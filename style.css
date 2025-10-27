@@ -233,7 +233,7 @@ body {
 /* Seção Hero */
 .hero {
     /* Use uma imagem de fundo de sua preferência aqui */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://i.imgur.com/L8nL3aR.jpeg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('./assets/folhas-verdes-exuberantes-criativas-padrao-natureza-textura-de-fundo.jpg');
     background-size: cover;
     background-position: center;
     height: 60vh;
@@ -875,7 +875,7 @@ body {
 
 /* Hero Section */
 .about-hero {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/k6fX3sL.jpeg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1652091705632-0755a239a186?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHx8');
     background-size: cover;
     background-position: center 60%;
     height: 45vh;
@@ -1073,4 +1073,9 @@ body {
         padding-top: 2rem;
         border-top: 1px solid #eee;
     }
+}
+
+/* Correção de espaçamento para o botão do carrinho vazio */
+.cart-empty .btn {
+    margin-top: 1.5rem; /* Adiciona um espaço acima do botão */
 }

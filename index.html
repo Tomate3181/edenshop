@@ -36,45 +36,61 @@
             </div>
         </section>
 
-        <!-- Seção de Produtos em Destaque -->
-        <section class="featured-products">
-            <div class="container">
-                <h2 class="section-title">Produtos em Destaque</h2>
-                <div class="products-grid">
-                    <!-- Produto 1 -->
-                    <div class="product-card">
-                        <img src="https://i.imgur.com/8i2M2fV.png" alt="Planta Monstera Deliciosa">
-                        <h3>Monstera Deliciosa</h3>
-                        <p class="price">R$ 89,90</p>
-                        <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
-                    </div>
-                    <!-- Produto 2 -->
-                    <div class="product-card">
-                        <img src="https://i.imgur.com/sbu2nmy.png" alt="Planta Jiboia">
-                        <h3>Jiboia (Epipremnum aureum)</h3>
-                        <p class="price">R$ 49,90</p>
-                        <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
-                    </div>
-                    <!-- Produto 3 -->
-                    <div class="product-card">
-                        <img src="https://i.imgur.com/Kk2f5vH.png" alt="Planta Zamioculca">
-                        <h3>Zamioculca</h3>
-                        <p class="price">R$ 69,90</p>
-                        <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
-                    </div>
-                    <!-- Produto 4 -->
-                    <div class="product-card">
-                        <img src="https://i.imgur.com/pQ8eJjY.png" alt="Planta Espada de São Jorge">
-                        <h3>Espada de São Jorge</h3>
-                        <p class="price">R$ 59,90</p>
-                        <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
-                    </div>
-                </div>
-                 <div class="text-center">
-                    <a href="products.html" class="btn">Ver todos os produtos</a>
-                </div>
+<!-- Seção de Produtos em Destaque CORRIGIDA -->
+<section class="featured-products">
+    <div class="container">
+        <h2 class="section-title">Produtos em Destaque</h2>
+        <div class="products-grid">
+            <!-- Produto 1 -->
+            <div class="product-card" 
+                 data-id="prod1" 
+                 data-name="Monstera Deliciosa" 
+                 data-price="89.90" 
+                 data-image="https://growurban.uk/cdn/shop/articles/care-guide-monstera-deliciosa-668092_680bbf00-9564-4f0c-b9cb-27ededaf19d2.jpg?v=1748436514&width=2048">
+                <img src="https://growurban.uk/cdn/shop/articles/care-guide-monstera-deliciosa-668092_680bbf00-9564-4f0c-b9cb-27ededaf19d2.jpg?v=1748436514&width=2048" alt="Planta Monstera Deliciosa">
+                <h3>Monstera Deliciosa</h3>
+                <p class="price">R$ 89,90</p>
+                <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
             </div>
-        </section>
+            <!-- Produto 2 -->
+            <div class="product-card"
+                 data-id="prod2"
+                 data-name="Jiboia (Epipremnum aureum)"
+                 data-price="49.90"
+                 data-image="https://www.shutterstock.com/image-photo/epipremnum-aureum-species-flowering-plant-600nw-2557759849.jpg">
+                <img src="https://www.shutterstock.com/image-photo/epipremnum-aureum-species-flowering-plant-600nw-2557759849.jpg" alt="Planta Jiboia">
+                <h3>Jiboia (Epipremnum aureum)</h3>
+                <p class="price">R$ 49,90</p>
+                <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
+            </div>
+            <!-- Produto 3 -->
+            <div class="product-card"
+                 data-id="prod3"
+                 data-name="Zamioculca"
+                 data-price="69.90"
+                 data-image="https://upload.wikimedia.org/wikipedia/commons/d/d6/Zamioculcas.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Zamioculcas.jpg" alt="Planta Zamioculca">
+                <h3>Zamioculca</h3>
+                <p class="price">R$ 69,90</p>
+                <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
+            </div>
+            <!-- Produto 4 -->
+            <div class="product-card"
+                 data-id="prod4"
+                 data-name="Espada de São Jorge"
+                 data-price="59.90"
+                 data-image="https://cdn.awsli.com.br/600x700/1520/1520689/produto/247127180/espada-de-sao-jorge-mini3-b1rfi2xmr4.jpeg">
+                <img src="https://cdn.awsli.com.br/600x700/1520/1520689/produto/247127180/espada-de-sao-jorge-mini3-b1rfi2xmr4.jpeg" alt="Planta Espada de São Jorge">
+                <h3>Espada de São Jorge</h3>
+                <p class="price">R$ 59,90</p>
+                <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
+            </div>
+        </div>
+         <div class="text-center">
+            <a href="products.html" class="btn">Ver todos os produtos</a>
+        </div>
+    </div>
+</section>  
 
         <!-- Seção de Valores -->
         <section class="values-section">
