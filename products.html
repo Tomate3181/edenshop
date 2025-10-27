@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossos Produtos - Edenshop</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">Edenshop</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Produtos</a></li>
+                <li><a href="about.html">Sobre Nós</a></li>
+                <li><a href="contact.html">Contato</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="cart.html" aria-label="Carrinho de compras"><i class="fas fa-shopping-cart"></i></a>
+                <a href="login.html" aria-label="Login do usuário"><i class="fas fa-user"></i></a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container page-padding">
+        <h1 class="page-title">Nossas Plantas</h1>
+        <div class="shop-layout">
+            <!-- Barra Lateral de Filtros -->
+            <aside class="filters-sidebar">
+                <h3>Filtros</h3>
+                <div class="filter-group">
+                    <h4>Categorias</h4>
+                    <ul class="filter-list">
+                        <li><label><input type="checkbox" name="category" value="interna"> Plantas de Interior</label>
+                        </li>
+                        <li><label><input type="checkbox" name="category" value="externa"> Plantas de Exterior</label>
+                        </li>
+                        <li><label><input type="checkbox" name="category" value="suculenta"> Suculentas e Cactos</label>
+                        </li>
+                        <li><label><input type="checkbox" name="category" value="pendente"> Plantas Pendentes</label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="filter-group">
+                    <h4>Faixa de Preço</h4>
+                    <input type="range" id="priceRange" min="10" max="200" value="200" class="price-slider">
+                    <p>Até: <span id="priceValue">R$ 200</span></p>
+                </div>
+                <div class="filter-group">
+                    <h4>Cuidados</h4>
+                    <ul class="filter-list">
+                        <li><label><input type="checkbox" name="care" value="facil"> Cuidado Fácil</label></li>
+                        <li><label><input type="checkbox" name="care" value="pet-friendly"> Pet-Friendly</label></li>
+                    </ul>
+                </div>
+                <button class="btn" id="applyFilters">Aplicar Filtros</button>
+            </aside>
+
+            <!-- Grade de Produtos -->
+            <section class="products-grid-full">
+                <!-- Produto 1 -->
+                <!-- Produto 1 -->
+                <div class="product-card" data-id="p1" data-name="Jiboia (Epipremnum aureum)" data-price="49.90"
+                    data-image="https://i.imgur.com/sbu2nmy.png" data-category="interna pendente" data-care="facil">
+                    <a href="product-detail.html" class="product-link">
+                        <img src="https://i.imgur.com/sbu2nmy.png" alt="Planta Jiboia">
+                        <h3>Jiboia (Epipremnum aureum)</h3>
+                        <p class="price">R$ 49,90</p>
+                    </a>
+                    <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
+                </div>
+
+                <!-- Produto 2 -->
+                <div class="product-card" data-id="p2" data-name="Monstera Deliciosa" data-price="89.90"
+                    data-image="https://i.imgur.com/8i2M2fV.png" data-category="interna" data-care="pet-friendly">
+                    <a href="product-detail.html" class="product-link">
+                        <img src="https://i.imgur.com/8i2M2fV.png" alt="Planta Monstera Deliciosa">
+                        <h3>Monstera Deliciosa</h3>
+                        <p class="price">R$ 89,90</p>
+                    </a>
+                    <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
+                </div>
+
+                <!-- Produto 3 -->
+                <div class="product-card" data-id="p3" data-name="Espada de São Jorge" data-price="59.90"
+                    data-image="https://i.imgur.com/pQ8eJjY.png" data-category="interna" data-care="facil">
+                    <a href="product-detail.html" class="product-link">
+                        <img src="https://i.imgur.com/pQ8eJjY.png" alt="Planta Espada de São Jorge">
+                        <h3>Espada de São Jorge</h3>
+                        <p class="price">R$ 59,90</p>
+                    </a>
+                    <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
+                </div>
+
+                <!-- Produto 4 -->
+                <div class="product-card" data-id="p4" data-name="Zamioculca" data-price="69.90"
+                    data-image="https://i.imgur.com/Kk2f5vH.png" data-category="interna suculenta" data-care="facil">
+                    <a href="product-detail.html" class="product-link">
+                        <img src="https://i.imgur.com/Kk2f5vH.png" alt="Planta Zamioculca">
+                        <h3>Zamioculca</h3>
+                        <p class="price">R$ 69,90</p>
+                    </a>
+                    <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
+                </div>
+
+                <!-- Produto 5 -->
+                <div class="product-card" data-id="p5" data-name="Ficus Lyrata" data-price="129.90"
+                    data-image="https://i.imgur.com/abc123d.png" data-category="externa" data-care="">
+                    <a href="product-detail.html" class="product-link">
+                        <img src="https://i.imgur.com/abc123d.png" alt="Planta Ficus Lyrata">
+                        <h3>Ficus Lyrata</h3>
+                        <p class="price">R$ 129,90</p>
+                    </a>
+                    <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
+                </div>
+
+                <!-- Produto 6 -->
+                <div class="product-card" data-id="p6" data-name="Mix de Suculentas" data-price="19.90"
+                    data-image="https://i.imgur.com/xyz789e.png" data-category="suculenta" data-care="facil">
+                    <a href="product-detail.html" class="product-link">
+                        <img src="https://i.imgur.com/xyz789e.png" alt="Mix de Suculentas">
+                        <h3>Mix de Suculentas</h3>
+                        <p class="price">R$ 19,90</p>
+                    </a>
+                    <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
+                </div>
+                <!-- Adicione mais produtos conforme necessário -->
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Edenshop</h3>
+                <p>Conectando pessoas e o verde no dia a dia.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Links Úteis</h3>
+                <ul>
+                    <li><a href="#">Política de Privacidade</a></li>
+                    <li><a href="#">Termos de Serviço</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Siga-nos</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Edenshop. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
