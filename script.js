@@ -31,18 +31,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ===================================================================
-    // --- 2. LÓGICA DO FORMULÁRIO DE LOGIN (login.html) ---
+    // --- LÓGICA DE SESSÃO DO USUÁRIO (Login, Logout, Verificação) ---
     // ===================================================================
+
+    // --- Lógica de Login (login.html) ---
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const email = document.getElementById('email').value;
-            if (email) {
-                alert(`Login simulado com sucesso para ${email}! Redirecionando...`);
-                window.location.href = 'index.html';
-            }
+            const emailInput = document.getElementById('email');
+            const user = {
+                // Para simulação, vamos criar um nome genérico.
+                // Em um sistema real, este dado viria de um banco de dados.
+                name: "Amante de Plantas",
+                email: emailInput.value
+            };
+
+            // Salva o usuário no localStorage
+            localStorage.setItem('currentUser', JSON.stringify(user));
+
+            alert(`Bem-vindo(a), ${user.name}!`);
+            window.location.href = 'profile.html'; // Redireciona para a página de perfil
         });
+    }
+
+    // --- Lógica de Verificação de Login (Executa em todas as páginas) ---
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const userIconLink = document.querySelector('.nav-icons a[href*="login.html"], .nav-icons a[href*="profile.html"]');
+
+    if (currentUser && userIconLink) {
+        // Se o usuário está logado, o ícone de usuário leva para a página de perfil
+        userIconLink.href = 'profile.html';
+    } else if (userIconLink) {
+        // Se não, leva para a página de login
+        userIconLink.href = 'login.html';
     }
 
 
@@ -211,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Simulação de envio
             alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
-            
+
             // Limpa o formulário
             contactForm.reset();
         });
@@ -220,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===================================================================
     // --- 8. LÓGICA DAS NOVAS SEÇÕES (index.html) ---
     // ===================================================================
-    
+
     // a) Lógica do Carrossel de Avaliações
     const testimonialWrapper = document.querySelector('.testimonial-wrapper');
     if (testimonialWrapper) {
@@ -242,14 +264,14 @@ document.addEventListener('DOMContentLoaded', () => {
             currentIndex = (currentIndex - 1 + slides.length) % slides.length;
             showSlide(currentIndex);
         });
-        
+
         // Inicia o carrossel no primeiro slide
         showSlide(currentIndex);
     }
-    
+
     // b) Lógica do Formulário de Newsletter
     const newsletterForm = document.getElementById('newsletterForm');
-    if(newsletterForm) {
+    if (newsletterForm) {
         newsletterForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const emailInput = newsletterForm.querySelector('#email');
@@ -258,6 +280,36 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Adicione este bloco dentro do evento 'DOMContentLoaded' em script.js
+
+// ===================================================================
+// --- LÓGICA DA PÁGINA DE PERFIL (profile.html) ---
+// ===================================================================
+const profileName = document.getElementById('profile-name');
+if (profileName) { // Verifica se estamos na página de perfil
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+    // Proteção de Rota: se não houver usuário, volta para o login
+    if (!currentUser) {
+        window.location.href = 'login.html';
+    } else {
+        // Preenche as informações na página
+        document.getElementById('profile-name').textContent = currentUser.name;
+        document.getElementById('profile-email').textContent = currentUser.email;
+        document.getElementById('profile-avatar').textContent = currentUser.name.charAt(0).toUpperCase();
+
+        // Lógica de Logout
+        const logoutBtn = document.getElementById('logout-btn');
+        logoutBtn.addEventListener('click', () => {
+            if (confirm('Você tem certeza que deseja sair?')) {
+                localStorage.removeItem('currentUser');
+                localStorage.removeItem('edenshopCart'); // Opcional: limpar o carrinho ao sair
+                alert('Você foi desconectado.');
+                window.location.href = 'index.html';
+            }
+        });
+    }
+}
 
     // ===================================================================
     // --- 7. INICIALIZAÇÃO GERAL (Executa em todas as páginas) ---
