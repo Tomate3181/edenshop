@@ -1075,7 +1075,7 @@ body {
     }
 }
 
-/* Correção de espaçamento para o botão do carrinho vazio */
-.cart-empty .btn {
-    margin-top: 1.5rem; /* Adiciona um espaço acima do botão */
+/* Correção de espaçamento para a mensagem do carrinho vazio */
+.cart-empty p {
+    margin-bottom: 1.5rem; /* Adiciona um espaço ABAIXO do parágrafo */
 }
