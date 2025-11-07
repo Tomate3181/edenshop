@@ -34,39 +34,68 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- LÓGICA DE SESSÃO DO USUÁRIO (Login, Logout, Verificação) ---
     // ===================================================================
 
-    // --- Lógica de Login (login.html) ---
+    // --- Lógica de Login (agora no modal) ---
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const emailInput = document.getElementById('email');
+            // AQUI USAMOS O ID DO INPUT DO MODAL
+            const emailInput = document.getElementById('modal-email');
             const user = {
-                // Para simulação, vamos criar um nome genérico.
-                // Em um sistema real, este dado viria de um banco de dados.
                 name: "Amante de Plantas",
                 email: emailInput.value
             };
 
-            // Salva o usuário no localStorage
             localStorage.setItem('currentUser', JSON.stringify(user));
 
+            // --- LINHA ADICIONADA ---
+            closeLoginModal(); // Fecha o modal
+            // -------------------------
+
             alert(`Bem-vindo(a), ${user.name}!`);
-            window.location.href = 'profile.html'; // Redireciona para a página de perfil
+            window.location.href = 'profile.html';
         });
     }
 
-    // --- Lógica de Verificação de Login (Executa em todas as páginas) ---
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    const userIconLink = document.querySelector('.nav-icons a[href*="login.html"], .nav-icons a[href*="profile.html"]');
+    // ===================================================================
+    // --- LÓGICA DO MODAL DE LOGIN E VERIFICAÇÃO DE SESSÃO ---
+    // ===================================================================
 
-    if (currentUser && userIconLink) {
-        // Se o usuário está logado, o ícone de usuário leva para a página de perfil
-        userIconLink.href = 'profile.html';
-    } else if (userIconLink) {
-        // Se não, leva para a página de login
-        userIconLink.href = 'login.html';
+    const loginModal = document.getElementById('loginModal');
+    const userActionIcon = document.getElementById('user-action-icon');
+    const closeModalBtn = document.querySelector('.close-btn');
+
+    // Função para abrir o modal
+    const openLoginModal = () => {
+        if (loginModal) loginModal.style.display = 'block';
+    }
+    // Função para fechar o modal
+    const closeLoginModal = () => {
+        if (loginModal) loginModal.style.display = 'none';
     }
 
+    // Lógica de Verificação de Login ATUALIZADA
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+    if (currentUser && userActionIcon) {
+        // Se o usuário está logado, o ícone leva para a página de perfil
+        userActionIcon.href = 'profile.html';
+    } else if (userActionIcon) {
+        // Se não, o ícone abre o modal de login
+        userActionIcon.href = '#'; // Garante que a página não recarregue
+        userActionIcon.addEventListener('click', (e) => {
+            e.preventDefault();
+            openLoginModal();
+        });
+    }
+
+    // Event Listeners para fechar o modal
+    if(closeModalBtn) closeModalBtn.addEventListener('click', closeLoginModal);
+    window.addEventListener('click', (event) => {
+        if (event.target == loginModal) {
+            closeLoginModal();
+        }
+    });
 
     // ===================================================================
     // --- 3. LÓGICA DOS FILTROS (products.html) ---
@@ -162,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     itemElement.innerHTML = `
                         <img src="${item.image}" alt="${item.name}" class="cart-item-image">
                         <div class="cart-item-info"><h3>${item.name}</h3><p class="price">R$ ${item.price.toFixed(2).replace('.', ',')}</p></div>
-                        <div class="cart-item-actions"><div class="quantity-wrapper"><button class="change-quantity-btn" data-id="${item.id}" data-change="-1">-</button><input type="number" value="${item.quantity}" min="1" readonly><button class="change-quantity-btn" data-id="${item.id}" data-change="1">+</button></div><button class="remove-from-cart-btn" data-id="${item.id}">Remover</button></div>`;
+                        <div class="cart-item-actions"><div class="quantity-wrapper"><button class="change-quantity-btn" data-id="${item.id}" data-change="-1">-</button><div class="quantity"><span class="quantity-number">${item.quantity}</span></div><button class="change-quantity-btn" data-id="${item.id}" data-change="1">+</button></div><button class="remove-from-cart-btn" data-id="${item.id}">Remover</button></div>`;
                     cartItemsContainer.appendChild(itemElement);
                 });
                 updateCartSummary();

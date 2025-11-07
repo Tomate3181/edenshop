@@ -11,7 +11,10 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <a href="index.html"><img src="./assets/logo2.png" alt="Edenshop Logo"></a>
+                <a href="index.html">
+                    <img src="./assets/logo2.png" alt="Edenshop Logo">
+                    <!-- Edenshop -->
+                </a>
             </div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
@@ -21,7 +24,7 @@
             </ul>
             <div class="nav-icons">
                 <a href="cart.html" aria-label="Carrinho de compras"><i class="fas fa-shopping-cart"></i></a>
-                <a href="login.html" aria-label="Login do usuário"><i class="fas fa-user"></i></a>
+                <a href="#" id="user-action-icon"><i class="fas fa-user"></i></a>
             </div>
         </nav>
     </header>
@@ -217,6 +220,40 @@
         <div class="footer-bottom">
             <p>&copy; 2025 Edenshop. Todos os direitos reservados.</p>
         </div>
+
+        <!-- =============================================== -->
+<!-- ============= INÍCIO DO MODAL DE LOGIN ============= -->
+<!-- =============================================== -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <!-- Conteúdo reutilizado do seu login-box -->
+        <div class="login-box-modal">
+            <div class="login-header-text">
+                <h2>Bem-vindo de volta!</h2>
+                <p>Faça login para continuar</p>
+            </div>
+            <form id="loginForm"> <!-- O ID importante que seu JS já usa -->
+                <div class="input-group">
+                    <label for="modal-email">Email</label>
+                    <input type="email" id="modal-email" name="email" placeholder="seuemail@exemplo.com" required>
+                </div>
+                <div class="input-group">
+                    <label for="modal-password">Senha</label>
+                    <input type="password" id="modal-password" name="password" placeholder="Sua senha" required>
+                </div>
+                <button type="submit" class="btn">Entrar</button>
+                <div class="login-footer">
+                    <p>Não tem uma conta? <a href="#">Cadastre-se</a></p>
+                    <a href="#">Esqueceu sua senha?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- =============================================== -->
+<!-- =============== FIM DO MODAL DE LOGIN =============== -->
+<!-- =============================================== -->
     </footer>
 
     <script src="script.js"></script>
