@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         saveCart(cart);
         updateCartIcon();
+        openCartModal();
     };
-
 
     // ===================================================================
     // --- LÓGICA DE SESSÃO DO USUÁRIO (Login, Logout, Verificação) ---
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Event Listeners para fechar o modal
-    if(closeModalBtn) closeModalBtn.addEventListener('click', closeLoginModal);
+    if (closeModalBtn) closeModalBtn.addEventListener('click', closeLoginModal);
     window.addEventListener('click', (event) => {
         if (event.target == loginModal) {
             closeLoginModal();
@@ -169,63 +169,117 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ===================================================================
-    // --- 5. LÓGICA DA PÁGINA DO CARRINHO (cart.html) ---
+    // --- 5. LÓGICA DO CARRINHO (MODAL) - VERSÃO CORRIGIDA ---
     // ===================================================================
-    const cartItemsContainer = document.getElementById('cart-items-container');
-    if (cartItemsContainer) {
-        const displayCartItems = () => {
-            const cart = getCart();
-            const cartWrapper = document.getElementById('cart-wrapper');
-            const emptyCartMessage = document.getElementById('cart-empty-message');
-            cartItemsContainer.innerHTML = '';
 
-            if (cart.length === 0) {
-                cartWrapper.style.display = 'none';
-                emptyCartMessage.style.display = 'block';
-            } else {
-                cartWrapper.style.display = 'grid';
-                emptyCartMessage.style.display = 'none';
-                cart.forEach(item => {
-                    const itemElement = document.createElement('div');
-                    itemElement.classList.add('cart-item');
-                    itemElement.innerHTML = `
-                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
-                        <div class="cart-item-info"><h3>${item.name}</h3><p class="price">R$ ${item.price.toFixed(2).replace('.', ',')}</p></div>
-                        <div class="cart-item-actions"><div class="quantity-wrapper"><button class="change-quantity-btn" data-id="${item.id}" data-change="-1">-</button><div class="quantity"><span class="quantity-number">${item.quantity}</span></div><button class="change-quantity-btn" data-id="${item.id}" data-change="1">+</button></div><button class="remove-from-cart-btn" data-id="${item.id}">Remover</button></div>`;
-                    cartItemsContainer.appendChild(itemElement);
-                });
-                updateCartSummary();
-                addCartEventListeners();
-            }
-        };
+    // --- Seletores dos Elementos do Modal ---
+    const cartModal = document.getElementById('cartModal');
+    const openCartBtn = document.getElementById('open-cart-btn');
+    const closeCartBtn = document.querySelector('.close-cart-btn');
+    const cartOverlay = document.querySelector('.cart-modal-overlay');
+    const cartItemsContainerModal = document.getElementById('cart-items-container-modal');
 
-        const updateCartSummary = () => {
-            const cart = getCart();
-            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            document.getElementById('cart-subtotal').textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
-            document.getElementById('cart-total').textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
-        };
-
-        const addCartEventListeners = () => {
-            document.querySelectorAll('.remove-from-cart-btn').forEach(b => b.addEventListener('click', e => {
-                let cart = getCart().filter(item => item.id !== e.target.dataset.id);
-                saveCart(cart);
-                displayCartItems();
-                updateCartIcon();
-            }));
-            document.querySelectorAll('.change-quantity-btn').forEach(b => b.addEventListener('click', e => {
-                let cart = getCart();
-                const item = cart.find(item => item.id === e.target.dataset.id);
-                if (item) item.quantity += parseInt(e.target.dataset.change);
-                if (item.quantity < 1) item.quantity = 1;
-                saveCart(cart);
-                displayCartItems();
-                updateCartIcon();
-            }));
-        };
-
-        displayCartItems();
+    // --- Funções de Controle do Modal ---
+    const openCartModal = () => {
+        if (cartModal) {
+            displayCartItems(); // Agora esta função já existe e pode ser chamada
+            cartModal.classList.add('active');
+        }
     }
+    const closeCartModal = () => {
+        if (cartModal) cartModal.classList.remove('active');
+    }
+
+    // --- Funções de Lógica e Renderização do Carrinho ---
+    // MOVEMOS A DEFINIÇÃO DAS FUNÇÕES PARA CÁ, PARA O ESCOPO PRINCIPAL.
+
+    const updateCartSummary = () => {
+        const cart = getCart();
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const cartTotalEl = document.getElementById('cart-total-modal');
+        if (cartTotalEl) {
+            cartTotalEl.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+        }
+    };
+
+    const addCartEventListeners = () => {
+        // Usamos o container do modal como base para os seletores
+        cartItemsContainerModal.querySelectorAll('.remove-from-cart-btn').forEach(b => b.addEventListener('click', e => {
+            let cart = getCart().filter(item => item.id !== e.target.dataset.id);
+            saveCart(cart);
+            displayCartItems();
+            updateCartIcon();
+        }));
+        cartItemsContainerModal.querySelectorAll('.change-quantity-btn').forEach(b => b.addEventListener('click', e => {
+            let cart = getCart();
+            const item = cart.find(item => item.id === e.target.dataset.id);
+            if (item) item.quantity += parseInt(e.target.dataset.change);
+            if (item.quantity < 1) {
+                let newCart = getCart().filter(cartItem => cartItem.id !== item.id);
+                saveCart(newCart);
+            } else {
+                saveCart(cart);
+            }
+            displayCartItems();
+            updateCartIcon();
+        }));
+    };
+
+    const displayCartItems = () => {
+        // ADICIONAMOS UMA VERIFICAÇÃO DE SEGURANÇA AQUI DENTRO.
+        // Se os elementos do carrinho não existirem na página, a função para.
+        if (!cartItemsContainerModal) return;
+
+        const cart = getCart();
+        const emptyCartMessageModal = document.getElementById('cart-empty-message-modal');
+        const cartFooterModal = document.getElementById('cart-modal-footer');
+
+        cartItemsContainerModal.innerHTML = '';
+
+        if (cart.length === 0) {
+            emptyCartMessageModal.style.display = 'block';
+            cartFooterModal.style.display = 'none';
+            cartItemsContainerModal.style.display = 'none';
+        } else {
+            emptyCartMessageModal.style.display = 'none';
+            cartFooterModal.style.display = 'block';
+            cartItemsContainerModal.style.display = 'flex';
+
+            cart.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.classList.add('cart-item');
+                // Dentro da sua função displayCartItems, no loop cart.forEach(item => { ... })
+
+                itemElement.innerHTML = `
+                    <div class="cart-item-details">
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                        <div class="cart-item-info">
+                            <h3>${item.name}</h3>
+                            <p class="price">R$ ${item.price.toFixed(2).replace('.', ',')}</p>
+                        </div>
+                    </div>
+                    <div class="cart-item-actions">
+                        <div class="quantity-controls">
+                            <button class="change-quantity-btn" data-id="${item.id}" data-change="-1">-</button>
+                            <span class="quantity-number">${item.quantity}</span>
+                            <button class="change-quantity-btn" data-id="${item.id}" data-change="1">+</button>
+                        </div>
+                        <button class="remove-from-cart-btn" data-id="${item.id}">Remover</button>
+                    </div>`;
+                cartItemsContainerModal.appendChild(itemElement);
+            });
+            updateCartSummary();
+            addCartEventListeners();
+        }
+    };
+
+    // --- Event Listeners para Abrir/Fechar ---
+    if (openCartBtn) openCartBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openCartModal();
+    });
+    if (closeCartBtn) closeCartBtn.addEventListener('click', closeCartModal);
+    if (cartOverlay) cartOverlay.addEventListener('click', closeCartModal);
 
 
     // ===================================================================
@@ -311,34 +365,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Adicione este bloco dentro do evento 'DOMContentLoaded' em script.js
 
-// ===================================================================
-// --- LÓGICA DA PÁGINA DE PERFIL (profile.html) ---
-// ===================================================================
-const profileName = document.getElementById('profile-name');
-if (profileName) { // Verifica se estamos na página de perfil
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    // ===================================================================
+    // --- LÓGICA DA PÁGINA DE PERFIL (profile.html) ---
+    // ===================================================================
+    const profileName = document.getElementById('profile-name');
+    if (profileName) { // Verifica se estamos na página de perfil
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-    // Proteção de Rota: se não houver usuário, volta para o login
-    if (!currentUser) {
-        window.location.href = 'login.html';
-    } else {
-        // Preenche as informações na página
-        document.getElementById('profile-name').textContent = currentUser.name;
-        document.getElementById('profile-email').textContent = currentUser.email;
-        document.getElementById('profile-avatar').textContent = currentUser.name.charAt(0).toUpperCase();
+        // Proteção de Rota: se não houver usuário, volta para o login
+        if (!currentUser) {
+            window.location.href = 'login.html';
+        } else {
+            // Preenche as informações na página
+            document.getElementById('profile-name').textContent = currentUser.name;
+            document.getElementById('profile-email').textContent = currentUser.email;
+            document.getElementById('profile-avatar').textContent = currentUser.name.charAt(0).toUpperCase();
 
-        // Lógica de Logout
-        const logoutBtn = document.getElementById('logout-btn');
-        logoutBtn.addEventListener('click', () => {
-            if (confirm('Você tem certeza que deseja sair?')) {
-                localStorage.removeItem('currentUser');
-                localStorage.removeItem('edenshopCart'); // Opcional: limpar o carrinho ao sair
-                alert('Você foi desconectado.');
-                window.location.href = 'index.html';
-            }
-        });
+            // Lógica de Logout
+            const logoutBtn = document.getElementById('logout-btn');
+            logoutBtn.addEventListener('click', () => {
+                if (confirm('Você tem certeza que deseja sair?')) {
+                    localStorage.removeItem('currentUser');
+                    localStorage.removeItem('edenshopCart'); // Opcional: limpar o carrinho ao sair
+                    alert('Você foi desconectado.');
+                    window.location.href = 'index.html';
+                }
+            });
+        }
     }
-}
 
     // ===================================================================
     // --- 7. INICIALIZAÇÃO GERAL (Executa em todas as páginas) ---

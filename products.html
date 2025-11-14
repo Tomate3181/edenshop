@@ -1,228 +1,382 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nossos Produtos - Edenshop</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
 
-<body>
+  <body>
     <header>
-        <nav class="navbar">
-            <div class="logo">
-                <a href="index.html"><img src="./assets/logo2.png" alt="Edenshop Logo"></a>
-            </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="products.html">Produtos</a></li>
-                <li><a href="about.html">Sobre Nós</a></li>
-                <li><a href="contact.html">Contato</a></li>
-            </ul>
-            <div class="nav-icons">
-                <a href="cart.html" aria-label="Carrinho de compras"><i class="fas fa-shopping-cart"></i></a>
-                <a href="#" id="user-action-icon"><i class="fas fa-user"></i></a>
-            </div>
-        </nav>
+      <nav class="navbar">
+        <div class="logo">
+          <a href="index.html"
+            ><img src="./assets/logo2.png" alt="Edenshop Logo"
+          /></a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Produtos</a></li>
+          <li><a href="about.html">Sobre Nós</a></li>
+          <li><a href="contact.html">Contato</a></li>
+        </ul>
+        <div class="nav-icons">
+          <!-- LINHA NOVA -->
+          <a
+            href="#"
+            id="open-cart-btn"
+            aria-label="Abrir carrinho de compras"
+            class="cart-icon-link"
+          >
+            <i class="fas fa-shopping-cart"></i>
+            <span id="cart-item-count">0</span>
+          </a>
+          <a href="#" id="user-action-icon"><i class="fas fa-user"></i></a>
+        </div>
+      </nav>
     </header>
 
     <main class="container page-padding">
-        <h1 class="page-title">Nossas Plantas</h1>
-        <div class="shop-layout">
-            <!-- Barra Lateral de Filtros -->
-            <aside class="filters-sidebar">
-                <h3>Filtros</h3>
-                <div class="filter-group">
-                    <h4>Categorias</h4>
-                    <ul class="filter-list">
-                        <li><label><input type="checkbox" name="category" value="interna"> Plantas de Interior</label>
-                        </li>
-                        <li><label><input type="checkbox" name="category" value="externa"> Plantas de Exterior</label>
-                        </li>
-                        <li><label><input type="checkbox" name="category" value="suculenta"> Suculentas e Cactos</label>
-                        </li>
-                        <li><label><input type="checkbox" name="category" value="pendente"> Plantas Pendentes</label>
-                        </li>
-                    </ul>
-                </div>
-                <div class="filter-group">
-                    <h4>Faixa de Preço</h4>
-                    <input type="range" id="priceRange" min="10" max="200" value="200" class="price-slider">
-                    <p>Até: <span id="priceValue">R$ 200</span></p>
-                </div>
-                <div class="filter-group">
-                    <h4>Cuidados</h4>
-                    <ul class="filter-list">
-                        <li><label><input type="checkbox" name="care" value="facil"> Cuidado Fácil</label></li>
-                        <li><label><input type="checkbox" name="care" value="pet-friendly"> Pet-Friendly</label></li>
-                    </ul>
-                </div>
-                <button class="btn" id="applyFilters">Aplicar Filtros</button>
-            </aside>
+      <h1 class="page-title">Nossas Plantas</h1>
+      <div class="shop-layout">
+        <!-- Barra Lateral de Filtros -->
+        <aside class="filters-sidebar">
+          <h3>Filtros</h3>
+          <div class="filter-group">
+            <h4>Categorias</h4>
+            <ul class="filter-list">
+              <li>
+                <label
+                  ><input type="checkbox" name="category" value="interna" />
+                  Plantas de Interior</label
+                >
+              </li>
+              <li>
+                <label
+                  ><input type="checkbox" name="category" value="externa" />
+                  Plantas de Exterior</label
+                >
+              </li>
+              <li>
+                <label
+                  ><input type="checkbox" name="category" value="suculenta" />
+                  Suculentas e Cactos</label
+                >
+              </li>
+              <li>
+                <label
+                  ><input type="checkbox" name="category" value="pendente" />
+                  Plantas Pendentes</label
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="filter-group">
+            <h4>Faixa de Preço</h4>
+            <input
+              type="range"
+              id="priceRange"
+              min="10"
+              max="200"
+              value="200"
+              class="price-slider"
+            />
+            <p>Até: <span id="priceValue">R$ 200</span></p>
+          </div>
+          <div class="filter-group">
+            <h4>Cuidados</h4>
+            <ul class="filter-list">
+              <li>
+                <label
+                  ><input type="checkbox" name="care" value="facil" /> Cuidado
+                  Fácil</label
+                >
+              </li>
+              <li>
+                <label
+                  ><input type="checkbox" name="care" value="pet-friendly" />
+                  Pet-Friendly</label
+                >
+              </li>
+            </ul>
+          </div>
+          <button class="btn" id="applyFilters">Aplicar Filtros</button>
+        </aside>
 
-            <!-- Grade de Produtos -->
-            <section class="products-grid-full">
-                <!-- Produto 1 -->
-                <!-- Produto 1 -->
-                <div class="product-card" data-id="p1" data-name="Jiboia (Epipremnum aureum)" data-price="49.90"
-                    data-image="https://www.shutterstock.com/image-photo/epipremnum-aureum-species-flowering-plant-600nw-2557759849.jpg" data-category="interna pendente" data-care="facil">
-                    <a href="product-detail.html" class="product-link">
-                        <img src="https://www.shutterstock.com/image-photo/epipremnum-aureum-species-flowering-plant-600nw-2557759849.jpg" alt="Planta Jiboia">
-                        <div class="product-card-content">
-                            <h3>Jiboia (Epipremnum aureum)</h3>
-                            <p class="price">R$ 49,90</p>
-                        </div>
-                    </a>
-                    <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
-                </div>
+        <!-- Grade de Produtos -->
+        <section class="products-grid-full">
+          <!-- Produto 1 -->
+          <!-- Produto 1 -->
+          <div
+            class="product-card"
+            data-id="p1"
+            data-name="Jiboia (Epipremnum aureum)"
+            data-price="49.90"
+            data-image="https://www.shutterstock.com/image-photo/epipremnum-aureum-species-flowering-plant-600nw-2557759849.jpg"
+            data-category="interna pendente"
+            data-care="facil"
+          >
+            <a href="product-detail.html" class="product-link">
+              <img
+                src="https://www.shutterstock.com/image-photo/epipremnum-aureum-species-flowering-plant-600nw-2557759849.jpg"
+                alt="Planta Jiboia"
+              />
+              <div class="product-card-content">
+                <h3>Jiboia (Epipremnum aureum)</h3>
+                <p class="price">R$ 49,90</p>
+              </div>
+            </a>
+            <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
+          </div>
 
-                <!-- Produto 2 -->
-                <div class="product-card" data-id="p2" data-name="Monstera Deliciosa" data-price="89.90"
-                    data-image="https://growurban.uk/cdn/shop/articles/care-guide-monstera-deliciosa-668092_680bbf00-9564-4f0c-b9cb-27ededaf19d2.jpg?v=1748436514&width=2048" data-category="interna" data-care="">
-                    <a href="product-detail.html" class="product-link">
-                        <img src="https://growurban.uk/cdn/shop/articles/care-guide-monstera-deliciosa-668092_680bbf00-9564-4f0c-b9cb-27ededaf19d2.jpg?v=1748436514&width=2048" alt="Planta Monstera Deliciosa">
-                        <div class="product-card-content">
-                            <h3>Monstera Deliciosa</h3>
-                            <p class="price">R$ 89,90</p>
-                        </div>
-                    </a>
-                    <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
-                </div>
+          <!-- Produto 2 -->
+          <div
+            class="product-card"
+            data-id="p2"
+            data-name="Monstera Deliciosa"
+            data-price="89.90"
+            data-image="https://growurban.uk/cdn/shop/articles/care-guide-monstera-deliciosa-668092_680bbf00-9564-4f0c-b9cb-27ededaf19d2.jpg?v=1748436514&width=2048"
+            data-category="interna"
+            data-care=""
+          >
+            <a href="product-detail.html" class="product-link">
+              <img
+                src="https://growurban.uk/cdn/shop/articles/care-guide-monstera-deliciosa-668092_680bbf00-9564-4f0c-b9cb-27ededaf19d2.jpg?v=1748436514&width=2048"
+                alt="Planta Monstera Deliciosa"
+              />
+              <div class="product-card-content">
+                <h3>Monstera Deliciosa</h3>
+                <p class="price">R$ 89,90</p>
+              </div>
+            </a>
+            <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
+          </div>
 
-                <!-- Produto 3 -->
-                <div class="product-card" data-id="p3" data-name="Espada de São Jorge" data-price="59.90"
-                    data-image="https://cdn.awsli.com.br/600x700/1520/1520689/produto/247127180/espada-de-sao-jorge-mini3-b1rfi2xmr4.jpeg" data-category="interna" data-care="facil">
-                    <a href="product-detail.html" class="product-link">
-                        <img src="https://cdn.awsli.com.br/600x700/1520/1520689/produto/247127180/espada-de-sao-jorge-mini3-b1rfi2xmr4.jpeg" alt="Planta Espada de São Jorge">
-                        <div class="product-card-content">
-                            <h3>Espada de São Jorge</h3>
-                            <p class="price">R$ 59,90</p>
-                        </div>
-                    </a>
-                    <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
-                </div>
+          <!-- Produto 3 -->
+          <div
+            class="product-card"
+            data-id="p3"
+            data-name="Espada de São Jorge"
+            data-price="59.90"
+            data-image="https://cdn.awsli.com.br/600x700/1520/1520689/produto/247127180/espada-de-sao-jorge-mini3-b1rfi2xmr4.jpeg"
+            data-category="interna"
+            data-care="facil"
+          >
+            <a href="product-detail.html" class="product-link">
+              <img
+                src="https://cdn.awsli.com.br/600x700/1520/1520689/produto/247127180/espada-de-sao-jorge-mini3-b1rfi2xmr4.jpeg"
+                alt="Planta Espada de São Jorge"
+              />
+              <div class="product-card-content">
+                <h3>Espada de São Jorge</h3>
+                <p class="price">R$ 59,90</p>
+              </div>
+            </a>
+            <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
+          </div>
 
-                <!-- Produto 4 -->
-                <div class="product-card" data-id="p4" data-name="Zamioculca" data-price="69.90"
-                    data-image="https://upload.wikimedia.org/wikipedia/commons/d/d6/Zamioculcas.jpg" data-category="interna suculenta" data-care="facil">
-                    <a href="product-detail.html" class="product-link">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Zamioculcas.jpg" alt="Planta Zamioculca">
-                        <div class="product-card-content">
-                            <h3>Zamioculca</h3>
-                            <p class="price">R$ 69,90</p>
-                        </div>
-                    </a>
-                    <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
-                </div>
+          <!-- Produto 4 -->
+          <div
+            class="product-card"
+            data-id="p4"
+            data-name="Zamioculca"
+            data-price="69.90"
+            data-image="https://upload.wikimedia.org/wikipedia/commons/d/d6/Zamioculcas.jpg"
+            data-category="interna suculenta"
+            data-care="facil"
+          >
+            <a href="product-detail.html" class="product-link">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Zamioculcas.jpg"
+                alt="Planta Zamioculca"
+              />
+              <div class="product-card-content">
+                <h3>Zamioculca</h3>
+                <p class="price">R$ 69,90</p>
+              </div>
+            </a>
+            <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
+          </div>
 
-                <!-- Produto 5 -->
-                <div class="product-card" data-id="p5" data-name="Ficus Lyrata" data-price="129.90"
-                    data-image="https://cdn.store-assets.com/s/214074/i/88112830.jpeg" data-category="externa" data-care="pet-friendly">
-                    <a href="product-detail.html" class="product-link">
-                        <img src="https://cdn.store-assets.com/s/214074/i/88112830.jpeg" alt="Planta Ficus Lyrata">
-                        <div class="product-card-content">
-                            <h3>Ficus Lyrata</h3>
-                            <p class="price">R$ 129,90</p>
-                        </div>
-                    </a>
-                    <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
-                </div>
+          <!-- Produto 5 -->
+          <div
+            class="product-card"
+            data-id="p5"
+            data-name="Ficus Lyrata"
+            data-price="129.90"
+            data-image="https://cdn.store-assets.com/s/214074/i/88112830.jpeg"
+            data-category="externa"
+            data-care="pet-friendly"
+          >
+            <a href="product-detail.html" class="product-link">
+              <img
+                src="https://cdn.store-assets.com/s/214074/i/88112830.jpeg"
+                alt="Planta Ficus Lyrata"
+              />
+              <div class="product-card-content">
+                <h3>Ficus Lyrata</h3>
+                <p class="price">R$ 129,90</p>
+              </div>
+            </a>
+            <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
+          </div>
 
-                <!-- Produto 6 -->
-                <div class="product-card" data-id="p6" data-name="Mix de Suculentas" data-price="19.90"
-                    data-image="https://casaeconstrucao.org/wp-content/uploads/2022/02/Echeveria-como-cuidar.webp" data-category="suculenta" data-care="facil">
-                    <a href="product-detail.html" class="product-link">
-                        <img src="https://casaeconstrucao.org/wp-content/uploads/2022/02/Echeveria-como-cuidar.webp" alt="Mix de Suculentas">
-                        <div class="product-card-content">
-                            <h3>Mix de Suculentas</h3>
-                            <p class="price">R$ 19,90</p>
-                        </div>
-                    </a>
-                    <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
-                </div>
-                <!-- Adicione mais produtos conforme necessário -->
-            </section>
-        </div>
+          <!-- Produto 6 -->
+          <div
+            class="product-card"
+            data-id="p6"
+            data-name="Mix de Suculentas"
+            data-price="19.90"
+            data-image="https://casaeconstrucao.org/wp-content/uploads/2022/02/Echeveria-como-cuidar.webp"
+            data-category="suculenta"
+            data-care="facil"
+          >
+            <a href="product-detail.html" class="product-link">
+              <img
+                src="https://casaeconstrucao.org/wp-content/uploads/2022/02/Echeveria-como-cuidar.webp"
+                alt="Mix de Suculentas"
+              />
+              <div class="product-card-content">
+                <h3>Mix de Suculentas</h3>
+                <p class="price">R$ 19,90</p>
+              </div>
+            </a>
+            <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
+          </div>
+          <!-- Adicione mais produtos conforme necessário -->
+        </section>
+      </div>
     </main>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Edenshop</h3>
-                <p>Conectando pessoas e o verde no dia a dia.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Links Úteis</h3>
-                <ul>
-                    <li><a href="#">Política de Privacidade</a></li>
-                    <li><a href="#">Termos de Serviço</a></li>
-                    <li><a href="#">FAQ</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Siga-nos</h3>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Edenshop. Todos os direitos reservados.</p>
+    <!-- =============================================== -->
+    <!-- ============ INÍCIO DO MODAL DE CARRINHO ============ -->
+    <!-- =============================================== -->
+    <div id="cartModal" class="cart-modal">
+      <!-- Fundo escurecido -->
+      <div class="cart-modal-overlay"></div>
+
+      <!-- Conteúdo do modal -->
+      <div class="cart-modal-content">
+        <!-- Cabeçalho do modal -->
+        <div class="cart-modal-header">
+          <h3>Meu Carrinho</h3>
+          <button class="close-cart-btn">&times;</button>
         </div>
 
-              <!-- =============================================== -->
-      <!-- ============= INÍCIO DO MODAL DE LOGIN ============= -->
-      <!-- =============================================== -->
-      <div id="loginModal" class="modal">
-        <div class="modal-content">
-          <span class="close-btn">&times;</span>
-          <!-- Conteúdo reutilizado do seu login-box -->
-          <div class="login-box-modal">
-            <div class="login-header-text">
-              <h2>Bem-vindo de volta!</h2>
-              <p>Faça login para continuar</p>
+        <!-- Corpo do modal (onde os itens e a mensagem de vazio aparecem) -->
+        <div class="cart-modal-body">
+          <!-- Itens do Carrinho (serão preenchidos pelo JS) -->
+          <div id="cart-items-container-modal"></div>
+
+          <!-- Mensagem de Carrinho Vazio -->
+          <div
+            id="cart-empty-message-modal"
+            class="cart-empty"
+            style="display: none"
+          >
+            <h2>Seu carrinho está vazio.</h2>
+            <p>Adicione algumas plantas para vê-las aqui!</p>
+            <a href="products.html" class="btn">Ver Produtos</a>
+          </div>
+        </div>
+
+        <!-- Rodapé do modal (resumo e botão de finalizar) -->
+        <div id="cart-modal-footer" class="cart-modal-footer">
+          <!-- Reutilizamos a sua classe order-summary com algumas adaptações -->
+          <div class="order-summary-modal">
+            <div class="summary-row total-row">
+              <span>Subtotal</span>
+              <span id="cart-total-modal">R$ 0,00</span>
             </div>
-            <form id="loginForm">
-              <!-- O ID importante que seu JS já usa -->
-              <div class="input-group">
-                <label for="modal-email">Email</label>
-                <input
-                  type="email"
-                  id="modal-email"
-                  name="email"
-                  placeholder="seuemail@exemplo.com"
-                  required
-                />
-              </div>
-              <div class="input-group">
-                <label for="modal-password">Senha</label>
-                <input
-                  type="password"
-                  id="modal-password"
-                  name="password"
-                  placeholder="Sua senha"
-                  required
-                />
-              </div>
-              <button type="submit" class="btn">Entrar</button>
-              <div class="login-footer">
-                <p>Não tem uma conta? <a href="#">Cadastre-se</a></p>
-                <a href="#">Esqueceu sua senha?</a>
-              </div>
-            </form>
+            <button class="btn large-btn">Finalizar Compra</button>
           </div>
         </div>
       </div>
-      <!-- =============================================== -->
-      <!-- =============== FIM DO MODAL DE LOGIN =============== -->
-      <!-- =============================================== -->
+    </div>
+    <!-- =============================================== -->
+    <!-- ============= FIM DO MODAL DE CARRINHO ============= -->
+    <!-- =============================================== -->
+
+    <!-- =============================================== -->
+    <!-- ============= INÍCIO DO MODAL DE LOGIN ============= -->
+    <!-- =============================================== -->
+    <div id="loginModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <!-- Conteúdo reutilizado do seu login-box -->
+        <div class="login-box-modal">
+          <div class="login-header-text">
+            <h2>Bem-vindo de volta!</h2>
+            <p>Faça login para continuar</p>
+          </div>
+          <form id="loginForm">
+            <!-- O ID importante que seu JS já usa -->
+            <div class="input-group">
+              <label for="modal-email">Email</label>
+              <input
+                type="email"
+                id="modal-email"
+                name="email"
+                placeholder="seuemail@exemplo.com"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="modal-password">Senha</label>
+              <input
+                type="password"
+                id="modal-password"
+                name="password"
+                placeholder="Sua senha"
+                required
+              />
+            </div>
+            <button type="submit" class="btn">Entrar</button>
+            <div class="login-footer">
+              <p>Não tem uma conta? <a href="#">Cadastre-se</a></p>
+              <a href="#">Esqueceu sua senha?</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- =============================================== -->
+    <!-- =============== FIM DO MODAL DE LOGIN =============== -->
+    <!-- =============================================== -->
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Edenshop</h3>
+          <p>Conectando pessoas e o verde no dia a dia.</p>
+        </div>
+        <div class="footer-section">
+          <h3>Links Úteis</h3>
+          <ul>
+            <li><a href="#">Política de Privacidade</a></li>
+            <li><a href="#">Termos de Serviço</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Siga-nos</h3>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Edenshop. Todos os direitos reservados.</p>
+      </div>
     </footer>
 
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>

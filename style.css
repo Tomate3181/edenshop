@@ -135,7 +135,6 @@ body {
 }
 
 .btn {
-    width: 100%;
     padding: 0.8rem;
     background-color: var(--primary-green);
     color: var(--white-color);
@@ -1282,4 +1281,234 @@ body {
   color: #333;
   text-decoration: none;
   cursor: pointer;
+}
+
+/* =============================================== */
+/* == ESTILOS DO MODAL DE CARRINHO (COM ANIMAÇÕES) == */
+/* =============================================== */
+
+.cart-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1001;
+  
+  /* MUDANÇA 1: Usamos visibility e opacity em vez de display */
+  /* Isso permite que as transições de "saída" funcionem corretamente. */
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+}
+
+/* Quando o modal está ativo, ele se torna visível */
+.cart-modal.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.cart-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  
+  /* MUDANÇA 2: Adicionamos transição de opacidade para o fundo */
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+/* Quando o modal está ativo, o fundo aparece suavemente */
+.cart-modal.active .cart-modal-overlay {
+  opacity: 1;
+}
+
+.cart-modal-content {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 450px;
+  height: 100%;
+  background-color: var(--background-color);
+  box-shadow: -5px 0 25px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  
+  /* MUDANÇA 3: A Mágica da Animação de Deslizar */
+  /* Começa fora da tela (100% para a direita) */
+  transform: translateX(100%);
+  /* Define a transição para a propriedade 'transform' */
+  transition: transform 0.4s ease-in-out; 
+}
+
+/* Quando o modal está ativo, ele desliza para a posição final (0) */
+.cart-modal.active .cart-modal-content {
+  transform: translateX(0);
+}
+
+
+/* --- O restante do seu CSS do carrinho permanece o mesmo --- */
+/* (Cabeçalho, corpo, itens, rodapé, etc.) */
+
+.cart-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #eee;
+  flex-shrink: 0;
+  color: var(--dark-text); /* Corrigindo a cor do texto "Meu Carrinho" */
+}
+.cart-modal-header h3 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+.close-cart-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #aaa;
+}
+.cart-modal-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+.cart-modal-footer {
+  padding: 1.5rem;
+  border-top: 1px solid #eee;
+  background-color: #fff;
+  flex-shrink: 0;
+}
+.order-summary-modal .btn {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+/* E todos os outros estilos de .cart-item, .quantity-controls, etc. */
+
+/* =============================================== */
+/* --- AJUSTES DE ESTILO DO MODAL DO CARRINHO --- */
+/* =============================================== */
+
+/* --- 1. Correção de Cores --- */
+
+.cart-modal-header h3 {
+  color: var(--dark-text); /* Deixa o título "Meu Carrinho" escuro */
+}
+
+/* Garante que o texto dentro do carrinho vazio também seja escuro */
+.cart-empty h2, .cart-empty p {
+    color: var(--dark-text);
+}
+
+
+/* --- 2. Rework do Layout e Botões dos Itens --- */
+
+/* Altera o card principal do item para um layout flexível */
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Empurra os elementos para as extremidades */
+    gap: 1rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+/* Container da imagem e das informações (nome/preço) */
+.cart-item-details {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-grow: 1; /* Faz este container crescer e ocupar o espaço */
+}
+
+/* Ajusta o nome do produto que fica dentro dos detalhes */
+.cart-item-details h3 {
+    font-size: 1rem;
+    color: var(--dark-text); /* Cor escura para o nome da planta */
+}
+
+/* O container das ações (botões) agora fica no final */
+.cart-item-actions {
+    display: flex;
+    flex-direction: column; /* Coloca os botões de quantidade em cima do "Remover" */
+    align-items: center;
+    gap: 0.5rem; /* Espaço entre os botões de +/- e o "Remover" */
+}
+
+/* NOVO wrapper para os botões de quantidade */
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    background-color: #f1f1f1;
+    border-radius: 20px; /* Bordas arredondadas */
+}
+
+/* NOVO estilo para os botões de +/- */
+.change-quantity-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--dark-text);
+    padding: 0.3rem 0.8rem;
+    transition: background-color 0.2s;
+}
+
+.change-quantity-btn:hover {
+    background-color: #e0e0e0;
+    border-radius: 20px;
+}
+
+/* NOVO estilo para o número da quantidade */
+.quantity-number {
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0 0.5rem;
+    color: var(--dark-text);
+}
+
+/* NOVO estilo para o botão "Remover" */
+.remove-from-cart-btn {
+    font-size: 0.8rem;
+    color: #999;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.remove-from-cart-btn:hover {
+    color: #c0392b; /* Vermelho ao passar o mouse */
+    text-decoration: underline;
+}
+
+/* --- REMOÇÃO de estilos antigos que não são mais necessários --- */
+.cart-item-actions .quantity-wrapper {
+    margin-bottom: 0;
+}
+
+/* ============================================================ */
+/* CORREÇÃO: LISTA VERTICAL NO CARRINHO */
+/* ============================================================ */
+
+#cart-items-container-modal {
+    display: flex;
+    flex-direction: column; /* <--- O SEGREDO: Isso força um item embaixo do outro */
+    gap: 1.5rem;            /* Espaço entre os itens */
+    width: 100%;            /* Garante que o container ocupe a largura do modal */
+}
+
+/* Aproveitando para garantir que o item ocupe a largura certa */
+.cart-item {
+    width: 100%;
+    background-color: #fff; /* Fundo branco no card */
+    border-radius: 8px;     /* Cantos arredondados (opcional, pois vi que está bonito no print) */
+    /* ... os outros estilos que já criamos ... */
 }
