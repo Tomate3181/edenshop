@@ -1512,3 +1512,26 @@ body {
     border-radius: 8px;     /* Cantos arredondados (opcional, pois vi que está bonito no print) */
     /* ... os outros estilos que já criamos ... */
 }
+/* =============================================== */
+/* === NAVBAR FIXA E AJUSTE DE CONTEÚDO === */
+/* =============================================== */
+
+/* 1. Torna a navbar fixa no topo da tela */
+.navbar {
+    position: fixed; /* Fixa o elemento em relação à janela de visualização */
+    top: 0;          /* Alinha no topo */
+    left: 0;         /* Alinha na esquerda */
+    width: 100%;     /* Faz ocupar toda a largura */
+    z-index: 999;    /* Garante que ela fique na frente de outros conteúdos */
+
+    /* Bônus: uma transição suave para futuras animações (ex: mudar de cor ao rolar) */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 2. Adiciona um "espaçamento" no topo do conteúdo principal */
+/* Isso impede que o início da página fique escondido atrás da navbar fixa */
+main {
+    /* ALTURA APROXIMADA DA SUA NAVBAR. */
+    /* Você pode ajustar este valor (ex: 80px, 65px) para um encaixe perfeito. */
+    padding-top: 72px; 
+}

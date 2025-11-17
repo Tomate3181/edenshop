@@ -89,14 +89,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Event Listeners para fechar o modal
+    // Event Listeners para fechar o modal de login
+    // NOTA: O event listener para fechar clicando fora foi movido para o novo bloco de código para evitar duplicidade.
     if (closeModalBtn) closeModalBtn.addEventListener('click', closeLoginModal);
-    window.addEventListener('click', (event) => {
-        if (event.target == loginModal) {
-            closeLoginModal();
-        }
-    });
+    
 
+    
     // ===================================================================
     // --- 3. LÓGICA DOS FILTROS (products.html) ---
     // ===================================================================
@@ -372,9 +370,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (profileName) { // Verifica se estamos na página de perfil
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-        // Proteção de Rota: se não houver usuário, volta para o login
+        // Proteção de Rota: se não houver usuário, volta para a homepage   
         if (!currentUser) {
-            window.location.href = 'login.html';
+            window.location.href = 'index.html';
         } else {
             // Preenche as informações na página
             document.getElementById('profile-name').textContent = currentUser.name;
@@ -399,4 +397,80 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===================================================================
     updateCartIcon();
 
+    // ===================================================================
+    // --- NOVO CÓDIGO: LÓGICA DO MODAL DE CADASTRO E TROCA ---
+    // ===================================================================
+    
+    // --- 1. Seleciona os elementos do modal de cadastro ---
+    const registerModal = document.getElementById('registerModal');
+    if (registerModal) { // Adiciona uma verificação para garantir que o modal existe
+        const closeRegisterBtn = registerModal.querySelector('.close-btn');
+        const registerForm = document.getElementById('registerForm');
+        
+        // Botões que trocam entre os modais
+        const switchToRegister = document.getElementById('switchToRegister');
+        const switchToLogin = document.getElementById('switchToLogin');
+
+        // --- 2. Funções para abrir e fechar o modal de CADASTRO ---
+        const openRegisterModal = () => { if (registerModal) registerModal.style.display = 'block'; }
+        const closeRegisterModal = () => { if (registerModal) registerModal.style.display = 'none'; }
+
+        // --- 3. Lógica para alternar entre os modais ---
+        if (switchToRegister) {
+            switchToRegister.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeLoginModal(); // Função que já existe para fechar o modal de login
+                openRegisterModal();
+            });
+        }
+
+        if (switchToLogin) {
+            switchToLogin.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeRegisterModal();
+                openLoginModal(); // Função que já existe para abrir o modal de login
+            });
+        }
+
+        // --- 4. Event listeners para fechar o modal de CADASTRO ---
+        if (closeRegisterBtn) closeRegisterBtn.addEventListener('click', closeRegisterModal);
+
+        // Adiciona o registerModal à lógica de fechar ao clicar fora
+        window.addEventListener('click', (event) => {
+            if (event.target == registerModal) {
+                closeRegisterModal();
+            }
+            if (event.target == loginModal) {
+                closeLoginModal();
+            }
+        });
+
+        // --- 5. Lógica de validação e envio do formulário de CADASTRO ---
+        if (registerForm) {
+            registerForm.addEventListener('submit', (e) => {
+                e.preventDefault(); // Impede o recarregamento da página
+
+                const name = document.getElementById('register-name').value;
+                const email = document.getElementById('register-email').value;
+                const password = document.getElementById('register-password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+
+                // Validação crucial: verificar se as senhas coincidem
+                if (password !== confirmPassword) {
+                    alert('As senhas não coincidem. Por favor, tente novamente.');
+                    return; // Para a execução da função aqui
+                }
+
+                // Simulação de cadastro bem-sucedido
+                // Futuramente, aqui você enviará os dados para o seu script PHP
+                console.log('Enviando para o backend (PHP):', { name, email, password });
+                
+                alert(`Cadastro realizado com sucesso, ${name}!\nAgora você já pode fazer o login.`);
+
+                registerForm.reset(); // Limpa o formulário
+                closeRegisterModal(); // Fecha o modal de cadastro
+                openLoginModal();     // Abre o modal de login para o usuário entrar
+            });
+        }
+    }
 });

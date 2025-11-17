@@ -197,6 +197,75 @@
       <!-- =============== FIM DO MODAL DE LOGIN =============== -->
       <!-- =============================================== -->
 
+      <!-- =============================================== -->
+<!-- =========== INÍCIO DO MODAL DE CADASTRO =========== -->
+<!-- =============================================== -->
+<div id="registerModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <!-- Conteúdo adaptado para o cadastro -->
+    <div class="login-box-modal">
+      <div class="login-header-text">
+        <h2>Crie sua conta</h2>
+        <p>É rápido e fácil!</p>
+      </div>
+      <form id="registerForm">
+        <!-- Campo Nome -->
+        <div class="input-group">
+          <label for="register-name">Nome</label>
+          <input
+            type="text"
+            id="register-name"
+            name="name"
+            placeholder="Seu nome completo"
+            required
+          />
+        </div>
+        <!-- Campo Email -->
+        <div class="input-group">
+          <label for="register-email">Email</label>
+          <input
+            type="email"
+            id="register-email"
+            name="email"
+            placeholder="seuemail@exemplo.com"
+            required
+          />
+        </div>
+        <!-- Campo Senha -->
+        <div class="input-group">
+          <label for="register-password">Senha</label>
+          <input
+            type="password"
+            id="register-password"
+            name="password"
+            placeholder="Crie uma senha forte"
+            required
+          />
+        </div>
+        <!-- Campo Confirmar Senha -->
+        <div class="input-group">
+          <label for="confirm-password">Confirmar Senha</label>
+          <input
+            type="password"
+            id="confirm-password"
+            name="confirm_password"
+            placeholder="Digite a senha novamente"
+            required
+          />
+        </div>
+        <button type="submit" class="btn">Cadastrar</button>
+        <div class="login-footer">
+          <p>Já tem uma conta? <a href="#" id="switchToLogin">Faça login</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- =============================================== -->
+<!-- ============ FIM DO MODAL DE CADASTRO ============ -->
+<!-- =============================================== -->
+
 
     <footer class="footer">
         <div class="footer-content">
