@@ -28,7 +28,20 @@
           <li><a href="contact.html">Contato</a></li>
         </ul>
         <div class="nav-icons">
-          <!-- LINHA NOVA -->
+          <!-- INÍCIO DO NOVO COMPONENTE DE BUSCA -->
+          <div class="search-container">
+            <input
+              type="search"
+              id="search-bar"
+              class="search-bar"
+              placeholder="Buscar plantas..."
+            />
+            <a href="#" id="search-icon-btn" aria-label="Buscar"
+              ><i class="fas fa-search"></i
+            ></a>
+          </div>
+          <!-- FIM DO NOVO COMPONENTE DE BUSCA -->
+
           <a
             href="#"
             id="open-cart-btn"
@@ -63,7 +76,7 @@
           <div class="products-grid">
             <!-- Produto 1 -->
             <div
-              class="product-card"
+              class="product-card animate-on-scroll"
               data-id="prod1"
               data-name="Monstera Deliciosa"
               data-price="89.90"
@@ -81,7 +94,7 @@
             </div>
             <!-- Produto 2 -->
             <div
-              class="product-card"
+              class="product-card animate-on-scroll"
               data-id="prod2"
               data-name="Jiboia (Epipremnum aureum)"
               data-price="49.90"
@@ -99,7 +112,7 @@
             </div>
             <!-- Produto 3 -->
             <div
-              class="product-card"
+              class="product-card animate-on-scroll"
               data-id="prod3"
               data-name="Zamioculca"
               data-price="69.90"
@@ -117,7 +130,7 @@
             </div>
             <!-- Produto 4 -->
             <div
-              class="product-card"
+              class="product-card animate-on-scroll"
               data-id="prod4"
               data-name="Espada de São Jorge"
               data-price="59.90"
@@ -344,7 +357,10 @@
             </div>
             <button type="submit" class="btn">Entrar</button>
             <div class="login-footer">
-              <p>Não tem uma conta? <a href="#" id="switchToRegister">Cadastre-se</a></p>
+              <p>
+                Não tem uma conta?
+                <a href="#" id="switchToRegister">Cadastre-se</a>
+              </p>
               <a href="#">Esqueceu sua senha?</a>
             </div>
           </form>
@@ -355,74 +371,76 @@
     <!-- =============== FIM DO MODAL DE LOGIN =============== -->
     <!-- =============================================== -->
 
-<!-- =============================================== -->
-<!-- =========== INÍCIO DO MODAL DE CADASTRO =========== -->
-<!-- =============================================== -->
-<div id="registerModal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn">&times;</span>
-    <!-- Conteúdo adaptado para o cadastro -->
-    <div class="login-box-modal">
-      <div class="login-header-text">
-        <h2>Crie sua conta</h2>
-        <p>É rápido e fácil!</p>
+    <!-- =============================================== -->
+    <!-- =========== INÍCIO DO MODAL DE CADASTRO =========== -->
+    <!-- =============================================== -->
+    <div id="registerModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <!-- Conteúdo adaptado para o cadastro -->
+        <div class="login-box-modal">
+          <div class="login-header-text">
+            <h2>Crie sua conta</h2>
+            <p>É rápido e fácil!</p>
+          </div>
+          <form id="registerForm">
+            <!-- Campo Nome -->
+            <div class="input-group">
+              <label for="register-name">Nome</label>
+              <input
+                type="text"
+                id="register-name"
+                name="name"
+                placeholder="Seu nome completo"
+                required
+              />
+            </div>
+            <!-- Campo Email -->
+            <div class="input-group">
+              <label for="register-email">Email</label>
+              <input
+                type="email"
+                id="register-email"
+                name="email"
+                placeholder="seuemail@exemplo.com"
+                required
+              />
+            </div>
+            <!-- Campo Senha -->
+            <div class="input-group">
+              <label for="register-password">Senha</label>
+              <input
+                type="password"
+                id="register-password"
+                name="password"
+                placeholder="Crie uma senha forte"
+                required
+              />
+            </div>
+            <!-- Campo Confirmar Senha -->
+            <div class="input-group">
+              <label for="confirm-password">Confirmar Senha</label>
+              <input
+                type="password"
+                id="confirm-password"
+                name="confirm_password"
+                placeholder="Digite a senha novamente"
+                required
+              />
+            </div>
+            <button type="submit" class="btn">Cadastrar</button>
+            <div class="login-footer">
+              <p>
+                Já tem uma conta? <a href="#" id="switchToLogin">Faça login</a>
+              </p>
+            </div>
+          </form>
+        </div>
       </div>
-      <form id="registerForm">
-        <!-- Campo Nome -->
-        <div class="input-group">
-          <label for="register-name">Nome</label>
-          <input
-            type="text"
-            id="register-name"
-            name="name"
-            placeholder="Seu nome completo"
-            required
-          />
-        </div>
-        <!-- Campo Email -->
-        <div class="input-group">
-          <label for="register-email">Email</label>
-          <input
-            type="email"
-            id="register-email"
-            name="email"
-            placeholder="seuemail@exemplo.com"
-            required
-          />
-        </div>
-        <!-- Campo Senha -->
-        <div class="input-group">
-          <label for="register-password">Senha</label>
-          <input
-            type="password"
-            id="register-password"
-            name="password"
-            placeholder="Crie uma senha forte"
-            required
-          />
-        </div>
-        <!-- Campo Confirmar Senha -->
-        <div class="input-group">
-          <label for="confirm-password">Confirmar Senha</label>
-          <input
-            type="password"
-            id="confirm-password"
-            name="confirm_password"
-            placeholder="Digite a senha novamente"
-            required
-          />
-        </div>
-        <button type="submit" class="btn">Cadastrar</button>
-        <div class="login-footer">
-          <p>Já tem uma conta? <a href="#" id="switchToLogin">Faça login</a></p>
-        </div>
-      </form>
     </div>
-  </div>
-</div>
-<!-- =============================================== -->
-<!-- ============ FIM DO MODAL DE CADASTRO ============ -->
-<!-- =============================================== -->
+    <!-- =============================================== -->
+    <!-- ============ FIM DO MODAL DE CADASTRO ============ -->
+    <!-- =============================================== -->
 
     <footer class="footer">
       <div class="footer-content">
@@ -451,9 +469,9 @@
         <p>&copy; 2025 Edenshop. Todos os direitos reservados.</p>
       </div>
     </footer>
-    
+
     <script src="script.js"></script>
     <script src="homepage.js"></script>
-    <!-- <<< ADICIONE ESTA LINHA -->
+    <script src="search.js"></script>
   </body>
 </html>

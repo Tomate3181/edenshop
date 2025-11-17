@@ -20,7 +20,20 @@
                 <li><a href="contact.html">Contato</a></li>
             </ul>
             <div class="nav-icons">
-                          <!-- LINHA NOVA -->
+          <!-- INÍCIO DO NOVO COMPONENTE DE BUSCA -->
+          <div class="search-container">
+            <input
+              type="search"
+              id="search-bar"
+              class="search-bar"
+              placeholder="Buscar plantas..."
+            />
+            <a href="#" id="search-icon-btn" aria-label="Buscar"
+              ><i class="fas fa-search"></i
+            ></a>
+          </div>
+          <!-- FIM DO NOVO COMPONENTE DE BUSCA -->
+
           <a
             href="#"
             id="open-cart-btn"
@@ -30,8 +43,8 @@
             <i class="fas fa-shopping-cart"></i>
             <span id="cart-item-count">0</span>
           </a>
-                <a href="#" id="user-action-icon"><i class="fas fa-user"></i></a>
-            </div>
+          <a href="#" id="user-action-icon"><i class="fas fa-user"></i></a>
+        </div>
         </nav>
     </header>
 
@@ -274,5 +287,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="search.js"></script>
 </body>
 </html>

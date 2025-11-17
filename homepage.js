@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, {
-        threshold: 0.1 // A animação começa quando 10% do elemento estiver visível
+        threshold: 0.03 // A animação começa quando 3% do elemento estiver visível
     });
 
     // Pede ao observador para "observar" cada um dos elementos selecionados

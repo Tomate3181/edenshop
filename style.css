@@ -1535,3 +1535,81 @@ main {
     /* Você pode ajustar este valor (ex: 80px, 65px) para um encaixe perfeito. */
     padding-top: 72px; 
 }
+
+/* =============================================== */
+/* =========== ESTILOS DA BARRA DE BUSCA (COM FADE-OUT) =========== */
+/* =============================================== */
+
+/* Alinha todos os itens (busca, carrinho, usuário) no header */
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Ajusta o espaçamento entre os ícones */
+}
+
+/* Container que segura o input e o ícone da lupa */
+.search-container {
+    position: relative; /* Cria o contexto para o posicionamento absoluto do input */
+    display: flex;
+    align-items: center;
+}
+
+/* Ícone da lupa */
+#search-icon-btn {
+    font-size: 1.2rem;
+    color: var(--dark-text);
+    transition: color 0.3s;
+    text-decoration: none;
+    z-index: 2; /* Garante que o ícone fique na frente do input */
+    height: 38px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+}
+
+#search-icon-btn:hover {
+    color: var(--primary-green);
+}
+
+/* O campo de input da busca */
+.search-bar {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    
+    /* Estado inicial (escondido) */
+    width: 0;
+    opacity: 0;
+    visibility: hidden; /* Começa escondido */
+    
+    /* Estilos visuais */
+    height: 38px;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    
+    /* A MÁGICA DA ANIMAÇÃO DE SAÍDA ESTÁ AQUI */
+    /* Quando a classe .active for removida, a visibilidade só mudará após 0.4s */
+    transition: width 0.4s ease-in-out, 
+                opacity 0.4s ease-in-out, 
+                padding 0.4s ease-in-out, 
+                border-color 0.4s ease-in-out,
+                visibility 0s linear 0.4s; /* Transição instantânea, mas com atraso */
+}
+
+/* Estado ativo (visível), ativado pelo JavaScript */
+.search-bar.active {
+    width: 220px;
+    padding: 0.5rem 45px 0.5rem 1rem;
+    border-color: #ccc;
+    opacity: 1;
+    visibility: visible; /* Torna-se visível */
+
+    /* AQUI GARANTIMOS QUE A ENTRADA SEJA IMEDIATA */
+    /* Removemos o atraso da visibilidade para a animação de entrada */
+    transition-delay: 0s;
+}
