@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Minha Conta - Edenshop</title>
+    <title>Finalizar Compra - Edenshop</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="checkout.css" />
+    <!-- Font Awesome para ícones -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-  </head>
-  <body>
+</head>
+<body>
+    <!-- Header (consistente com o resto do site) -->
     <header>
       <nav class="navbar">
         <div class="logo">
-          <a href="index.html"
-            ><img src="./assets/logo2.png" alt="Edenshop Logo"
-          /></a>
+          <a href="index.html">
+            <img src="./assets/logo2.png" alt="Edenshop Logo" />
+            <!-- Edenshop -->
+          </a>
         </div>
         <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
@@ -24,7 +28,7 @@
           <li><a href="about.html">Sobre Nós</a></li>
           <li><a href="contact.html">Contato</a></li>
         </ul>
-       <div class="nav-icons">
+        <div class="nav-icons">
           <!-- INÍCIO DO NOVO COMPONENTE DE BUSCA -->
           <div class="search-container">
             <input
@@ -53,37 +57,64 @@
       </nav>
     </header>
 
-    <main class="container page-padding">
-      <h1 class="page-title">Minha Conta</h1>
+    <main class="page-padding">
+        <div class="container">
+            <h1 class="page-title">Finalizar Compra</h1>
+            
+            <div class="checkout-layout">
+                <!-- Seção de Detalhes do Cliente -->
+                <div class="customer-details">
+                    <h2>Seus Dados</h2>
+                    <form id="checkout-form">
+                        <div class="form-group">
+                            <label for="fullName">Nome Completo</label>
+                            <input type="text" id="fullName" name="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
 
-      <!-- Card de Informações do Usuário -->
-      <div class="profile-card">
-        <div id="profile-avatar" class="profile-avatar"></div>
-        <h2 id="profile-name">Carregando...</h2>
-        <p id="profile-email">...</p>
-        <button id="logout-btn" class="btn btn-danger">Sair (Logout)</button>
-      </div>
+                        <h2>Endereço de Entrega</h2>
+                        <div class="form-group">
+                            <label for="address">Endereço</label>
+                            <input type="text" id="address" name="address" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">Cidade</label>
+                                <input type="text" id="city" name="city" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="state">Estado</label>
+                                <input type="text" id="state" name="state" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="zip">CEP</label>
+                            <input type="text" id="zip" name="zip" required>
+                        </div>
 
-      <div class="profile-layout">
-        <h2>Opções da Conta</h2>
-        <div class="profile-options">
-          <div class="option-item">
-            <i class="fas fa-box"></i>
-            <span>Meus Pedidos</span>
-            <i class="fas fa-chevron-right"></i>
-          </div>
-          <div class="option-item">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Meus Endereços</span>
-            <i class="fas fa-chevron-right"></i>
-          </div>
-          <div class="option-item">
-            <i class="fas fa-lock"></i>
-            <span>Alterar Senha</span>
-            <i class="fas fa-chevron-right"></i>
-          </div>
+                        <h2>Pagamento</h2>
+                        <p>Funcionalidade de pagamento será implementada em breve. Clique abaixo para confirmar seu pedido.</p>
+
+                    </form>
+                </div>
+
+                <!-- Seção de Resumo do Pedido -->
+                <div class="order-summary-checkout">
+                    <h3>Resumo do Pedido</h3>
+                    <div id="checkout-items-container">
+                        <!-- Itens do carrinho serão inseridos aqui pelo JS -->
+                    </div>
+                    <div class="summary-row total-row">
+                        <span>Total</span>
+                        <span id="checkout-total">R$ 0,00</span>
+                    </div>
+                    <button type="submit" form="checkout-form" class="btn large-btn">Confirmar Pedido</button>
+                </div>
+            </div>
         </div>
-      </div>
     </main>
 
     <!-- =============================================== -->
@@ -171,7 +202,10 @@
             </div>
             <button type="submit" class="btn">Entrar</button>
             <div class="login-footer">
-              <p>Não tem uma conta? <a href="#">Cadastre-se</a></p>
+              <p>
+                Não tem uma conta?
+                <a href="#" id="switchToRegister">Cadastre-se</a>
+              </p>
               <a href="#">Esqueceu sua senha?</a>
             </div>
           </form>
@@ -182,8 +216,10 @@
     <!-- =============== FIM DO MODAL DE LOGIN =============== -->
     <!-- =============================================== -->
 
+    <!-- Footer (consistente com o resto do site) -->
     <footer class="footer">
-      <div class="footer-content">
+        <!-- O mesmo conteúdo do seu footer aqui -->
+        <div class="footer-content">
         <div class="footer-section">
           <h3>Edenshop</h3>
           <p>Conectando pessoas e o verde no dia a dia.</p>
@@ -210,7 +246,8 @@
       </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="checkout.js"></script>
+    <script src="script.js"></script> <!-- Carregue o script principal também -->
     <script src="search.js"></script>
-  </body>
+</body>
 </html>

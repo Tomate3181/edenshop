@@ -473,4 +473,14 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
+
+    // ===================================================================
+    // --- DIRECIONAMENTO PARA PÁGINA DE CHECKOUT ---
+    // ===================================================================
+    const checkoutBtn = document.getElementById('checkout-btn-modal');
+    if(checkoutBtn) {
+        checkoutBtn.addEventListener('click', () => {
+            window.location.href = 'checkout.html';
+        });
+    }
 });
