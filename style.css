@@ -23,7 +23,9 @@ body {
     line-height: 1.6;
 }
 
-/* Navbar */
+/* =============================================== */
+/* === NAVBAR - ESTILOS ALTERADOS E CORRIGIDOS === */
+/* =============================================== */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -31,17 +33,22 @@ body {
     padding: 1rem 2rem;
     background-color: var(--white-color);
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .logo a {
-    /* Garante que o link da imagem se comporte corretamente */
     display: inline-block; 
 }
 
 .logo img {
-    height: 40px; /* <<<<<< AJUSTE A ALTURA AQUI */
-    width: auto;  /* Garante que a largura se ajuste para manter a proporção */
-    display: block; /* Remove qualquer espaço extra que o navegador possa adicionar abaixo da imagem */
+    height: 40px; 
+    width: auto;  
+    display: block; 
 }
 
 .logo {
@@ -74,16 +81,35 @@ body {
     color: var(--primary-green);
 }
 
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
 .nav-icons a {
-    margin-left: 1.5rem;
     font-size: 1.2rem;
     color: var(--dark-text);
     transition: color 0.3s;
+
+    /* --- ADICIONE ESTAS LINHAS --- */
+    display: flex;
+    align-items: center;
+    height: 38px;      /* Mesma altura da área da lupa */
+    padding: 0 12px;   /* Exatamente o mesmo padding da lupa */
 }
 
 .nav-icons a:hover {
     color: var(--primary-green);
 }
+
+/* Adiciona um "espaçamento" no topo do conteúdo principal */
+main {
+    padding-top: 72px; 
+}
+
+/* --- O RESTANTE DO CSS PERMANECE IGUAL --- */
+
 
 /* Container do Login */
 .login-container {
@@ -1556,15 +1582,8 @@ main {
 
 /* Ícone da lupa */
 #search-icon-btn {
-    font-size: 1.2rem;
-    color: var(--dark-text);
-    transition: color 0.3s;
     text-decoration: none;
     z-index: 2; /* Garante que o ícone fique na frente do input */
-    height: 38px;
-    padding: 0 12px;
-    display: flex;
-    align-items: center;
 }
 
 #search-icon-btn:hover {
