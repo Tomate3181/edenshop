@@ -1762,26 +1762,43 @@ main {
 .transparent-header .hero {
     margin-top: 0;
 }
+    
+/* ======================================================= */
+/*  CORREÇÃO DEFINITIVA: FORÇA O TEXTO E ÍCONES DO DROPDOWN */
+/* ======================================================= */
 
-/* Container para o menu de usuário, para garantir o posicionamento correto do dropdown */
-.user-menu-container {
-  position: relative; /* Essencial para o dropdown se posicionar corretamente */
-  display: inline-block;
+/*
+  Esta regra é super específica e garante que o TEXTO ("Minha Conta", "Sair")
+  dentro do <span> seja sempre escuro.
+*/
+.transparent-header .navbar .dropdown-github-style .dropdown-item span {
+    color: var(--dark-text);
 }
 
-/* Estilo do menu dropdown */
-.dropdown-menu {
-  display: none; /* Escondido por padrão */
-  position: absolute;
-  right: 0; /* Alinha o dropdown à direita do ícone */
-  top: 100%; /* Posiciona logo abaixo do ícone */
-  background-color: #ffffff;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 100; /* Garante que fique sobre outros elementos */
-  border-radius: 5px;
-  overflow: hidden; /* Garante que os links respeitem o border-radius */
-  margin-top: 10px; /* Pequeno espaço entre o ícone e o menu */
+/*
+  Esta regra garante que os ÍCONES mantenham a cor verde da marca,
+  impedindo que fiquem brancos ou herdem outra cor.
+*/
+.transparent-header .navbar .dropdown-github-style .dropdown-item i {
+    color: var(--primary-green);
+}
+
+/*
+  Garante que o efeito hover funcione corretamente, mudando a cor do TEXTO
+  para o verde principal ao passar o mouse.
+*/
+.transparent-header .navbar .dropdown-github-style .dropdown-item:hover span {
+    color: var(--primary-green);
+}
+
+/*
+  Garante que o cabeçalho "Logado como..." e o nome do usuário
+  permaneçam escuros e totalmente visíveis.
+*/
+.transparent-header .navbar .dropdown-header p,
+.transparent-header .navbar .dropdown-header strong {
+    color: var(--dark-text);
+    opacity: 1; /* Garante opacidade total */
 }
 
 
@@ -1794,28 +1811,39 @@ main {
 /*  DROPDOWN ESTILO GITHUB COM CORES DA MARCA E ANIMAÇÃO   */
 /* ======================================================= */
 
+.user-menu-container {
+  position: relative; /* Essencial para o dropdown se posicionar corretamente */
+  display: inline-block;
+}
+
 /* Container principal do dropdown */
 .dropdown-menu.dropdown-github-style {
+  position: absolute;
+  right: 0;
+  top: 100%;
   min-width: 240px;
   background-color: var(--white-color);
-  border: 1px solid #e0e0e0; /* Usamos um cinza neutro para a borda */
+  border: 1px solid #e0e0e0;
   border-radius: 6px;
   padding: 0;
   margin-top: 8px;
-  box-shadow: 0 8px 24px rgba(47, 79, 79, 0.15); /* Sombra baseada na cor do texto */
+  box-shadow: 0 8px 24px rgba(47, 79, 79, 0.15);
+  overflow: hidden; /* Garante que os links respeitem o border-radius */
 
   /* --- LÓGICA DA ANIMAÇÃO --- */
-  opacity: 0; /* Começa invisível */
-  visibility: hidden; /* Começa inacessível */
+  opacity: 0;                   /* Começa invisível */
+  visibility: hidden;           /* Começa inacessível para cliques e leitores de tela */
   transform: translateY(-10px); /* Começa 10px para cima */
-  transition: opacity 0.2s ease-out, transform 0.2s ease-out, visibility 0.2s;
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out, visibility 0s linear 0.2s;
+  /* A transição de visibility tem um atraso para que o elemento desapareça visualmente ANTES de se tornar 'hidden' */
 }
 
-/* Estado ativo (quando o JS adiciona a classe .active) */
+/* Estado ativo (quando o JS adiciona a classe .active) - ESTADO VISÍVEL */
 .dropdown-menu.dropdown-github-style.active {
-  opacity: 1; /* Torna-se visível */
-  visibility: visible; /* Torna-se acessível */
-  transform: translateY(0); /* Desce para a posição final */
+  opacity: 1;                 /* Torna-se visível */
+  visibility: visible;        /* Torna-se acessível */
+  transform: translateY(0);   /* Desce para a posição final */
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out; /* Transição suave para aparecer */
 }
 
 /* Cabeçalho com "Logado como..." */
