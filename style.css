@@ -2,10 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
 :root {
-    --primary-green: #6B8E23; /* Verde principal mais escuro */
-    --light-green: #AEC670;   /* Verde claro dos fundos */
-    --dark-text: #2F4F4F;      /* Cor de texto escura */
-    --gold-accent: #DAA520;     /* Dourado dos detalhes */
+    --primary-green: #6B8E23;
+    /* Verde principal mais escuro */
+    --light-green: #AEC670;
+    /* Verde claro dos fundos */
+    --dark-text: #2F4F4F;
+    /* Cor de texto escura */
+    --gold-accent: #DAA520;
+    /* Dourado dos detalhes */
     --white-color: #FFFFFF;
     --background-color: #F8F9FA;
 }
@@ -32,7 +36,7 @@ body {
     align-items: center;
     padding: 1rem 2rem;
     background-color: var(--white-color);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: fixed;
     top: 0;
     left: 0;
@@ -42,13 +46,13 @@ body {
 }
 
 .logo a {
-    display: inline-block; 
+    display: inline-block;
 }
 
 .logo img {
-    height: 40px; 
-    width: auto;  
-    display: block; 
+    height: 40px;
+    width: auto;
+    display: block;
 }
 
 .logo {
@@ -95,8 +99,10 @@ body {
     /* --- ADICIONE ESTAS LINHAS --- */
     display: flex;
     align-items: center;
-    height: 38px;      /* Mesma altura da área da lupa */
-    padding: 0 12px;   /* Exatamente o mesmo padding da lupa */
+    height: 38px;
+    /* Mesma altura da área da lupa */
+    padding: 0 12px;
+    /* Exatamente o mesmo padding da lupa */
 }
 
 .nav-icons a:hover {
@@ -105,7 +111,7 @@ body {
 
 /* Adiciona um "espaçamento" no topo do conteúdo principal */
 main {
-    padding-top: 72px; 
+    padding-top: 72px;
 }
 
 /* --- O RESTANTE DO CSS PERMANECE IGUAL --- */
@@ -124,7 +130,7 @@ main {
     background: var(--white-color);
     padding: 2.5rem;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 400px;
     text-align: center;
@@ -312,7 +318,7 @@ main {
     background: var(--white-color);
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     text-align: center;
 }
 
@@ -337,25 +343,30 @@ main {
     background: var(--white-color);
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
 
     /* --- NOVAS PROPRIEDADES --- */
-    display: flex;          /* 1. Ativa o layout Flexbox */
-    flex-direction: column; /* 2. Organiza os itens em uma coluna (vertical) */
-    height: 100%;           /* 3. Garante que todos os cards na mesma linha tenham a mesma altura */
+    display: flex;
+    /* 1. Ativa o layout Flexbox */
+    flex-direction: column;
+    /* 2. Organiza os itens em uma coluna (vertical) */
+    height: 100%;
+    /* 3. Garante que todos os cards na mesma linha tenham a mesma altura */
 }
 
 /* REGRA NOVA PARA O CONTEÚDO */
 .product-card-content {
-    padding: 1rem 1rem 0; /* Espaçamento interno */
-    flex-grow: 1;         /* 4. Faz esta área crescer e empurrar o botão para baixo */
+    padding: 1rem 1rem 0;
+    /* Espaçamento interno */
+    flex-grow: 1;
+    /* 4. Faz esta área crescer e empurrar o botão para baixo */
 }
 
 .product-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
 }
 
 .product-card img {
@@ -378,7 +389,7 @@ main {
 
 .product-card .btn {
     /* Mantém o espaçamento nas laterais e na parte inferior */
-    margin: 1rem 1.5rem 1.5rem; 
+    margin: 1rem 1.5rem 1.5rem;
 }
 
 /* Seção de Valores */
@@ -422,7 +433,8 @@ main {
 /* NOVA SEÇÃO: Benefícios */
 .benefits-section {
     padding: 4rem 0;
-    background-color: #f8f9fa; /* Um cinza bem claro */
+    background-color: #f8f9fa;
+    /* Um cinza bem claro */
 }
 
 .benefits-grid {
@@ -436,7 +448,7 @@ main {
     padding: 2.5rem 2rem;
     text-align: left;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .benefit-card h3 {
@@ -595,8 +607,9 @@ main {
     background-color: #fff;
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    align-self: flex-start; /* Alinha o sidebar no topo */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    align-self: flex-start;
+    /* Alinha o sidebar no topo */
 }
 
 .filters-sidebar h3 {
@@ -667,7 +680,7 @@ main {
     width: 100%;
     height: auto;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     margin-bottom: 1rem;
 }
 
@@ -687,7 +700,8 @@ main {
     border: 2px solid transparent;
 }
 
-.thumbnail.active, .thumbnail:hover {
+.thumbnail.active,
+.thumbnail:hover {
     opacity: 1;
     border-color: var(--primary-green);
 }
@@ -777,7 +791,8 @@ main {
     transition: color 0.3s, border-color 0.3s;
 }
 
-.tab-btn.active, .tab-btn:hover {
+.tab-btn.active,
+.tab-btn:hover {
     color: var(--dark-text);
     border-bottom-color: var(--primary-green);
 }
@@ -843,7 +858,7 @@ main {
     gap: 1.5rem;
     padding: 1.5rem;
     background-color: #fff;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     border-radius: 8px;
     align-items: center;
 }
@@ -902,7 +917,7 @@ main {
     background-color: #fff;
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     position: sticky;
     top: 2rem;
 }
@@ -966,7 +981,7 @@ main {
     background-color: #fff;
     padding: 2.5rem;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
     text-align: center;
 }
 
@@ -1011,12 +1026,14 @@ main {
 .commitment-image img {
     width: 100%;
     border-radius: 8px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 /* Responsividade para seções da página Sobre */
 @media (max-width: 768px) {
-    .mission-vision-section, .commitment-section {
+
+    .mission-vision-section,
+    .commitment-section {
         grid-template-columns: 1fr;
     }
 
@@ -1042,7 +1059,7 @@ main {
     background-color: #fff;
     padding: 3rem;
     border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 /* Formulário */
@@ -1105,6 +1122,7 @@ main {
     color: var(--primary-green);
     text-decoration: none;
 }
+
 .contact-info a:hover {
     text-decoration: underline;
 }
@@ -1119,6 +1137,7 @@ main {
     margin-right: 1.5rem;
     transition: color 0.3s;
 }
+
 .social-icons-contact a:hover {
     color: var(--primary-green);
 }
@@ -1141,7 +1160,8 @@ main {
 
 /* Correção de espaçamento para a mensagem do carrinho vazio */
 .cart-empty p {
-    margin-bottom: 1.5rem; /* Adiciona um espaço ABAIXO do parágrafo */
+    margin-bottom: 1.5rem;
+    /* Adiciona um espaço ABAIXO do parágrafo */
 }
 
 /* --- Estilos da Página de Perfil --- */
@@ -1157,7 +1177,7 @@ main {
     background-color: #fff;
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     text-align: center;
 }
 
@@ -1187,6 +1207,7 @@ main {
 .btn-danger {
     background-color: #c0392b;
 }
+
 .btn-danger:hover {
     background-color: #a93226;
 }
@@ -1203,14 +1224,14 @@ main {
     background-color: #fff;
     padding: 1.5rem;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .option-item:hover {
     transform: translateY(-3px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .option-item i:first-child {
@@ -1239,49 +1260,68 @@ main {
 
 /* O fundo escurecido do modal (overlay) */
 .modal {
-  display: none; /* Escondido por padrão */
-  position: fixed; /* Fica fixo na tela */
-  z-index: 1000; /* Garante que fique sobre todo o conteúdo */
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto; /* Permite scroll se o conteúdo for grande */
-  background-color: rgba(0,0,0,0.6); /* Fundo preto com 60% de opacidade */
-  animation: fadeIn 0.3s;
+    display: none;
+    /* Escondido por padrão */
+    position: fixed;
+    /* Fica fixo na tela */
+    z-index: 1000;
+    /* Garante que fique sobre todo o conteúdo */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    /* Permite scroll se o conteúdo for grande */
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Fundo preto com 60% de opacidade */
+    animation: fadeIn 0.3s;
 }
 
 /* Animação de fade-in */
 @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 /* A caixa principal do modal */
 .modal-content {
-  background-color: #fefefe;
-  margin: 10% auto; /* 10% do topo e centralizado */
-  padding: 20px;
-  border: none;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 420px;
-  position: relative;
-  box-shadow: 0 5px 25px rgba(0,0,0,0.2);
-  animation: slideIn 0.4s;
+    background-color: #fefefe;
+    margin: 10% auto;
+    /* 10% do topo e centralizado */
+    padding: 20px;
+    border: none;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 420px;
+    position: relative;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.4s;
 }
 
 /* Animação de slide-in */
 @keyframes slideIn {
-    from {transform: translateY(-50px); opacity: 0;}
-    to {transform: translateY(0); opacity: 1;}
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 
 /* Reutilizando e adaptando seu .login-box para o modal */
 .login-box-modal {
     text-align: center;
-    padding: 1rem; /* Adiciona um pouco de padding interno */
+    padding: 1rem;
+    /* Adiciona um pouco de padding interno */
 }
 
 .login-header-text {
@@ -1294,19 +1334,19 @@ main {
 
 /* Botão de fechar (o "x") */
 .close-btn {
-  color: #aaa;
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 32px;
-  font-weight: bold;
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 32px;
+    font-weight: bold;
 }
 
 .close-btn:hover,
 .close-btn:focus {
-  color: #333;
-  text-decoration: none;
-  cursor: pointer;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 /* =============================================== */
@@ -1314,66 +1354,66 @@ main {
 /* =============================================== */
 
 .cart-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1001;
-  
-  /* MUDANÇA 1: Usamos visibility e opacity em vez de display */
-  /* Isso permite que as transições de "saída" funcionem corretamente. */
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1001;
+
+    /* MUDANÇA 1: Usamos visibility e opacity em vez de display */
+    /* Isso permite que as transições de "saída" funcionem corretamente. */
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
 }
 
 /* Quando o modal está ativo, ele se torna visível */
 .cart-modal.active {
-  visibility: visible;
-  opacity: 1;
+    visibility: visible;
+    opacity: 1;
 }
 
 .cart-modal-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  
-  /* MUDANÇA 2: Adicionamos transição de opacidade para o fundo */
-  opacity: 0;
-  transition: opacity 0.4s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    /* MUDANÇA 2: Adicionamos transição de opacidade para o fundo */
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
 }
 
 /* Quando o modal está ativo, o fundo aparece suavemente */
 .cart-modal.active .cart-modal-overlay {
-  opacity: 1;
+    opacity: 1;
 }
 
 .cart-modal-content {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100%;
-  max-width: 450px;
-  height: 100%;
-  background-color: var(--background-color);
-  box-shadow: -5px 0 25px rgba(0,0,0,0.2);
-  display: flex;
-  flex-direction: column;
-  
-  /* MUDANÇA 3: A Mágica da Animação de Deslizar */
-  /* Começa fora da tela (100% para a direita) */
-  transform: translateX(100%);
-  /* Define a transição para a propriedade 'transform' */
-  transition: transform 0.4s ease-in-out; 
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    max-width: 450px;
+    height: 100%;
+    background-color: var(--background-color);
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+
+    /* MUDANÇA 3: A Mágica da Animação de Deslizar */
+    /* Começa fora da tela (100% para a direita) */
+    transform: translateX(100%);
+    /* Define a transição para a propriedade 'transform' */
+    transition: transform 0.4s ease-in-out;
 }
 
 /* Quando o modal está ativo, ele desliza para a posição final (0) */
 .cart-modal.active .cart-modal-content {
-  transform: translateX(0);
+    transform: translateX(0);
 }
 
 
@@ -1381,39 +1421,45 @@ main {
 /* (Cabeçalho, corpo, itens, rodapé, etc.) */
 
 .cart-modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid #eee;
-  flex-shrink: 0;
-  color: var(--dark-text); /* Corrigindo a cor do texto "Meu Carrinho" */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #eee;
+    flex-shrink: 0;
+    color: var(--dark-text);
+    /* Corrigindo a cor do texto "Meu Carrinho" */
 }
+
 .cart-modal-header h3 {
-  font-size: 1.5rem;
-  margin: 0;
+    font-size: 1.5rem;
+    margin: 0;
 }
+
 .close-cart-btn {
-  background: none;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
-  color: #aaa;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #aaa;
 }
+
 .cart-modal-body {
-  padding: 1.5rem;
-  overflow-y: auto;
-  flex-grow: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+    flex-grow: 1;
 }
+
 .cart-modal-footer {
-  padding: 1.5rem;
-  border-top: 1px solid #eee;
-  background-color: #fff;
-  flex-shrink: 0;
+    padding: 1.5rem;
+    border-top: 1px solid #eee;
+    background-color: #fff;
+    flex-shrink: 0;
 }
+
 .order-summary-modal .btn {
-  width: 100%;
-  margin-top: 1rem;
+    width: 100%;
+    margin-top: 1rem;
 }
 
 /* E todos os outros estilos de .cart-item, .quantity-controls, etc. */
@@ -1425,11 +1471,13 @@ main {
 /* --- 1. Correção de Cores --- */
 
 .cart-modal-header h3 {
-  color: var(--dark-text); /* Deixa o título "Meu Carrinho" escuro */
+    color: var(--dark-text);
+    /* Deixa o título "Meu Carrinho" escuro */
 }
 
 /* Garante que o texto dentro do carrinho vazio também seja escuro */
-.cart-empty h2, .cart-empty p {
+.cart-empty h2,
+.cart-empty p {
     color: var(--dark-text);
 }
 
@@ -1440,7 +1488,8 @@ main {
 .cart-item {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Empurra os elementos para as extremidades */
+    justify-content: space-between;
+    /* Empurra os elementos para as extremidades */
     gap: 1rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid #eee;
@@ -1451,21 +1500,25 @@ main {
     display: flex;
     align-items: center;
     gap: 1rem;
-    flex-grow: 1; /* Faz este container crescer e ocupar o espaço */
+    flex-grow: 1;
+    /* Faz este container crescer e ocupar o espaço */
 }
 
 /* Ajusta o nome do produto que fica dentro dos detalhes */
 .cart-item-details h3 {
     font-size: 1rem;
-    color: var(--dark-text); /* Cor escura para o nome da planta */
+    color: var(--dark-text);
+    /* Cor escura para o nome da planta */
 }
 
 /* O container das ações (botões) agora fica no final */
 .cart-item-actions {
     display: flex;
-    flex-direction: column; /* Coloca os botões de quantidade em cima do "Remover" */
+    flex-direction: column;
+    /* Coloca os botões de quantidade em cima do "Remover" */
     align-items: center;
-    gap: 0.5rem; /* Espaço entre os botões de +/- e o "Remover" */
+    gap: 0.5rem;
+    /* Espaço entre os botões de +/- e o "Remover" */
 }
 
 /* NOVO wrapper para os botões de quantidade */
@@ -1473,7 +1526,8 @@ main {
     display: flex;
     align-items: center;
     background-color: #f1f1f1;
-    border-radius: 20px; /* Bordas arredondadas */
+    border-radius: 20px;
+    /* Bordas arredondadas */
 }
 
 /* NOVO estilo para os botões de +/- */
@@ -1510,8 +1564,10 @@ main {
     cursor: pointer;
     transition: color 0.2s;
 }
+
 .remove-from-cart-btn:hover {
-    color: #c0392b; /* Vermelho ao passar o mouse */
+    color: #c0392b;
+    /* Vermelho ao passar o mouse */
     text-decoration: underline;
 }
 
@@ -1526,29 +1582,40 @@ main {
 
 #cart-items-container-modal {
     display: flex;
-    flex-direction: column; /* <--- O SEGREDO: Isso força um item embaixo do outro */
-    gap: 1.5rem;            /* Espaço entre os itens */
-    width: 100%;            /* Garante que o container ocupe a largura do modal */
+    flex-direction: column;
+    /* <--- O SEGREDO: Isso força um item embaixo do outro */
+    gap: 1.5rem;
+    /* Espaço entre os itens */
+    width: 100%;
+    /* Garante que o container ocupe a largura do modal */
 }
 
 /* Aproveitando para garantir que o item ocupe a largura certa */
 .cart-item {
     width: 100%;
-    background-color: #fff; /* Fundo branco no card */
-    border-radius: 8px;     /* Cantos arredondados (opcional, pois vi que está bonito no print) */
+    background-color: #fff;
+    /* Fundo branco no card */
+    border-radius: 8px;
+    /* Cantos arredondados (opcional, pois vi que está bonito no print) */
     /* ... os outros estilos que já criamos ... */
 }
+
 /* =============================================== */
 /* === NAVBAR FIXA E AJUSTE DE CONTEÚDO === */
 /* =============================================== */
 
 /* 1. Torna a navbar fixa no topo da tela */
 .navbar {
-    position: fixed; /* Fixa o elemento em relação à janela de visualização */
-    top: 0;          /* Alinha no topo */
-    left: 0;         /* Alinha na esquerda */
-    width: 100%;     /* Faz ocupar toda a largura */
-    z-index: 999;    /* Garante que ela fique na frente de outros conteúdos */
+    position: fixed;
+    /* Fixa o elemento em relação à janela de visualização */
+    top: 0;
+    /* Alinha no topo */
+    left: 0;
+    /* Alinha na esquerda */
+    width: 100%;
+    /* Faz ocupar toda a largura */
+    z-index: 999;
+    /* Garante que ela fique na frente de outros conteúdos */
 
     /* Bônus: uma transição suave para futuras animações (ex: mudar de cor ao rolar) */
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
@@ -1559,7 +1626,7 @@ main {
 main {
     /* ALTURA APROXIMADA DA SUA NAVBAR. */
     /* Você pode ajustar este valor (ex: 80px, 65px) para um encaixe perfeito. */
-    padding-top: 72px; 
+    padding-top: 72px;
 }
 
 /* =============================================== */
@@ -1570,12 +1637,14 @@ main {
 .nav-icons {
     display: flex;
     align-items: center;
-    gap: 1.5rem; /* Ajusta o espaçamento entre os ícones */
+    gap: 1.5rem;
+    /* Ajusta o espaçamento entre os ícones */
 }
 
 /* Container que segura o input e o ícone da lupa */
 .search-container {
-    position: relative; /* Cria o contexto para o posicionamento absoluto do input */
+    position: relative;
+    /* Cria o contexto para o posicionamento absoluto do input */
     display: flex;
     align-items: center;
 }
@@ -1583,7 +1652,8 @@ main {
 /* Ícone da lupa */
 #search-icon-btn {
     text-decoration: none;
-    z-index: 2; /* Garante que o ícone fique na frente do input */
+    z-index: 2;
+    /* Garante que o ícone fique na frente do input */
 }
 
 #search-icon-btn:hover {
@@ -1596,12 +1666,13 @@ main {
     top: 50%;
     right: 0;
     transform: translateY(-50%);
-    
+
     /* Estado inicial (escondido) */
     width: 0;
     opacity: 0;
-    visibility: hidden; /* Começa escondido */
-    
+    visibility: hidden;
+    /* Começa escondido */
+
     /* Estilos visuais */
     height: 38px;
     padding: 0;
@@ -1610,14 +1681,15 @@ main {
     font-family: 'Montserrat', sans-serif;
     font-size: 0.9rem;
     outline: none;
-    
+
     /* A MÁGICA DA ANIMAÇÃO DE SAÍDA ESTÁ AQUI */
     /* Quando a classe .active for removida, a visibilidade só mudará após 0.4s */
-    transition: width 0.4s ease-in-out, 
-                opacity 0.4s ease-in-out, 
-                padding 0.4s ease-in-out, 
-                border-color 0.4s ease-in-out,
-                visibility 0s linear 0.4s; /* Transição instantânea, mas com atraso */
+    transition: width 0.4s ease-in-out,
+        opacity 0.4s ease-in-out,
+        padding 0.4s ease-in-out,
+        border-color 0.4s ease-in-out,
+        visibility 0s linear 0.4s;
+    /* Transição instantânea, mas com atraso */
 }
 
 /* Estado ativo (visível), ativado pelo JavaScript */
@@ -1626,9 +1698,67 @@ main {
     padding: 0.5rem 45px 0.5rem 1rem;
     border-color: #ccc;
     opacity: 1;
-    visibility: visible; /* Torna-se visível */
+    visibility: visible;
+    /* Torna-se visível */
 
     /* AQUI GARANTIMOS QUE A ENTRADA SEJA IMEDIATA */
     /* Removemos o atraso da visibilidade para a animação de entrada */
     transition-delay: 0s;
+}
+
+/* =============================================== */
+/* === TRANSPARENT NAVBAR (HOMEPAGE) === */
+/* =============================================== */
+
+/* Default state for transparent header (at top of page) */
+.transparent-header .navbar {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+/* Text and Icon colors for transparent state (assuming dark background) */
+.transparent-header .navbar .nav-links a,
+.transparent-header .navbar .nav-icons a,
+.transparent-header .navbar .nav-icons .cart-icon-link {
+    color: var(--white-color);
+}
+
+/* Logo handling: Invert colors to make it white (if it's a dark logo) */
+.transparent-header .navbar .logo img {
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s ease;
+}
+
+/* Scrolled state for transparent header */
+.transparent-header .navbar.scrolled {
+    background-color: var(--white-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Restore text colors when scrolled */
+.transparent-header .navbar.scrolled .nav-links a,
+.transparent-header .navbar.scrolled .nav-icons a,
+.transparent-header .navbar.scrolled .nav-icons .cart-icon-link {
+    color: var(--dark-text);
+}
+
+/* Restore logo color when scrolled */
+.transparent-header .navbar.scrolled .logo img {
+    filter: none;
+}
+
+/* Hover effects for transparent state */
+.transparent-header .navbar .nav-links a:hover,
+.transparent-header .navbar .nav-icons a:hover {
+    color: var(--primary-green);
+}
+
+/* Remove padding-top from main on homepage so hero goes behind navbar */
+.transparent-header main {
+    padding-top: 0;
+}
+
+/* Ensure the hero section starts at the very top */
+.transparent-header .hero {
+    margin-top: 0;
 }

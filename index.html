@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edenshop - Sua loja de plantas online</title>
     <link rel="stylesheet" href="style.css" />
+
     <link rel="stylesheet" href="homepage.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
   </head>
-  <body>
+  <body class="transparent-header">
     <header>
       <nav class="navbar">
         <div class="logo">
@@ -382,7 +383,7 @@
             <h2>Crie sua conta</h2>
             <p>É rápido e fácil!</p>
           </div>
-          <form id="registerForm">
+          <form id="registerForm" method="POST" action="php/register.php">
             <!-- Campo Nome -->
             <div class="input-group">
               <label for="register-name">Nome</label>
