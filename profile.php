@@ -33,34 +33,7 @@ $inicial_usuario = mb_strtoupper(mb_substr($nome_usuario, 0, 1)); // Pega a prim
     />
 </head>
 <body>
-  <header>
-    <!-- Seu header/navbar continua o mesmo -->
-    <nav class="navbar">
-      <div class="logo">
-        <a href="index.php">
-          <img src="./assets/logo2.png" alt="Edenshop Logo" />
-        </a>
-      </div>
-      <ul class="nav-links">
-        <li><a href="index.php">Home</a></li>
-        <li><a href="products.php">Produtos</a></li>
-        <li><a href="about.php">Sobre Nós</a></li>
-        <li><a href="contact.php">Contato</a></li>
-      </ul>
-      <div class="nav-icons">
-        <div class="search-container">
-          <input type="search" id="search-bar" class="search-bar" placeholder="Buscar plantas..." />
-          <a href="#" id="search-icon-btn" aria-label="Buscar"><i class="fas fa-search"></i></a>
-        </div>
-        <a href="#" id="open-cart-btn" aria-label="Abrir carrinho de compras" class="cart-icon-link">
-          <i class="fas fa-shopping-cart"></i>
-          <span id="cart-item-count">0</span>
-        </a>
-        <!-- Este ícone agora sempre levará para o perfil, pois a página só é acessível se logado -->
-        <a href="profile.php" id="user-action-icon"><i class="fas fa-user"></i></a>
-      </div>
-    </nav>
-  </header>
+  <?php include 'php/header.php'; ?>
 
     <main class="container page-padding">
       <h1 class="page-title">Minha Conta</h1>

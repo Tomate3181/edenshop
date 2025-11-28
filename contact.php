@@ -8,34 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-      <header>
-    <nav class="navbar">
-      <div class="logo">
-        <a href="index.php">
-          <img src="./assets/logo2.png" alt="Edenshop Logo" />
-        </a>
-      </div>
-
-      <ul class="nav-links">
-        <li><a href="index.php">Home</a></li>
-        <li><a href="products.php">Produtos</a></li>
-        <li><a href="about.php">Sobre Nós</a></li>
-        <li><a href="contact.php">Contato</a></li>
-      </ul>
-
-      <div class="nav-icons">
-        <div class="search-container">
-          <input type="search" id="search-bar" class="search-bar" placeholder="Buscar plantas..." />
-          <a href="#" id="search-icon-btn" aria-label="Buscar"><i class="fas fa-search"></i></a>
-        </div>
-        <a href="#" id="open-cart-btn" aria-label="Abrir carrinho de compras" class="cart-icon-link">
-          <i class="fas fa-shopping-cart"></i>
-          <span id="cart-item-count">0</span>
-        </a>
-        <a href="#" id="user-action-icon"><i class="fas fa-user"></i></a>
-      </div>
-    </nav>
-  </header>
+    <?php include 'php/header.php'; ?>
 
     <main class="container page-padding">
         <h1 class="page-title">Fale Conosco</h1>

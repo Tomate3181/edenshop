@@ -467,4 +467,26 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => alert(errorMessage), 100); 
         }
     }
+
+    // ===================================================================
+    // --- LÓGICA DO DROPDOWN DO USUÁRIO ---
+    // ===================================================================
+    const userMenuButton = document.getElementById('user-menu-button');
+    const userDropdown = document.getElementById('user-dropdown');
+
+    if (userMenuButton && userDropdown) {
+        userMenuButton.addEventListener('click', (e) => {
+            e.preventDefault(); // Impede o link de navegar para '#'
+            userDropdown.classList.toggle('active'); // Mostra ou esconde o dropdown
+        });
+
+        // Opcional, mas recomendado: Fecha o dropdown se clicar fora dele
+        window.addEventListener('click', (e) => {
+            // Verifica se o clique NÃO foi no botão e NEM dentro do dropdown
+            if (!userMenuButton.contains(e.target) && !userDropdown.contains(e.target)) {
+                userDropdown.classList.remove('active'); // Fecha o dropdown
+            }
+        });
+    }
+
 });

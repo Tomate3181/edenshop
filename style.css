@@ -1762,3 +1762,116 @@ main {
 .transparent-header .hero {
     margin-top: 0;
 }
+
+/* Container para o menu de usuário, para garantir o posicionamento correto do dropdown */
+.user-menu-container {
+  position: relative; /* Essencial para o dropdown se posicionar corretamente */
+  display: inline-block;
+}
+
+/* Estilo do menu dropdown */
+.dropdown-menu {
+  display: none; /* Escondido por padrão */
+  position: absolute;
+  right: 0; /* Alinha o dropdown à direita do ícone */
+  top: 100%; /* Posiciona logo abaixo do ícone */
+  background-color: #ffffff;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 100; /* Garante que fique sobre outros elementos */
+  border-radius: 5px;
+  overflow: hidden; /* Garante que os links respeitem o border-radius */
+  margin-top: 10px; /* Pequeno espaço entre o ícone e o menu */
+}
+
+
+/* Classe 'active' que será adicionada/removida pelo JavaScript para mostrar o menu */
+.dropdown-menu.active {
+  display: block;
+}
+
+/* ======================================================= */
+/*  DROPDOWN ESTILO GITHUB COM CORES DA MARCA E ANIMAÇÃO   */
+/* ======================================================= */
+
+/* Container principal do dropdown */
+.dropdown-menu.dropdown-github-style {
+  min-width: 240px;
+  background-color: var(--white-color);
+  border: 1px solid #e0e0e0; /* Usamos um cinza neutro para a borda */
+  border-radius: 6px;
+  padding: 0;
+  margin-top: 8px;
+  box-shadow: 0 8px 24px rgba(47, 79, 79, 0.15); /* Sombra baseada na cor do texto */
+
+  /* --- LÓGICA DA ANIMAÇÃO --- */
+  opacity: 0; /* Começa invisível */
+  visibility: hidden; /* Começa inacessível */
+  transform: translateY(-10px); /* Começa 10px para cima */
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out, visibility 0.2s;
+}
+
+/* Estado ativo (quando o JS adiciona a classe .active) */
+.dropdown-menu.dropdown-github-style.active {
+  opacity: 1; /* Torna-se visível */
+  visibility: visible; /* Torna-se acessível */
+  transform: translateY(0); /* Desce para a posição final */
+}
+
+/* Cabeçalho com "Logado como..." */
+.dropdown-github-style .dropdown-header {
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.dropdown-github-style .dropdown-header p {
+  margin: 0;
+  color: var(--dark-text);
+  opacity: 0.8; /* Um pouco mais suave para o texto secundário */
+}
+
+.dropdown-github-style .dropdown-header strong {
+  color: var(--dark-text);
+}
+
+/* Linha divisória */
+.dropdown-github-style .dropdown-divider {
+  margin: 0;
+  height: 1px;
+  background-color: #e0e0e0;
+  border: 0;
+}
+
+/* Itens do menu (links) */
+.dropdown-github-style .dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  color: var(--dark-text);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+
+/* Ícones dentro dos itens */
+.dropdown-github-style .dropdown-item i {
+  width: 24px;
+  margin-right: 12px;
+  /* Usamos a cor primária para os ícones, dando um toque da marca */
+  color: var(--primary-green); 
+  text-align: center;
+  font-size: 1rem;
+  transition: color 0.15s ease-in-out;
+}
+
+/* Efeito hover nos links */
+.dropdown-github-style .dropdown-item:hover {
+  /* Usamos o fundo geral do site para o hover, criando um efeito sutil */
+  background-color: var(--background-color); 
+  color: var(--primary-green);
+}
+
+.dropdown-github-style .dropdown-item:hover i {
+  color: var(--primary-green);
+}
