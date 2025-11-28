@@ -16,16 +16,16 @@
     <header>
       <nav class="navbar">
         <div class="logo">
-          <a href="index.html">
+          <a href="index.php">
             <img src="./assets/logo2.png" alt="Edenshop Logo" />
             <!-- Edenshop -->
           </a>
         </div>
         <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="products.html">Produtos</a></li>
-          <li><a href="about.html">Sobre Nós</a></li>
-          <li><a href="contact.html">Contato</a></li>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="products.php">Produtos</a></li>
+          <li><a href="about.php">Sobre Nós</a></li>
+          <li><a href="contact.php">Contato</a></li>
         </ul>
         <div class="nav-icons">
           <!-- INÍCIO DO NOVO COMPONENTE DE BUSCA -->
