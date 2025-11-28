@@ -441,9 +441,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 closeRegisterModal();
             }
             if (event.target == loginModal) {
-                if (checkoutBtn) {
-                    checkoutBtn.addEventListener('click', () => {
-                        window.location.href = 'checkout.html';
-                    });
+                closeLoginModal();
+            }
+        });
+
+        // --- 5. LÓGICA DE CADASTRO ATUALIZADA PARA INTEGRAR COM PHP ---
+        if (registerForm) {
+            registerForm.addEventListener('submit', (e) => {
+                // Unica validação que mantemos no lado do cliente para feedback rápido.
+                const password = document.getElementById('register-password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+
+                // Validação crucial: verificar se as senhas coincidem
+                if (password !== confirmPassword) {
+                    // Se as senhas não baterem, A GENTE IMPEDE O ENVIO.
+                    e.preventDefault(); 
+                    alert('As senhas não coincidem. Por favor, tente novamente.');
+                    return; // Para a execução da função aqui
                 }
+
+                // Se as senhas coincidirem, o JavaScript não faz mais nada.
+                // O e.preventDefault() NÃO é chamado, e o formulário é enviado
+                // normalmente para o action="php/register.php" definido no seu HTML.
+                // O PHP agora é responsável por todo o resto.
             });
+        }
+    }
+
+    // ===================================================================
+    // --- DIRECIONAMENTO PARA PÁGINA DE CHECKOUT ---
+    // ===================================================================
+    const checkoutBtn = document.getElementById('checkout-btn-modal');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', () => {
+            window.location.href = 'checkout.html';
+        });
+    }
+});

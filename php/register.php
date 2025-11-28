@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         $stmt->execute();
 
-        echo "<script>alert('Cadastro realizado com sucesso!'); window.location.href = '../index.html';</script>";
+        echo "<script>alert('Cadastro realizado com sucesso!'); window.location.href = '../index.php';</script>";
     } catch (PDOException $e) {
         echo "Erro ao cadastrar: " . $e->getMessage();
     }
