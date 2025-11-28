@@ -38,28 +38,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            // AQUI USAMOS O ID DO INPUT DO MODAL
             const emailInput = document.getElementById('modal-email');
-            const user = {
-                name: "Amante de Plantas",
-                email: emailInput.value
-            };
+            const passwordInput = document.getElementById('modal-password');
 
-            localStorage.setItem('currentUser', JSON.stringify(user));
+            // Mantemos uma validação simples no lado do cliente para feedback rápido.
+            if (emailInput.value.trim() === '' || passwordInput.value.trim() === '') {
+                e.preventDefault(); // Impede o envio do formulário
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
 
-            // --- LINHA ADICIONADA ---
-            closeLoginModal(); // Fecha o modal
-            // -------------------------
-
-            alert(`Bem-vindo(a), ${user.name}!`);
-            window.location.href = 'profile.html';
+            // Se os campos estiverem preenchidos, o JavaScript não faz mais nada.
+            // O formulário será enviado normalmente para o "php/login.php"
+            // A lógica de `localStorage` foi removida pois a sessão agora é controlada pelo PHP.
         });
     }
+
 
     // ===================================================================
     // --- LÓGICA DO MODAL DE LOGIN E VERIFICAÇÃO DE SESSÃO ---
     // ===================================================================
+
+    // O código abaixo de verificação de login com `currentUser` (localStorage)
+    // precisará ser atualizado no futuro para verificar a sessão do PHP.
+    // Por enquanto, o login/logout via PHP já vai funcionar.
 
     const loginModal = document.getElementById('loginModal');
     const userActionIcon = document.getElementById('user-action-icon');
@@ -79,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (currentUser && userActionIcon) {
         // Se o usuário está logado, o ícone leva para a página de perfil
-        userActionIcon.href = 'profile.html';
+        userActionIcon.href = 'profile.php';
     } else if (userActionIcon) {
         // Se não, o ícone abre o modal de login
         userActionIcon.href = '#'; // Garante que a página não recarregue
@@ -321,7 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===================================================================
-    // --- 8. LÓGICA DAS NOVAS SEÇÕES (index.html) ---
+    // --- 8. LÓGICA DAS NOVAS SEÇÕES (index.php) ---
     // ===================================================================
 
     // a) Lógica do Carrossel de Avaliações
@@ -359,37 +361,6 @@ document.addEventListener('DOMContentLoaded', () => {
             alert(`Obrigado por se inscrever! Fique de olho em seu e-mail ${emailInput.value} para receber nossas ofertas.`);
             newsletterForm.reset();
         });
-    }
-
-    // Adicione este bloco dentro do evento 'DOMContentLoaded' em script.js
-
-    // ===================================================================
-    // --- LÓGICA DA PÁGINA DE PERFIL (profile.html) ---
-    // ===================================================================
-    const profileName = document.getElementById('profile-name');
-    if (profileName) { // Verifica se estamos na página de perfil
-        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-
-        // Proteção de Rota: se não houver usuário, volta para a homepage   
-        if (!currentUser) {
-            window.location.href = 'index.html';
-        } else {
-            // Preenche as informações na página
-            document.getElementById('profile-name').textContent = currentUser.name;
-            document.getElementById('profile-email').textContent = currentUser.email;
-            document.getElementById('profile-avatar').textContent = currentUser.name.charAt(0).toUpperCase();
-
-            // Lógica de Logout
-            const logoutBtn = document.getElementById('logout-btn');
-            logoutBtn.addEventListener('click', () => {
-                if (confirm('Você tem certeza que deseja sair?')) {
-                    localStorage.removeItem('currentUser');
-                    localStorage.removeItem('edenshopCart'); // Opcional: limpar o carrinho ao sair
-                    alert('Você foi desconectado.');
-                    window.location.href = 'index.html';
-                }
-            });
-        }
     }
 
     // ===================================================================
@@ -476,5 +447,24 @@ document.addEventListener('DOMContentLoaded', () => {
         checkoutBtn.addEventListener('click', () => {
             window.location.href = 'checkout.html';
         });
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const error = urlParams.get('error');
+
+    if (error) {
+        let errorMessage = '';
+        if (error === 'wrongcredentials') {
+            errorMessage = 'E-mail ou senha inválidos. Tente novamente.';
+        } else if (error === 'emptyfields') {
+            errorMessage = 'Por favor, preencha todos os campos.';
+        }
+        
+        if (errorMessage) {
+            // Abre o modal de login para o usuário ver o erro e tentar de novo.
+            openLoginModal(); 
+            // Exibe a mensagem. Você pode criar um elemento HTML específico para isso se quiser.
+            setTimeout(() => alert(errorMessage), 100); 
+        }
     }
 });

@@ -327,44 +327,42 @@
     <div id="loginModal" class="modal">
       <div class="modal-content">
         <span class="close-btn">&times;</span>
-        <!-- Conteúdo reutilizado do seu login-box -->
         <div class="login-box-modal">
-          <div class="login-header-text">
-            <h2>Bem-vindo de volta!</h2>
-            <p>Faça login para continuar</p>
-          </div>
-          <form id="loginForm">
-            <!-- O ID importante que seu JS já usa -->
-            <div class="input-group">
-              <label for="modal-email">Email</label>
-              <input
-                type="email"
-                id="modal-email"
-                name="email"
-                placeholder="seuemail@exemplo.com"
-                required
-              />
-            </div>
-            <div class="input-group">
-              <label for="modal-password">Senha</label>
-              <input
-                type="password"
-                id="modal-password"
-                name="password"
-                placeholder="Sua senha"
-                required
-              />
-            </div>
-            <button type="submit" class="btn">Entrar</button>
-            <div class="login-footer">
-              <p>
-                Não tem uma conta?
-                <a href="#" id="switchToRegister">Cadastre-se</a>
-              </p>
-              <a href="#">Esqueceu sua senha?</a>
-            </div>
-          </form>
-        </div>
+        <div class="login-header-text">
+        <h2>Bem-vindo de volta!</h2>
+        <p>Faça login para continuar</p>
+      </div>
+      <form id="loginForm" method="POST" action="php/login.php">
+      <div class="input-group">
+      <label for="modal-email">Email</label>
+      <input
+      type="email"
+      id="modal-email"
+      name="email"
+      placeholder="seuemail@exemplo.com"
+      required
+      />
+      </div>
+      <div class="input-group">
+      <label for="modal-password">Senha</label>
+      <input
+      type="password"
+      id="modal-password"
+      name="password"
+      placeholder="Sua senha"
+      required
+      />
+      </div>
+      <button type="submit" class="btn">Entrar</button>
+      <div class="login-footer">
+      <p>
+      Não tem uma conta?
+      <a href="#" id="switchToRegister">Cadastre-se</a>
+      </p>
+      <a href="#">Esqueceu sua senha?</a>
+      </div>
+      </form>
+      </div>
       </div>
     </div>
     <!-- =============================================== -->

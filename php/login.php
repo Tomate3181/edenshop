@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($email) || empty($senha)) {
         // Se algum campo estiver vazio, redireciona de volta com uma mensagem de erro.
         // Usar parâmetros na URL é uma forma simples de passar status para o front-end.
-        header("Location: ../index.html?error=emptyfields");
+        header("Location: ../index.php?error=emptyfields");
         exit();
     }
 
@@ -54,20 +54,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['usuario_email'] = $usuario['email'];
 
         // 13. Redireciona o usuário para a página de perfil
-        header("Location: ../profile.html");
+        header("Location: ../profile.php");
         exit(); // Garante que nenhum código a mais seja executado após o redirecionamento.
 
     } else {
         // Falha no Login!
         // Redireciona de volta para a página inicial com uma mensagem de erro genérica.
         // É uma boa prática de segurança não informar se foi o email ou a senha que errou.
-        header("Location: ../index.html?error=wrongcredentials");
+        header("Location: ../index.php?error=wrongcredentials");
         exit();
     }
 
 } else {
     // Se não for um POST, redireciona para a página inicial.
-    header("Location: ../index.html");
+    header("Location: ../index.php");
     exit();
 }
 ?>
