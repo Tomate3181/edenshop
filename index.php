@@ -28,86 +28,63 @@
         </div>
       </section>
 
-      <!-- Seção de Produtos em Destaque CORRIGIDA -->
+      <!-- Seção de Produtos em Destaque DINÂMICA -->
       <section class="featured-products">
         <div class="container">
           <h2 class="section-title animate-on-scroll">Produtos em Destaque</h2>
           <div class="products-grid">
-            <!-- Produto 1 -->
+            <?php
+            // Incluir o script de produtos em destaque
+            require_once 'php/get_featured_products.php';
+            
+            // Buscar produtos em destaque (8 produtos)
+            $produtos_destaque = getFeaturedProducts(8);
+            
+            // Verificar se há produtos
+            if (!empty($produtos_destaque)) {
+                foreach ($produtos_destaque as $produto) {
+                    // Formatar o preço
+                    $preco_formatado = number_format($produto['preco'], 2, ',', '.');
+                    
+                    // Escapar dados para segurança
+                    $id = htmlspecialchars($produto['id_planta']);
+                    $nome = htmlspecialchars($produto['nome_planta']);
+                    $imagem = htmlspecialchars($produto['imagem_url']);
+                    $preco = htmlspecialchars($preco_formatado);
+                    
+                    // Renderizar card do produto
+                    echo <<<HTML
+            <!-- Produto {$id} -->
             <div
               class="product-card animate-on-scroll"
-              data-id="prod1"
-              data-name="Monstera Deliciosa"
-              data-price="89.90"
-              data-image="https://growurban.uk/cdn/shop/articles/care-guide-monstera-deliciosa-668092_680bbf00-9564-4f0c-b9cb-27ededaf19d2.jpg?v=1748436514&width=2048"
+              data-id="prod{$id}"
+              data-name="{$nome}"
+              data-price="{$produto['preco']}"
+              data-image="{$imagem}"
             >
-              <img
-                src="https://growurban.uk/cdn/shop/articles/care-guide-monstera-deliciosa-668092_680bbf00-9564-4f0c-b9cb-27ededaf19d2.jpg?v=1748436514&width=2048"
-                alt="Planta Monstera Deliciosa"
-              />
-              <div class="product-card-content">
-                <h3>Monstera Deliciosa</h3>
-                <p class="price">R$ 89,90</p>
-              </div>
+              <a href="product-detail.php?id={$id}">
+                <img
+                  src="{$imagem}"
+                  alt="{$nome}"
+                  onerror="this.src='https://via.placeholder.com/300x300?text=Sem+Imagem'"
+                />
+                <div class="product-card-content">
+                  <h3>{$nome}</h3>
+                  <p class="price">R$ {$preco}</p>
+                </div>
+              </a>
               <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
             </div>
-            <!-- Produto 2 -->
-            <div
-              class="product-card animate-on-scroll"
-              data-id="prod2"
-              data-name="Jiboia (Epipremnum aureum)"
-              data-price="49.90"
-              data-image="https://www.shutterstock.com/image-photo/epipremnum-aureum-species-flowering-plant-600nw-2557759849.jpg"
-            >
-              <img
-                src="https://www.shutterstock.com/image-photo/epipremnum-aureum-species-flowering-plant-600nw-2557759849.jpg"
-                alt="Planta Jiboia"
-              />
-              <div class="product-card-content">
-                <h3>Jiboia (Epipremnum aureum)</h3>
-                <p class="price">R$ 49,90</p>
-              </div>
-              <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
-            </div>
-            <!-- Produto 3 -->
-            <div
-              class="product-card animate-on-scroll"
-              data-id="prod3"
-              data-name="Zamioculca"
-              data-price="69.90"
-              data-image="https://upload.wikimedia.org/wikipedia/commons/d/d6/Zamioculcas.jpg"
-            >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Zamioculcas.jpg"
-                alt="Planta Zamioculca"
-              />
-              <div class="product-card-content">
-                <h3>Zamioculca</h3>
-                <p class="price">R$ 69,90</p>
-              </div>
-              <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
-            </div>
-            <!-- Produto 4 -->
-            <div
-              class="product-card animate-on-scroll"
-              data-id="prod4"
-              data-name="Espada de São Jorge"
-              data-price="59.90"
-              data-image="https://cdn.awsli.com.br/600x700/1520/1520689/produto/247127180/espada-de-sao-jorge-mini3-b1rfi2xmr4.jpeg"
-            >
-              <img
-                src="https://cdn.awsli.com.br/600x700/1520/1520689/produto/247127180/espada-de-sao-jorge-mini3-b1rfi2xmr4.jpeg"
-                alt="Planta Espada de São Jorge"
-              />
-              <div class="product-card-content">
-                <h3>Espada de São Jorge</h3>
-                <p class="price">R$ 59,90</p>
-              </div>
-              <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
-            </div>
+HTML;
+                }
+            } else {
+                // Mensagem caso não haja produtos
+                echo '<p class="no-products">Nenhum produto em destaque no momento.</p>';
+            }
+            ?>
           </div>
           <div class="text-center animate-on-scroll">
-            <a href="products.html" class="btn">Ver todos os produtos</a>
+            <a href="products.php" class="btn">Ver todos os produtos</a>
           </div>
         </div>
       </section>

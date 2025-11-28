@@ -3,7 +3,51 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Monstera Deliciosa - Edenshop</title>
+    <?php
+    // Incluir script de produtos
+    require_once 'php/get_products.php';
+    
+    // Verificar se o ID foi fornecido na URL
+    if (!isset($_GET['id']) || empty($_GET['id'])) {
+        // Redirecionar para a página de produtos se não houver ID
+        header("Location: products.php");
+        exit();
+    }
+    
+    // Capturar e validar o ID do produto
+    $produto_id = (int)$_GET['id'];
+    
+    // Buscar dados do produto
+    $produto = getProductById($produto_id);
+    
+    // Verificar se o produto existe
+    if (!$produto) {
+        // Redirecionar para a página de produtos se o produto não existir
+        header("Location: products.php?error=productnotfound");
+        exit();
+    }
+    
+    // Preparar dados do produto
+    $nome = htmlspecialchars($produto['nome_planta']);
+    $preco_formatado = number_format($produto['preco'], 2, ',', '.');
+    $descricao = htmlspecialchars($produto['descricao']);
+    $imagem = htmlspecialchars($produto['imagem_url']);
+    $categoria = htmlspecialchars($produto['nome_categoria'] ?? 'Sem categoria');
+    
+    // Dados de especificações
+    $nome_cientifico = htmlspecialchars($produto['nomeCientifico'] ?? 'Não disponível');
+    $familia = htmlspecialchars($produto['familia'] ?? 'Não disponível');
+    $origem = htmlspecialchars($produto['origem'] ?? 'Não disponível');
+    $altura_media = htmlspecialchars($produto['alturaMedia'] ?? 'Não disponível');
+    $pet_friendly = htmlspecialchars($produto['pet'] ?? 'Não disponível');
+    
+    // Dados de cuidados
+    $luz = htmlspecialchars($produto['luz'] ?? 'Informação não disponível');
+    $agua = htmlspecialchars($produto['agua'] ?? 'Informação não disponível');
+    $humidade = htmlspecialchars($produto['humidade'] ?? 'Informação não disponível');
+    $solo = htmlspecialchars($produto['solo'] ?? 'Informação não disponível');
+    ?>
+    <title><?= $nome ?> - Edenshop</title>
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
@@ -19,55 +63,37 @@
         <!-- Galeria de Imagens do Produto -->
         <div class="product-image-gallery">
           <img
-            src="https://growurban.uk/cdn/shop/articles/care-guide-monstera-deliciosa-668092_680bbf00-9564-4f0c-b9cb-27ededaf19d2.jpg?v=1748436514&width=2048"
-            alt="Monstera Deliciosa - Vista Principal"
+            src="<?= $imagem ?>"
+            alt="<?= $nome ?> - Vista Principal"
             id="mainProductImage"
             class="main-image"
+            onerror="this.src='https://via.placeholder.com/600x600?text=Sem+Imagem'"
           />
-          <div class="thumbnail-images">
-            <img
-              src="https://growurban.uk/cdn/shop/articles/care-guide-monstera-deliciosa-668092_680bbf00-9564-4f0c-b9cb-27ededaf19d2.jpg?v=1748436514&width=2048"
-              alt="Monstera Thumbnail 1"
-              class="thumbnail active"
-            />
-            <img
-              src="https://www.ourhouseplants.com/imgs-content/monstera-deliciosa-moss-pole.jpg"
-              alt="Monstera Thumbnail 2"
-              class="thumbnail"
-            />
-            <img
-              src="https://www.smallandgreen.com/wp-content/uploads/2022/04/R_8FXiuKEemVpNz4j5wv6w-pnja_Dv0EeyYyr60XqKDaw-scaled.jpeg"
-              alt="Monstera Thumbnail 3"
-              class="thumbnail"
-            />
-          </div>
         </div>
 
         <!-- Informações do Produto -->
         <div
           class="product-info"
-          data-id="p2"
-          data-name="Monstera Deliciosa"
-          data-price="89.90"
-          data-image="https://growurban.uk/cdn/shop/articles/care-guide-monstera-deliciosa-668092_680bbf00-9564-4f0c-b9cb-27ededaf19d2.jpg?v=1748436514&width=2048"
-          data-category="interna"
-          data-care="pet-friendly"
+          data-id="p<?= $produto_id ?>"
+          data-name="<?= $nome ?>"
+          data-price="<?= $produto['preco'] ?>"
+          data-image="<?= $imagem ?>"
+          data-category="<?= $categoria ?>"
         >
-          <h1>Monstera Deliciosa</h1>
-          <p class="product-price">R$ 89,90</p>
+          <h1><?= $nome ?></h1>
+          <p class="product-price">R$ <?= $preco_formatado ?></p>
           <p class="short-description">
-            Também conhecida como Costela-de-Adão, é uma planta icônica com
-            folhas grandes e recortadas que adicionam um toque tropical a
-            qualquer ambiente.
+            <?= $descricao ?>
           </p>
 
           <div class="quantity-selector">
             <label for="quantity">Quantidade:</label>
             <div class="quantity-wrapper">
               <button id="decreaseQuantity">-</button>
-              <input type="number" id="quantity" value="1" min="1" />
+              <input type="number" id="quantity" value="1" min="1" max="<?= $produto['quantidade_estoque'] ?>" />
               <button id="increaseQuantity">+</button>
             </div>
+            <p class="stock-info">Estoque: <?= $produto['quantidade_estoque'] ?> unidades</p>
           </div>
 
           <button class="btn add-to-cart-btn large-btn">
@@ -87,47 +113,37 @@
         </div>
         <div id="description" class="tab-content active">
           <p>
-            A Monstera Deliciosa é uma das plantas de interior mais populares do
-            mundo, e por um bom motivo. Suas folhas exuberantes desenvolvem
-            fendas naturais (fenestrações) à medida que amadurecem, criando um
-            visual espetacular. É uma planta relativamente fácil de cuidar e que
-            purifica o ar.
+            <?= nl2br($descricao) ?>
           </p>
         </div>
         <div id="care" class="tab-content">
           <ul>
             <li>
-              <strong>Luz:</strong> Prefere luz indireta brilhante. Evite sol
-              direto, que pode queimar as folhas.
+              <strong>Luz:</strong> <?= $luz ?>
             </li>
             <li>
-              <strong>Água:</strong> Regue quando os 2-3 cm superiores do solo
-              estiverem secos. Evite encharcar.
+              <strong>Água:</strong> <?= $agua ?>
             </li>
             <li>
-              <strong>Umidade:</strong> Gosta de umidade. Borrifar as folhas
-              ocasionalmente pode ajudar.
+              <strong>Umidade:</strong> <?= $humidade ?>
             </li>
             <li>
-              <strong>Solo:</strong> Substrato bem drenado, rico em matéria
-              orgânica.
+              <strong>Solo:</strong> <?= $solo ?>
             </li>
           </ul>
         </div>
         <div id="specs" class="tab-content">
           <ul>
             <li>
-              <strong>Nome Científico:</strong> <em>Monstera deliciosa</em>
+              <strong>Nome Científico:</strong> <em><?= $nome_cientifico ?></em>
             </li>
-            <li><strong>Família:</strong> Araceae</li>
+            <li><strong>Família:</strong> <?= $familia ?></li>
             <li>
-              <strong>Origem:</strong> Florestas tropicais do México e América
-              Central
+              <strong>Origem:</strong> <?= $origem ?>
             </li>
-            <li><strong>Altura Média:</strong> 30-40 cm (no vaso)</li>
+            <li><strong>Altura Média:</strong> <?= $altura_media ?></li>
             <li>
-              <strong>Pet-Friendly:</strong> Não. É tóxica se ingerida por
-              animais de estimação.
+              <strong>Pet-Friendly:</strong> <?= $pet_friendly ?>
             </li>
           </ul>
         </div>

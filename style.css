@@ -1762,7 +1762,7 @@ main {
 .transparent-header .hero {
     margin-top: 0;
 }
-    
+
 /* ======================================================= */
 /*  CORREÇÃO DEFINITIVA: FORÇA O TEXTO E ÍCONES DO DROPDOWN */
 /* ======================================================= */
@@ -1798,13 +1798,14 @@ main {
 .transparent-header .navbar .dropdown-header p,
 .transparent-header .navbar .dropdown-header strong {
     color: var(--dark-text);
-    opacity: 1; /* Garante opacidade total */
+    opacity: 1;
+    /* Garante opacidade total */
 }
 
 
 /* Classe 'active' que será adicionada/removida pelo JavaScript para mostrar o menu */
 .dropdown-menu.active {
-  display: block;
+    display: block;
 }
 
 /* ======================================================= */
@@ -1812,94 +1813,220 @@ main {
 /* ======================================================= */
 
 .user-menu-container {
-  position: relative; /* Essencial para o dropdown se posicionar corretamente */
-  display: inline-block;
+    position: relative;
+    /* Essencial para o dropdown se posicionar corretamente */
+    display: inline-block;
 }
 
 /* Container principal do dropdown */
 .dropdown-menu.dropdown-github-style {
-  position: absolute;
-  right: 0;
-  top: 100%;
-  min-width: 240px;
-  background-color: var(--white-color);
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
-  padding: 0;
-  margin-top: 8px;
-  box-shadow: 0 8px 24px rgba(47, 79, 79, 0.15);
-  overflow: hidden; /* Garante que os links respeitem o border-radius */
+    position: absolute;
+    right: 0;
+    top: 100%;
+    min-width: 240px;
+    background-color: var(--white-color);
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 0;
+    margin-top: 8px;
+    box-shadow: 0 8px 24px rgba(47, 79, 79, 0.15);
+    overflow: hidden;
+    /* Garante que os links respeitem o border-radius */
 
-  /* --- LÓGICA DA ANIMAÇÃO --- */
-  opacity: 0;                   /* Começa invisível */
-  visibility: hidden;           /* Começa inacessível para cliques e leitores de tela */
-  transform: translateY(-10px); /* Começa 10px para cima */
-  transition: opacity 0.2s ease-out, transform 0.2s ease-out, visibility 0s linear 0.2s;
-  /* A transição de visibility tem um atraso para que o elemento desapareça visualmente ANTES de se tornar 'hidden' */
+    /* --- LÓGICA DA ANIMAÇÃO --- */
+    opacity: 0;
+    /* Começa invisível */
+    visibility: hidden;
+    /* Começa inacessível para cliques e leitores de tela */
+    transform: translateY(-10px);
+    /* Começa 10px para cima */
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out, visibility 0s linear 0.2s;
+    /* A transição de visibility tem um atraso para que o elemento desapareça visualmente ANTES de se tornar 'hidden' */
 }
 
 /* Estado ativo (quando o JS adiciona a classe .active) - ESTADO VISÍVEL */
 .dropdown-menu.dropdown-github-style.active {
-  opacity: 1;                 /* Torna-se visível */
-  visibility: visible;        /* Torna-se acessível */
-  transform: translateY(0);   /* Desce para a posição final */
-  transition: opacity 0.2s ease-out, transform 0.2s ease-out; /* Transição suave para aparecer */
+    opacity: 1;
+    /* Torna-se visível */
+    visibility: visible;
+    /* Torna-se acessível */
+    transform: translateY(0);
+    /* Desce para a posição final */
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+    /* Transição suave para aparecer */
 }
 
 /* Cabeçalho com "Logado como..." */
 .dropdown-github-style .dropdown-header {
-  padding: 8px 16px;
-  font-size: 0.875rem;
-  border-bottom: 1px solid #e0e0e0;
+    padding: 8px 16px;
+    font-size: 0.875rem;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .dropdown-github-style .dropdown-header p {
-  margin: 0;
-  color: var(--dark-text);
-  opacity: 0.8; /* Um pouco mais suave para o texto secundário */
+    margin: 0;
+    color: var(--dark-text);
+    opacity: 0.8;
+    /* Um pouco mais suave para o texto secundário */
 }
 
 .dropdown-github-style .dropdown-header strong {
-  color: var(--dark-text);
+    color: var(--dark-text);
 }
 
 /* Linha divisória */
 .dropdown-github-style .dropdown-divider {
-  margin: 0;
-  height: 1px;
-  background-color: #e0e0e0;
-  border: 0;
+    margin: 0;
+    height: 1px;
+    background-color: #e0e0e0;
+    border: 0;
 }
 
 /* Itens do menu (links) */
 .dropdown-github-style .dropdown-item {
-  display: flex;
-  align-items: center;
-  padding: 10px 16px;
-  color: var(--dark-text);
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    color: var(--dark-text);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
 }
 
 /* Ícones dentro dos itens */
 .dropdown-github-style .dropdown-item i {
-  width: 24px;
-  margin-right: 12px;
-  /* Usamos a cor primária para os ícones, dando um toque da marca */
-  color: var(--primary-green); 
-  text-align: center;
-  font-size: 1rem;
-  transition: color 0.15s ease-in-out;
+    width: 24px;
+    margin-right: 12px;
+    /* Usamos a cor primária para os ícones, dando um toque da marca */
+    color: var(--primary-green);
+    text-align: center;
+    font-size: 1rem;
+    transition: color 0.15s ease-in-out;
 }
 
 /* Efeito hover nos links */
 .dropdown-github-style .dropdown-item:hover {
-  /* Usamos o fundo geral do site para o hover, criando um efeito sutil */
-  background-color: var(--background-color); 
-  color: var(--primary-green);
+    /* Usamos o fundo geral do site para o hover, criando um efeito sutil */
+    background-color: var(--background-color);
+    color: var(--primary-green);
 }
 
 .dropdown-github-style .dropdown-item:hover i {
-  color: var(--primary-green);
+    color: var(--primary-green);
+}
+
+/* =============================================== */
+/* === ESTILOS PARA ALERTAS E MENSAGENS === */
+/* =============================================== */
+.alert {
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.alert::before {
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 1.2rem;
+}
+
+.alert-success::before {
+    content: '\f058';
+    /* ícone de check circle */
+}
+
+.alert-error::before {
+    content: '\f06a';
+    /* ícone de exclamation circle */
+}
+
+/* =============================================== */
+/* === ESTILOS PARA SEÇÕES DO PERFIL === */
+/* =============================================== */
+.profile-section {
+    background: var(--white-color);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+}
+
+.profile-section h2 {
+    color: var(--dark-text);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.profile-section h2 i {
+    color: var(--primary-green);
+}
+
+.profile-form {
+    max-width: 500px;
+}
+
+.profile-form .input-group {
+    margin-bottom: 1.5rem;
+}
+
+.profile-form .btn {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+/* =============================================== */
+/* === ESTILOS PARA MENSAGEM SEM PRODUTOS === */
+/* =============================================== */
+.no-products {
+    text-align: center;
+    padding: 3rem;
+    font-size: 1.2rem;
+    color: #666;
+    grid-column: 1 / -1;
+}
+
+/* =============================================== */
+/* === ESTILOS PARA INFO DE ESTOQUE === */
+/* =============================================== */
+.stock-info {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* =============================================== */
+/* === ESTILOS PARA FILTROS DE RADIO === */
+/* =============================================== */
+.filter-list input[type=\"radio\"] {
+    margin-right: 0.5rem;
+    accent-color: var(--primary-green);
+    cursor: pointer;
+}
+
+.filter-list label {
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.filter-list label:hover {
+    color: var(--primary-green);
 }

@@ -12,7 +12,18 @@
   </head>
 
   <body>
-    <?php include 'php/header.php'; ?>
+    <?php 
+    // Incluir header e scripts de produtos
+    include 'php/header.php'; 
+    require_once 'php/get_products.php';
+    
+    // Verificar se há filtro de categoria
+    $categoria_filtro = isset($_GET['categoria']) ? (int)$_GET['categoria'] : null;
+    
+    // Buscar categorias e produtos
+    $categorias = getAllCategories();
+    $produtos = getAllProducts($categoria_filtro);
+    ?>
 
     <main class="container page-padding">
       <h1 class="page-title">Nossas Plantas</h1>
@@ -24,65 +35,84 @@
             <h4>Categorias</h4>
             <ul class="filter-list">
               <li>
-                <label
-                  ><input type="checkbox" name="category" value="interna" />
-                  Plantas de Interior</label
-                >
+                <label>
+                  <input type="radio" name="category" value="" <?= $categoria_filtro === null ? 'checked' : '' ?> 
+                         onclick="window.location.href='products.php'"/> 
+                  Todas as Categorias
+                </label>
               </li>
+              <?php
+              // Renderizar categorias dinamicamente
+              foreach ($categorias as $categoria) {
+                  $id = htmlspecialchars($categoria['id_categoria']);
+                  $nome = htmlspecialchars($categoria['nome_categoria']);
+                  $checked = ($categoria_filtro == $id) ? 'checked' : '';
+                  
+                  echo <<<HTML
               <li>
-                <label
-                  ><input type="checkbox" name="category" value="externa" />
-                  Plantas de Exterior</label
-                >
+                <label>
+                  <input type="radio" name="category" value="{$id}" {$checked}
+                         onclick="window.location.href='products.php?categoria={$id}'"/> 
+                  {$nome}
+                </label>
               </li>
-              <li>
-                <label
-                  ><input type="checkbox" name="category" value="suculenta" />
-                  Suculentas e Cactos</label
-                >
-              </li>
-              <li>
-                <label
-                  ><input type="checkbox" name="category" value="pendente" />
-                  Plantas Pendentes</label
-                >
-              </li>
+HTML;
+              }
+              ?>
             </ul>
           </div>
-          <div class="filter-group">
-            <h4>Faixa de Preço</h4>
-            <input
-              type="range"
-              id="priceRange"
-              min="10"
-              max="200"
-              value="200"
-              class="price-slider"
-            />
-            <p>Até: <span id="priceValue">R$ 200</span></p>
-          </div>
-          <div class="filter-group">
-            <h4>Cuidados</h4>
-            <ul class="filter-list">
-              <li>
-                <label
-                  ><input type="checkbox" name="care" value="facil" /> Cuidado
-                  Fácil</label
-                >
-              </li>
-              <li>
-                <label
-                  ><input type="checkbox" name="care" value="pet-friendly" />
-                  Pet-Friendly</label
-                >
-              </li>
-            </ul>
-          </div>
-          <button class="btn" id="applyFilters">Aplicar Filtros</button>
         </aside>
 
         <!-- Grade de Produtos -->
         <section class="products-grid-full">
+          <?php
+          // Verificar se há produtos
+          if (!empty($produtos)) {
+              foreach ($produtos as $produto) {
+                  // Formatar o preço
+                  $preco_formatado = number_format($produto['preco'], 2, ',', '.');
+                  
+                  // Escapar dados para segurança
+                  $id = htmlspecialchars($produto['id_planta']);
+                  $nome = htmlspecialchars($produto['nome_planta']);
+                  $imagem = htmlspecialchars($produto['imagem_url']);
+                  $preco = htmlspecialchars($preco_formatado);
+                  $categoria = htmlspecialchars($produto['nome_categoria'] ?? '');
+                  
+                  // Renderizar card do produto
+                  echo <<<HTML
+          <!-- Produto {$id} -->
+          <div
+            class="product-card"
+            data-id="p{$id}"
+            data-name="{$nome}"
+            data-price="{$produto['preco']}"
+            data-image="{$imagem}"
+            data-category="{$categoria}"
+          >
+            <a href="product-detail.php?id={$id}" class="product-link">
+              <img
+                src="{$imagem}"
+                alt="{$nome}"
+                onerror="this.src='https://via.placeholder.com/300x300?text=Sem+Imagem'"
+              />
+              <div class="product-card-content">
+                <h3>{$nome}</h3>
+                <p class="price">R$ {$preco}</p>
+              </div>
+            </a>
+            <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
+          </div>
+HTML;
+              }
+          } else {
+              // Mensagem caso não haja produtos
+              echo '<p class="no-products">Nenhum produto encontrado nesta categoria.</p>';
+          }
+          ?>
+        </section>
+      </div>
+    </main>
           <!-- Produto 1 -->
           <!-- Produto 1 -->
           <div
@@ -105,123 +135,6 @@
               </div>
             </a>
             <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
-          </div>
-
-          <!-- Produto 2 -->
-          <div
-            class="product-card"
-            data-id="p2"
-            data-name="Monstera Deliciosa"
-            data-price="89.90"
-            data-image="https://growurban.uk/cdn/shop/articles/care-guide-monstera-deliciosa-668092_680bbf00-9564-4f0c-b9cb-27ededaf19d2.jpg?v=1748436514&width=2048"
-            data-category="interna"
-            data-care=""
-          >
-            <a href="product-detail.html" class="product-link">
-              <img
-                src="https://growurban.uk/cdn/shop/articles/care-guide-monstera-deliciosa-668092_680bbf00-9564-4f0c-b9cb-27ededaf19d2.jpg?v=1748436514&width=2048"
-                alt="Planta Monstera Deliciosa"
-              />
-              <div class="product-card-content">
-                <h3>Monstera Deliciosa</h3>
-                <p class="price">R$ 89,90</p>
-              </div>
-            </a>
-            <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
-          </div>
-
-          <!-- Produto 3 -->
-          <div
-            class="product-card"
-            data-id="p3"
-            data-name="Espada de São Jorge"
-            data-price="59.90"
-            data-image="https://cdn.awsli.com.br/600x700/1520/1520689/produto/247127180/espada-de-sao-jorge-mini3-b1rfi2xmr4.jpeg"
-            data-category="interna"
-            data-care="facil"
-          >
-            <a href="product-detail.html" class="product-link">
-              <img
-                src="https://cdn.awsli.com.br/600x700/1520/1520689/produto/247127180/espada-de-sao-jorge-mini3-b1rfi2xmr4.jpeg"
-                alt="Planta Espada de São Jorge"
-              />
-              <div class="product-card-content">
-                <h3>Espada de São Jorge</h3>
-                <p class="price">R$ 59,90</p>
-              </div>
-            </a>
-            <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
-          </div>
-
-          <!-- Produto 4 -->
-          <div
-            class="product-card"
-            data-id="p4"
-            data-name="Zamioculca"
-            data-price="69.90"
-            data-image="https://upload.wikimedia.org/wikipedia/commons/d/d6/Zamioculcas.jpg"
-            data-category="interna suculenta"
-            data-care="facil"
-          >
-            <a href="product-detail.html" class="product-link">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Zamioculcas.jpg"
-                alt="Planta Zamioculca"
-              />
-              <div class="product-card-content">
-                <h3>Zamioculca</h3>
-                <p class="price">R$ 69,90</p>
-              </div>
-            </a>
-            <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
-          </div>
-
-          <!-- Produto 5 -->
-          <div
-            class="product-card"
-            data-id="p5"
-            data-name="Ficus Lyrata"
-            data-price="129.90"
-            data-image="https://cdn.store-assets.com/s/214074/i/88112830.jpeg"
-            data-category="externa"
-            data-care="pet-friendly"
-          >
-            <a href="product-detail.html" class="product-link">
-              <img
-                src="https://cdn.store-assets.com/s/214074/i/88112830.jpeg"
-                alt="Planta Ficus Lyrata"
-              />
-              <div class="product-card-content">
-                <h3>Ficus Lyrata</h3>
-                <p class="price">R$ 129,90</p>
-              </div>
-            </a>
-            <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
-          </div>
-
-          <!-- Produto 6 -->
-          <div
-            class="product-card"
-            data-id="p6"
-            data-name="Mix de Suculentas"
-            data-price="19.90"
-            data-image="https://casaeconstrucao.org/wp-content/uploads/2022/02/Echeveria-como-cuidar.webp"
-            data-category="suculenta"
-            data-care="facil"
-          >
-            <a href="product-detail.html" class="product-link">
-              <img
-                src="https://casaeconstrucao.org/wp-content/uploads/2022/02/Echeveria-como-cuidar.webp"
-                alt="Mix de Suculentas"
-              />
-              <div class="product-card-content">
-                <h3>Mix de Suculentas</h3>
-                <p class="price">R$ 19,90</p>
-              </div>
-            </a>
-            <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
-          </div>
-          <!-- Adicione mais produtos conforme necessário -->
         </section>
       </div>
     </main>
@@ -254,7 +167,7 @@
           >
             <h2>Seu carrinho está vazio.</h2>
             <p>Adicione algumas plantas para vê-las aqui!</p>
-            <a href="products.html" class="btn">Ver Produtos</a>
+            <a href="products.php" class="btn">Ver Produtos</a>
           </div>
         </div>
 
