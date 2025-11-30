@@ -1,1257 +1,1208 @@
 /* Importação de fontes e configurações globais */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
 
 :root {
-    --primary-green: #6B8E23;
-    /* Verde principal mais escuro */
-    --light-green: #AEC670;
-    /* Verde claro dos fundos */
-    --dark-text: #2F4F4F;
-    /* Cor de texto escura */
-    --gold-accent: #DAA520;
-    /* Dourado dos detalhes */
-    --white-color: #FFFFFF;
-    --background-color: #F8F9FA;
+  --primary-green: #6b8e23;
+  /* Verde principal mais escuro */
+  --light-green: #aec670;
+  /* Verde claro dos fundos */
+  --dark-text: #2f4f4f;
+  /* Cor de texto escura */
+  --gold-accent: #daa520;
+  /* Dourado dos detalhes */
+  --white-color: #ffffff;
+  --background-color: #f8f9fa;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
-    background-color: var(--background-color);
-    color: var(--dark-text);
-    line-height: 1.6;
+  font-family: "Montserrat", sans-serif;
+  background-color: var(--background-color);
+  color: var(--dark-text);
+  line-height: 1.6;
 }
 
 /* =============================================== */
 /* === NAVBAR - ESTILOS ALTERADOS E CORRIGIDOS === */
 /* =============================================== */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background-color: var(--white-color);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 999;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease,
+    backdrop-filter 0.3s ease;
 }
 
 .logo a {
-    display: inline-block;
+  display: inline-block;
 }
 
 .logo img {
-    height: 40px;
-    width: auto;
-    display: block;
+  height: 40px;
+  width: auto;
+  display: block;
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 .logo {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .logo a:hover img {
-    transform: scale(1.05);
-    transition: transform 0.3s;
+  transform: scale(1.1) rotate(5deg);
 }
 
 .nav-links {
-    display: flex;
-    list-style: none;
+  display: flex;
+  list-style: none;
 }
 
 .nav-links li {
-    margin-left: 2rem;
+  margin-left: 2rem;
 }
 
 .nav-links a {
-    text-decoration: none;
-    color: var(--dark-text);
-    font-weight: 700;
-    transition: color 0.3s;
+  text-decoration: none;
+  color: var(--dark-text);
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 5px;
+  transition: color 0.3s ease;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-green);
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
 }
 
 .nav-links a:hover {
-    color: var(--primary-green);
+  color: var(--primary-green);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
 }
 
 .nav-icons {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 .nav-icons a {
-    font-size: 1.2rem;
-    color: var(--dark-text);
-    transition: color 0.3s;
-
-    /* --- ADICIONE ESTAS LINHAS --- */
-    display: flex;
-    align-items: center;
-    height: 38px;
-    /* Mesma altura da área da lupa */
-    padding: 0 12px;
-    /* Exatamente o mesmo padding da lupa */
+  font-size: 1.2rem;
+  color: var(--dark-text);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  height: 38px;
+  padding: 0 12px;
+  position: relative;
 }
 
 .nav-icons a:hover {
-    color: var(--primary-green);
+  color: var(--primary-green);
+  transform: translateY(-2px);
+}
+
+.nav-icons a i {
+  transition: transform 0.3s ease;
+}
+
+.nav-icons a:hover i {
+  transform: scale(1.2);
+}
+
+/* Cart icon badge animation */
+.cart-icon-link {
+  position: relative;
+}
+
+#cart-item-count {
+  position: absolute;
+  top: -5px;
+  right: 5px;
+  background-color: var(--primary-green);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+}
+
+.cart-icon-link:hover #cart-item-count {
+  transform: scale(1.2);
 }
 
 /* Adiciona um "espaçamento" no topo do conteúdo principal */
 main {
-    padding-top: 72px;
+  padding-top: 72px;
 }
 
 /* --- O RESTANTE DO CSS PERMANECE IGUAL --- */
 
-
 /* Container do Login */
 .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 80vh;
-    padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 2rem;
 }
 
 .login-box {
-    background: var(--white-color);
-    padding: 2.5rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
+  background: var(--white-color);
+  padding: 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
 }
 
 .login-box h2 {
-    color: var(--dark-text);
-    margin-bottom: 0.5rem;
+  color: var(--dark-text);
+  margin-bottom: 0.5rem;
 }
 
 .login-box p {
-    margin-bottom: 2rem;
-    color: #6c757d;
+  margin-bottom: 2rem;
+  color: #6c757d;
 }
 
 .input-group {
-    margin-bottom: 1.5rem;
-    text-align: left;
+  margin-bottom: 1.5rem;
+  text-align: left;
 }
 
 .input-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 700;
-    color: var(--dark-text);
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  color: var(--dark-text);
 }
 
 .input-group input {
-    width: 100%;
-    padding: 0.8rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-}
-
-.btn {
-    padding: 0.8rem;
-    background-color: var(--primary-green);
-    color: var(--white-color);
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    text-decoration: none;
-}
-
-.btn:hover {
-    background-color: #55711c;
-}
-
-.login-footer {
-    margin-top: 1.5rem;
-    font-size: 0.9rem;
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
 }
 
 .login-footer a {
-    color: var(--primary-green);
-    text-decoration: none;
-    font-weight: 700;
+  color: var(--primary-green);
+  text-decoration: none;
+  font-weight: 700;
 }
 
 .login-footer a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 /* Footer */
 .footer {
-    background-color: var(--dark-text);
-    color: var(--white-color);
-    padding: 2rem 0;
-    margin-top: 2rem;
+  background-color: var(--dark-text);
+  color: var(--white-color);
+  padding: 2rem 0;
+  margin-top: 2rem;
 }
 
 .footer-content {
-    display: flex;
-    justify-content: space-around;
-    padding: 0 2rem;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 2rem;
+  flex-wrap: wrap;
 }
 
 .footer-section {
-    flex: 1;
-    min-width: 200px;
-    margin-bottom: 1rem;
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 1rem;
 }
 
 .footer-section h3 {
-    margin-bottom: 1rem;
-    color: var(--light-green);
+  margin-bottom: 1rem;
+  color: var(--light-green);
 }
 
 .footer-section ul {
-    list-style: none;
+  list-style: none;
 }
 
 .footer-section ul li {
-    margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .footer-section a {
-    color: var(--white-color);
-    text-decoration: none;
-    transition: color 0.3s;
+  color: var(--white-color);
+  text-decoration: none;
+  transition: color 0.3s;
 }
 
 .footer-section a:hover {
-    color: var(--gold-accent);
+  color: var(--gold-accent);
 }
 
 .social-icons a {
-    margin-right: 1rem;
-    font-size: 1.5rem;
+  margin-right: 1rem;
+  font-size: 1.5rem;
 }
 
 .footer-bottom {
-    text-align: center;
-    padding-top: 1rem;
-    border-top: 1px solid #4f6a6a;
-    margin-top: 1rem;
+  text-align: center;
+  padding-top: 1rem;
+  border-top: 1px solid #4f6a6a;
+  margin-top: 1rem;
 }
 
 /* --- Estilos da Página Inicial --- */
 
 /* Classes Utilitárias */
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-    color: var(--dark-text);
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: var(--dark-text);
 }
 
 .text-center {
-    text-align: center;
-    margin-top: 3rem;
+  text-align: center;
+  margin-top: 3rem;
 }
-
 
 /* Seção Hero */
 .hero {
-    /* Use uma imagem de fundo de sua preferência aqui */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('./assets/folhas-verdes-exuberantes-criativas-padrao-natureza-textura-de-fundo.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 60vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: var(--white-color);
+  /* Use uma imagem de fundo de sua preferência aqui */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("./assets/folhas-verdes-exuberantes-criativas-padrao-natureza-textura-de-fundo.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--white-color);
 }
 
 .hero-content h1 {
-    font-size: 3.5rem;
-    margin-bottom: 1rem;
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
 }
 
 .hero-content p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
 }
 
 /* Seção Sobre (Missão e Visão) */
 .about-section {
-    padding: 4rem 0;
+  padding: 4rem 0;
 }
 
 .about-section .container {
-    display: flex;
-    justify-content: space-around;
-    gap: 2rem;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .about-box {
-    flex: 1;
-    min-width: 300px;
-    background: var(--white-color);
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    text-align: center;
+  flex: 1;
+  min-width: 300px;
+  background: var(--white-color);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  text-align: center;
 }
 
 .about-box h2 {
-    color: var(--primary-green);
-    margin-bottom: 1rem;
+  color: var(--primary-green);
+  margin-bottom: 1rem;
 }
 
 /* Seção de Produtos em Destaque */
 .featured-products {
-    padding: 4rem 0;
-    background-color: #fdfdfd;
+  padding: 4rem 0;
+  background-color: #fdfdfd;
 }
 
 .products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
 }
 
 .product-card {
-    background: var(--white-color);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
+  background: var(--white-color);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 
-    /* --- NOVAS PROPRIEDADES --- */
-    display: flex;
-    /* 1. Ativa o layout Flexbox */
-    flex-direction: column;
-    /* 2. Organiza os itens em uma coluna (vertical) */
-    height: 100%;
-    /* 3. Garante que todos os cards na mesma linha tenham a mesma altura */
+/* Link wrapper inside product card */
+.product-card a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 /* REGRA NOVA PARA O CONTEÚDO */
 .product-card-content {
-    padding: 1rem 1rem 0;
-    /* Espaçamento interno */
-    flex-grow: 1;
-    /* 4. Faz esta área crescer e empurrar o botão para baixo */
+  padding: 1rem 1rem 0;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .product-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 12px 35px rgba(107, 142, 35, 0.2);
 }
 
 .product-card img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover img {
+  transform: scale(1.05);
 }
 
 .product-card h3 {
-    margin: 1rem 0 0.5rem;
-    color: var(--dark-text);
+  margin: 1rem 0 0.5rem;
+  color: var(--dark-text);
+  text-decoration: none;
+  font-size: 1.1rem;
 }
 
 .product-card .price {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--primary-green);
-    margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary-green);
+  margin-bottom: auto;
+  margin-top: 0.5rem;
 }
 
 .product-card .btn {
-    /* Mantém o espaçamento nas laterais e na parte inferior */
-    margin: 1rem 1.5rem 1.5rem;
+  margin: 1rem 1.5rem 1.5rem;
+  align-self: stretch;
 }
 
 /* Seção de Valores */
 .values-section {
-    padding: 4rem 0;
-    background-color: var(--light-green);
-    color: var(--dark-text);
+  padding: 4rem 0;
+  background-color: var(--light-green);
+  color: var(--dark-text);
 }
 
 .values-section .section-title {
-    color: #2F4F4F;
+  color: #2f4f4f;
 }
 
 .values-container {
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-    flex-wrap: wrap;
-    gap: 2rem;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
 .value-item {
-    flex: 1;
-    min-width: 200px;
+  flex: 1;
+  min-width: 200px;
 }
 
 .value-item i {
-    font-size: 3rem;
-    color: var(--primary-green);
-    margin-bottom: 1rem;
+  font-size: 3rem;
+  color: var(--primary-green);
+  margin-bottom: 1rem;
 }
 
 /* --- Estilos da Página Inicial (Continuação) --- */
 
 /* REMOVER ESTILO DA SEÇÃO ANTIGA */
 .about-section {
-    display: none;
+  display: none;
 }
-
 
 /* NOVA SEÇÃO: Benefícios */
 .benefits-section {
-    padding: 4rem 0;
-    background-color: #f8f9fa;
-    /* Um cinza bem claro */
+  padding: 4rem 0;
+  background-color: #f8f9fa;
+  /* Um cinza bem claro */
 }
 
 .benefits-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
 }
 
 .benefit-card {
-    background-color: var(--white-color);
-    padding: 2.5rem 2rem;
-    text-align: left;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  background-color: var(--white-color);
+  padding: 2.5rem 2rem;
+  text-align: left;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .benefit-card h3 {
-    font-size: 1.5rem;
-    color: var(--dark-text);
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
+  font-size: 1.5rem;
+  color: var(--dark-text);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
 }
 
 .benefit-card h3 i {
-    color: var(--primary-green);
-    margin-right: 1rem;
+  color: var(--primary-green);
+  margin-right: 1rem;
 }
 
 .benefit-card p {
-    line-height: 1.6;
-    color: var(--text-color);
+  line-height: 1.6;
+  color: var(--text-color);
 }
-
 
 /* NOVA SEÇÃO: Avaliações */
 .testimonials-section {
-    padding: 4rem 0;
+  padding: 4rem 0;
 }
 
 .testimonial-carousel {
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-    overflow: hidden;
-    border-radius: 8px;
-    background-color: var(--light-green);
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: var(--light-green);
 }
 
 .testimonial-wrapper {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
+  display: flex;
+  transition: transform 0.5s ease-in-out;
 }
 
 .testimonial-slide {
-    flex: 0 0 100%;
-    padding: 3rem 4rem;
-    text-align: center;
-    box-sizing: border-box;
+  flex: 0 0 100%;
+  padding: 3rem 4rem;
+  text-align: center;
+  box-sizing: border-box;
 }
 
 .testimonial-text {
-    font-size: 1.2rem;
-    font-style: italic;
-    color: var(--dark-text);
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--dark-text);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
 }
 
 .testimonial-author {
-    font-weight: 700;
-    color: var(--primary-green);
+  font-weight: 700;
+  color: var(--primary-green);
 }
 
 .carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.3);
-    color: white;
-    border: none;
-    padding: 0.8rem;
-    font-size: 1.2rem;
-    cursor: pointer;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    line-height: 1;
-    transition: background-color 0.3s;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  line-height: 1;
+  transition: background-color 0.3s;
 }
 
 .carousel-btn:hover {
-    background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .carousel-btn.prev {
-    left: 1rem;
+  left: 1rem;
 }
 
 .carousel-btn.next {
-    right: 1rem;
+  right: 1rem;
 }
-
 
 /* NOVA SEÇÃO: Newsletter */
 .newsletter-section {
-    padding: 4rem 0;
-    background-color: #f8f9fa;
+  padding: 4rem 0;
+  background-color: #f8f9fa;
 }
 
 .newsletter-form {
-    max-width: 600px;
-    margin: 0 auto;
-    display: flex;
-    gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  gap: 1rem;
 }
 
 .newsletter-form input {
-    flex-grow: 1;
-    padding: 0.8rem 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
+  flex-grow: 1;
+  padding: 0.8rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
 }
 
 .newsletter-form .btn {
-    flex-shrink: 0;
+  flex-shrink: 0;
 }
 
 /* Utilitário para leitores de tela */
 .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 
 /* --- Estilos da Página de Produtos --- */
 
 .page-padding {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 
 .page-title {
-    text-align: center;
-    font-size: 2.8rem;
-    margin-bottom: 3rem;
-    color: var(--dark-text);
-}
-
-.shop-layout {
-    display: flex;
-    gap: 2rem;
-}
-
-.product-link {
-    text-decoration: none;
-    color: inherit;
-}
-
-/* Barra Lateral de Filtros */
-.filters-sidebar {
-    width: 250px;
-    flex-shrink: 0;
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    align-self: flex-start;
-    /* Alinha o sidebar no topo */
-}
-
-.filters-sidebar h3 {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    border-bottom: 2px solid var(--light-green);
-    padding-bottom: 0.5rem;
-}
-
-.filter-group {
-    margin-bottom: 2rem;
-}
-
-.filter-group h4 {
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-}
-
-.filter-list {
-    list-style: none;
-}
-
-.filter-list li {
-    margin-bottom: 0.8rem;
-}
-
-.filter-list label {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
-.filter-list input[type="checkbox"] {
-    margin-right: 0.5rem;
-    accent-color: var(--primary-green);
-}
-
-.price-slider {
-    width: 100%;
-    cursor: pointer;
-    accent-color: var(--primary-green);
-}
-
-#priceValue {
-    font-weight: 700;
-    color: var(--primary-green);
-}
-
-/* Grade de Produtos */
-.products-grid-full {
-    flex-grow: 1;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-}
-
-/* --- Estilos da Página de Detalhes do Produto --- */
-
-.product-detail-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: flex-start;
+  text-align: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: flex-start;
 }
 
 /* Galeria de Imagens */
 .product-image-gallery .main-image {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
 }
 
 .thumbnail-images {
-    display: flex;
-    gap: 1rem;
+  display: flex;
+  gap: 1rem;
 }
 
 .thumbnail {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 5px;
-    cursor: pointer;
-    opacity: 0.6;
-    transition: opacity 0.3s, border 0.3s;
-    border: 2px solid transparent;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.3s, border 0.3s;
+  border: 2px solid transparent;
 }
 
 .thumbnail.active,
 .thumbnail:hover {
-    opacity: 1;
-    border-color: var(--primary-green);
+  opacity: 1;
+  border-color: var(--primary-green);
 }
 
 /* Informações do Produto */
 .product-info h1 {
-    font-size: 2.5rem;
-    color: var(--dark-text);
-    margin-bottom: 1rem;
+  font-size: 2.5rem;
+  color: var(--dark-text);
+  margin-bottom: 1rem;
 }
 
 .product-price {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--primary-green);
-    margin-bottom: 1.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-green);
+  margin-bottom: 1.5rem;
 }
 
 .short-description {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    margin-bottom: 2rem;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
 }
 
 .quantity-selector {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 .quantity-selector label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 700;
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
 }
 
 .quantity-wrapper {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .quantity-wrapper button {
-    width: 40px;
-    height: 40px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-    font-size: 1.5rem;
-    cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .quantity-wrapper input {
-    width: 60px;
-    height: 40px;
-    text-align: center;
-    border: 1px solid #ccc;
-    border-left: none;
-    border-right: none;
-    font-size: 1.2rem;
+  width: 60px;
+  height: 40px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-left: none;
+  border-right: none;
+  font-size: 1.2rem;
 }
 
 .large-btn {
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
 }
 
 /* Abas de Detalhes */
 .product-details-tabs {
-    margin-top: 4rem;
-    border-top: 1px solid #eee;
-    padding-top: 2rem;
+  margin-top: 4rem;
+  border-top: 1px solid #eee;
+  padding-top: 2rem;
 }
 
 .tab-buttons {
-    display: flex;
-    gap: 1.5rem;
-    border-bottom: 1px solid #eee;
-    margin-bottom: 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 1.5rem;
 }
 
 .tab-btn {
-    padding: 0.8rem 0;
-    font-size: 1.1rem;
-    font-weight: 700;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #999;
-    border-bottom: 3px solid transparent;
-    transition: color 0.3s, border-color 0.3s;
+  padding: 0.8rem 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  border-bottom: 3px solid transparent;
+  transition: color 0.3s, border-color 0.3s;
 }
 
 .tab-btn.active,
 .tab-btn:hover {
-    color: var(--dark-text);
-    border-bottom-color: var(--primary-green);
+  color: var(--dark-text);
+  border-bottom-color: var(--primary-green);
 }
 
 .tab-content {
-    display: none;
-    line-height: 1.8;
+  display: none;
+  line-height: 1.8;
 }
 
 .tab-content.active {
-    display: block;
+  display: block;
 }
 
 .tab-content ul {
-    list-style-position: inside;
+  list-style-position: inside;
 }
 
 .tab-content li {
-    margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
-
 
 /* Seção de Produtos Relacionados */
 .related-products {
-    margin-top: 4rem;
+  margin-top: 4rem;
 }
 
 /* --- Estilos da Página do Carrinho --- */
 
 /* Indicador de itens no ícone do carrinho */
 .cart-icon-link {
-    position: relative;
+  position: relative;
 }
 
 #cart-item-count {
-    position: absolute;
-    top: -8px;
-    right: -12px;
-    background-color: var(--gold-accent);
-    color: white;
-    border-radius: 50%;
-    padding: 2px 6px;
-    font-size: 0.7rem;
-    font-weight: bold;
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  background-color: var(--gold-accent);
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.7rem;
+  font-weight: bold;
 }
 
 .cart-layout {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 2rem;
-    align-items: flex-start;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  align-items: flex-start;
 }
 
 /* Lista de itens */
 #cart-items-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .cart-item {
-    display: flex;
-    gap: 1.5rem;
-    padding: 1.5rem;
-    background-color: #fff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    border-radius: 8px;
-    align-items: center;
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  align-items: center;
 }
 
 .cart-item-image {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 5px;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
 .cart-item-info {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 .cart-item-info h3 {
-    margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .cart-item-info .price {
-    color: var(--primary-green);
-    font-weight: 700;
+  color: var(--primary-green);
+  font-weight: 700;
 }
 
 .cart-item-actions .quantity-wrapper {
-    margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .remove-from-cart-btn {
-    background: none;
-    border: none;
-    color: #999;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: color 0.3s;
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: color 0.3s;
 }
 
 .remove-from-cart-btn:hover {
-    color: #e74c3c;
+  color: #e74c3c;
 }
 
 .quantity {
-    width: 40px;
-    text-align: center;
-    font-size: 1rem;
+  width: 40px;
+  text-align: center;
+  font-size: 1rem;
 }
 
 .quantity-number {
-    display: inline-block;
-    width: 100%;
-    font-size: 1rem;
+  display: inline-block;
+  width: 100%;
+  font-size: 1rem;
 }
 
 /* Resumo do Pedido */
 .order-summary {
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    position: sticky;
-    top: 2rem;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 2rem;
 }
 
 .order-summary h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 1rem;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
 }
 
 .summary-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
 }
 
 .total-row {
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #eee;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
 }
 
 /* Mensagem de carrinho vazio */
 .cart-empty {
-    text-align: center;
-    padding: 4rem 0;
+  text-align: center;
+  padding: 4rem 0;
 }
 
 /* --- Estilos da Página Sobre Nós --- */
 
 /* Hero Section */
 .about-hero {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1652091705632-0755a239a186?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHx8');
-    background-size: cover;
-    background-position: center 60%;
-    height: 45vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: var(--white-color);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("https://images.unsplash.com/photo-1652091705632-0755a239a186?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHx8");
+  background-size: cover;
+  background-position: center 60%;
+  height: 45vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--white-color);
 }
 
 .about-hero h1 {
-    font-size: 3.2rem;
+  font-size: 3.2rem;
 }
 
 /* Seção de Missão e Visão */
 .mission-vision-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin-bottom: 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 4rem;
 }
 
 .info-card {
-    background-color: #fff;
-    padding: 2.5rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
-    text-align: center;
+  background-color: #fff;
+  padding: 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+  text-align: center;
 }
 
 .info-card i {
-    font-size: 2.5rem;
-    color: var(--primary-green);
-    margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  color: var(--primary-green);
+  margin-bottom: 1.5rem;
 }
 
 .info-card h2 {
-    margin-bottom: 1rem;
-    color: var(--dark-text);
+  margin-bottom: 1rem;
+  color: var(--dark-text);
 }
 
 .info-card p {
-    line-height: 1.8;
+  line-height: 1.8;
 }
 
 /* Ajuste na seção de valores para a página Sobre */
 .about-page-values {
-    background-color: transparent;
-    padding: 0;
-    margin-bottom: 4rem;
+  background-color: transparent;
+  padding: 0;
+  margin-bottom: 4rem;
 }
 
 /* Seção de Compromisso */
 .commitment-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: center;
-    background-color: #fdfdfd;
-    padding: 3rem;
-    border-radius: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  background-color: #fdfdfd;
+  padding: 3rem;
+  border-radius: 8px;
 }
 
 .commitment-text p {
-    line-height: 1.8;
-    margin-bottom: 1rem;
+  line-height: 1.8;
+  margin-bottom: 1rem;
 }
 
 .commitment-image img {
-    width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 /* Responsividade para seções da página Sobre */
 @media (max-width: 768px) {
+  .mission-vision-section,
+  .commitment-section {
+    grid-template-columns: 1fr;
+  }
 
-    .mission-vision-section,
-    .commitment-section {
-        grid-template-columns: 1fr;
-    }
-
-    .about-hero h1 {
-        font-size: 2.5rem;
-    }
+  .about-hero h1 {
+    font-size: 2.5rem;
+  }
 }
 
 /* --- Estilos da Página de Contato --- */
 
 .page-subtitle {
-    text-align: center;
-    max-width: 600px;
-    margin: -2rem auto 3rem;
-    font-size: 1.1rem;
-    color: #6c757d;
+  text-align: center;
+  max-width: 600px;
+  margin: -2rem auto 3rem;
+  font-size: 1.1rem;
+  color: #6c757d;
 }
 
 .contact-layout {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 3rem;
-    background-color: #fff;
-    padding: 3rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+  background-color: #fff;
+  padding: 3rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 /* Formulário */
 .contact-form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 700;
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
 }
 
 .form-group input,
 .form-group textarea {
-    width: 100%;
-    padding: 0.8rem 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-family: 'Montserrat', sans-serif;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-family: "Montserrat", sans-serif;
 }
 
 .form-group textarea {
-    resize: vertical;
+  resize: vertical;
 }
 
 /* Informações de Contato */
 .contact-info {
-    padding-left: 2rem;
-    border-left: 1px solid #eee;
+  padding-left: 2rem;
+  border-left: 1px solid #eee;
 }
 
 .contact-info h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: var(--dark-text);
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--dark-text);
 }
 
 .contact-info p {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
 }
 
 .contact-info i {
-    font-size: 1.2rem;
-    color: var(--primary-green);
-    margin-top: 5px;
+  font-size: 1.2rem;
+  color: var(--primary-green);
+  margin-top: 5px;
 }
 
 .contact-info a {
-    color: var(--primary-green);
-    text-decoration: none;
+  color: var(--primary-green);
+  text-decoration: none;
 }
 
 .contact-info a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .social-title {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .social-icons-contact a {
-    color: var(--dark-text);
-    font-size: 1.8rem;
-    margin-right: 1.5rem;
-    transition: color 0.3s;
+  color: var(--dark-text);
+  font-size: 1.8rem;
+  margin-right: 1.5rem;
+  transition: color 0.3s;
 }
 
 .social-icons-contact a:hover {
-    color: var(--primary-green);
+  color: var(--primary-green);
 }
 
 /* Responsividade para página de contato */
 @media (max-width: 768px) {
-    .contact-layout {
-        grid-template-columns: 1fr;
-        padding: 2rem;
-    }
+  .contact-layout {
+    grid-template-columns: 1fr;
+    padding: 2rem;
+  }
 
-    .contact-info {
-        padding-left: 0;
-        border-left: none;
-        margin-top: 2rem;
-        padding-top: 2rem;
-        border-top: 1px solid #eee;
-    }
+  .contact-info {
+    padding-left: 0;
+    border-left: none;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+  }
 }
 
 /* Correção de espaçamento para a mensagem do carrinho vazio */
 .cart-empty p {
-    margin-bottom: 1.5rem;
-    /* Adiciona um espaço ABAIXO do parágrafo */
+  margin-bottom: 1.5rem;
+  /* Adiciona um espaço ABAIXO do parágrafo */
 }
 
 /* --- Estilos da Página de Perfil --- */
 
 .profile-layout {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 2rem;
-    align-items: flex-start;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  align-items: flex-start;
 }
 
 .profile-card {
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    text-align: center;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  text-align: center;
 }
 
 .profile-avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background-color: var(--primary-green);
-    color: white;
-    font-size: 3rem;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto 1.5rem;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: var(--primary-green);
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 1.5rem;
 }
 
 #profile-name {
-    margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 #profile-email {
-    color: #6c757d;
-    margin-bottom: 2rem;
+  color: #6c757d;
+  margin-bottom: 2rem;
 }
 
 .btn-danger {
-    background-color: #c0392b;
+  background-color: #c0392b;
 }
 
 .btn-danger:hover {
-    background-color: #a93226;
+  background-color: #a93226;
 }
 
 .profile-options {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .option-item {
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .option-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .option-item i:first-child {
-    font-size: 1.5rem;
-    color: var(--primary-green);
-    margin-right: 1.5rem;
-    width: 30px;
-    text-align: center;
+  font-size: 1.5rem;
+  color: var(--primary-green);
+  margin-right: 1.5rem;
+  width: 30px;
+  text-align: center;
 }
 
 .option-item span {
-    flex-grow: 1;
-    font-weight: bold;
+  flex-grow: 1;
+  font-weight: bold;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-    .profile-layout {
-        grid-template-columns: 1fr;
-    }
+  .profile-layout {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* =============================================== */
@@ -1260,93 +1211,92 @@ main {
 
 /* O fundo escurecido do modal (overlay) */
 .modal {
-    display: none;
-    /* Escondido por padrão */
-    position: fixed;
-    /* Fica fixo na tela */
-    z-index: 1000;
-    /* Garante que fique sobre todo o conteúdo */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    /* Permite scroll se o conteúdo for grande */
-    background-color: rgba(0, 0, 0, 0.6);
-    /* Fundo preto com 60% de opacidade */
-    animation: fadeIn 0.3s;
+  display: none;
+  /* Escondido por padrão */
+  position: fixed;
+  /* Fica fixo na tela */
+  z-index: 1000;
+  /* Garante que fique sobre todo o conteúdo */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  /* Permite scroll se o conteúdo for grande */
+  background-color: rgba(0, 0, 0, 0.6);
+  /* Fundo preto com 60% de opacidade */
+  animation: fadeIn 0.3s;
 }
 
 /* Animação de fade-in */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
+  from {
+    opacity: 0;
+  }
 
-    to {
-        opacity: 1;
-    }
+  to {
+    opacity: 1;
+  }
 }
 
 /* A caixa principal do modal */
 .modal-content {
-    background-color: #fefefe;
-    margin: 10% auto;
-    /* 10% do topo e centralizado */
-    padding: 20px;
-    border: none;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 420px;
-    position: relative;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-    animation: slideIn 0.4s;
+  background-color: #fefefe;
+  margin: 10% auto;
+  /* 10% do topo e centralizado */
+  padding: 20px;
+  border: none;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 420px;
+  position: relative;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.4s;
 }
 
 /* Animação de slide-in */
 @keyframes slideIn {
-    from {
-        transform: translateY(-50px);
-        opacity: 0;
-    }
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
 
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
-
 
 /* Reutilizando e adaptando seu .login-box para o modal */
 .login-box-modal {
-    text-align: center;
-    padding: 1rem;
-    /* Adiciona um pouco de padding interno */
+  text-align: center;
+  padding: 1rem;
+  /* Adiciona um pouco de padding interno */
 }
 
 .login-header-text {
-    color: var(--dark-text);
+  color: var(--dark-text);
 }
 
 .login-footer p {
-    color: var(--dark-text);
+  color: var(--dark-text);
 }
 
 /* Botão de fechar (o "x") */
 .close-btn {
-    color: #aaa;
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 32px;
-    font-weight: bold;
+  color: #aaa;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 32px;
+  font-weight: bold;
 }
 
 .close-btn:hover,
 .close-btn:focus {
-    color: #333;
-    text-decoration: none;
-    cursor: pointer;
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 /* =============================================== */
@@ -1354,112 +1304,111 @@ main {
 /* =============================================== */
 
 .cart-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1001;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1001;
 
-    /* MUDANÇA 1: Usamos visibility e opacity em vez de display */
-    /* Isso permite que as transições de "saída" funcionem corretamente. */
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+  /* MUDANÇA 1: Usamos visibility e opacity em vez de display */
+  /* Isso permite que as transições de "saída" funcionem corretamente. */
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
 }
 
 /* Quando o modal está ativo, ele se torna visível */
 .cart-modal.active {
-    visibility: visible;
-    opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
 
 .cart-modal-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
 
-    /* MUDANÇA 2: Adicionamos transição de opacidade para o fundo */
-    opacity: 0;
-    transition: opacity 0.4s ease-in-out;
+  /* MUDANÇA 2: Adicionamos transição de opacidade para o fundo */
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
 }
 
 /* Quando o modal está ativo, o fundo aparece suavemente */
 .cart-modal.active .cart-modal-overlay {
-    opacity: 1;
+  opacity: 1;
 }
 
 .cart-modal-content {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 100%;
-    max-width: 450px;
-    height: 100%;
-    background-color: var(--background-color);
-    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 450px;
+  height: 100%;
+  background-color: var(--background-color);
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
 
-    /* MUDANÇA 3: A Mágica da Animação de Deslizar */
-    /* Começa fora da tela (100% para a direita) */
-    transform: translateX(100%);
-    /* Define a transição para a propriedade 'transform' */
-    transition: transform 0.4s ease-in-out;
+  /* MUDANÇA 3: A Mágica da Animação de Deslizar */
+  /* Começa fora da tela (100% para a direita) */
+  transform: translateX(100%);
+  /* Define a transição para a propriedade 'transform' */
+  transition: transform 0.4s ease-in-out;
 }
 
 /* Quando o modal está ativo, ele desliza para a posição final (0) */
 .cart-modal.active .cart-modal-content {
-    transform: translateX(0);
+  transform: translateX(0);
 }
-
 
 /* --- O restante do seu CSS do carrinho permanece o mesmo --- */
 /* (Cabeçalho, corpo, itens, rodapé, etc.) */
 
 .cart-modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid #eee;
-    flex-shrink: 0;
-    color: var(--dark-text);
-    /* Corrigindo a cor do texto "Meu Carrinho" */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #eee;
+  flex-shrink: 0;
+  color: var(--dark-text);
+  /* Corrigindo a cor do texto "Meu Carrinho" */
 }
 
 .cart-modal-header h3 {
-    font-size: 1.5rem;
-    margin: 0;
+  font-size: 1.5rem;
+  margin: 0;
 }
 
 .close-cart-btn {
-    background: none;
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-    color: #aaa;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #aaa;
 }
 
 .cart-modal-body {
-    padding: 1.5rem;
-    overflow-y: auto;
-    flex-grow: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex-grow: 1;
 }
 
 .cart-modal-footer {
-    padding: 1.5rem;
-    border-top: 1px solid #eee;
-    background-color: #fff;
-    flex-shrink: 0;
+  padding: 1.5rem;
+  border-top: 1px solid #eee;
+  background-color: #fff;
+  flex-shrink: 0;
 }
 
 .order-summary-modal .btn {
-    width: 100%;
-    margin-top: 1rem;
+  width: 100%;
+  margin-top: 1rem;
 }
 
 /* E todos os outros estilos de .cart-item, .quantity-controls, etc. */
@@ -1471,109 +1420,108 @@ main {
 /* --- 1. Correção de Cores --- */
 
 .cart-modal-header h3 {
-    color: var(--dark-text);
-    /* Deixa o título "Meu Carrinho" escuro */
+  color: var(--dark-text);
+  /* Deixa o título "Meu Carrinho" escuro */
 }
 
 /* Garante que o texto dentro do carrinho vazio também seja escuro */
 .cart-empty h2,
 .cart-empty p {
-    color: var(--dark-text);
+  color: var(--dark-text);
 }
-
 
 /* --- 2. Rework do Layout e Botões dos Itens --- */
 
 /* Altera o card principal do item para um layout flexível */
 .cart-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    /* Empurra os elementos para as extremidades */
-    gap: 1rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Empurra os elementos para as extremidades */
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
 }
 
 /* Container da imagem e das informações (nome/preço) */
 .cart-item-details {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-grow: 1;
-    /* Faz este container crescer e ocupar o espaço */
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-grow: 1;
+  /* Faz este container crescer e ocupar o espaço */
 }
 
 /* Ajusta o nome do produto que fica dentro dos detalhes */
 .cart-item-details h3 {
-    font-size: 1rem;
-    color: var(--dark-text);
-    /* Cor escura para o nome da planta */
+  font-size: 1rem;
+  color: var(--dark-text);
+  /* Cor escura para o nome da planta */
 }
 
 /* O container das ações (botões) agora fica no final */
 .cart-item-actions {
-    display: flex;
-    flex-direction: column;
-    /* Coloca os botões de quantidade em cima do "Remover" */
-    align-items: center;
-    gap: 0.5rem;
-    /* Espaço entre os botões de +/- e o "Remover" */
+  display: flex;
+  flex-direction: column;
+  /* Coloca os botões de quantidade em cima do "Remover" */
+  align-items: center;
+  gap: 0.5rem;
+  /* Espaço entre os botões de +/- e o "Remover" */
 }
 
 /* NOVO wrapper para os botões de quantidade */
 .quantity-controls {
-    display: flex;
-    align-items: center;
-    background-color: #f1f1f1;
-    border-radius: 20px;
-    /* Bordas arredondadas */
+  display: flex;
+  align-items: center;
+  background-color: #f1f1f1;
+  border-radius: 20px;
+  /* Bordas arredondadas */
 }
 
 /* NOVO estilo para os botões de +/- */
 .change-quantity-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: var(--dark-text);
-    padding: 0.3rem 0.8rem;
-    transition: background-color 0.2s;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--dark-text);
+  padding: 0.3rem 0.8rem;
+  transition: background-color 0.2s;
 }
 
 .change-quantity-btn:hover {
-    background-color: #e0e0e0;
-    border-radius: 20px;
+  background-color: #e0e0e0;
+  border-radius: 20px;
 }
 
 /* NOVO estilo para o número da quantidade */
 .quantity-number {
-    font-size: 1rem;
-    font-weight: 700;
-    padding: 0 0.5rem;
-    color: var(--dark-text);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0 0.5rem;
+  color: var(--dark-text);
 }
 
 /* NOVO estilo para o botão "Remover" */
 .remove-from-cart-btn {
-    font-size: 0.8rem;
-    color: #999;
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: color 0.2s;
+  font-size: 0.8rem;
+  color: #999;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
 }
 
 .remove-from-cart-btn:hover {
-    color: #c0392b;
-    /* Vermelho ao passar o mouse */
-    text-decoration: underline;
+  color: #c0392b;
+  /* Vermelho ao passar o mouse */
+  text-decoration: underline;
 }
 
 /* --- REMOÇÃO de estilos antigos que não são mais necessários --- */
 .cart-item-actions .quantity-wrapper {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 /* ============================================================ */
@@ -1581,23 +1529,23 @@ main {
 /* ============================================================ */
 
 #cart-items-container-modal {
-    display: flex;
-    flex-direction: column;
-    /* <--- O SEGREDO: Isso força um item embaixo do outro */
-    gap: 1.5rem;
-    /* Espaço entre os itens */
-    width: 100%;
-    /* Garante que o container ocupe a largura do modal */
+  display: flex;
+  flex-direction: column;
+  /* <--- O SEGREDO: Isso força um item embaixo do outro */
+  gap: 1.5rem;
+  /* Espaço entre os itens */
+  width: 100%;
+  /* Garante que o container ocupe a largura do modal */
 }
 
 /* Aproveitando para garantir que o item ocupe a largura certa */
 .cart-item {
-    width: 100%;
-    background-color: #fff;
-    /* Fundo branco no card */
-    border-radius: 8px;
-    /* Cantos arredondados (opcional, pois vi que está bonito no print) */
-    /* ... os outros estilos que já criamos ... */
+  width: 100%;
+  background-color: #fff;
+  /* Fundo branco no card */
+  border-radius: 8px;
+  /* Cantos arredondados (opcional, pois vi que está bonito no print) */
+  /* ... os outros estilos que já criamos ... */
 }
 
 /* =============================================== */
@@ -1606,27 +1554,27 @@ main {
 
 /* 1. Torna a navbar fixa no topo da tela */
 .navbar {
-    position: fixed;
-    /* Fixa o elemento em relação à janela de visualização */
-    top: 0;
-    /* Alinha no topo */
-    left: 0;
-    /* Alinha na esquerda */
-    width: 100%;
-    /* Faz ocupar toda a largura */
-    z-index: 999;
-    /* Garante que ela fique na frente de outros conteúdos */
+  position: fixed;
+  /* Fixa o elemento em relação à janela de visualização */
+  top: 0;
+  /* Alinha no topo */
+  left: 0;
+  /* Alinha na esquerda */
+  width: 100%;
+  /* Faz ocupar toda a largura */
+  z-index: 999;
+  /* Garante que ela fique na frente de outros conteúdos */
 
-    /* Bônus: uma transição suave para futuras animações (ex: mudar de cor ao rolar) */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  /* Bônus: uma transição suave para futuras animações (ex: mudar de cor ao rolar) */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* 2. Adiciona um "espaçamento" no topo do conteúdo principal */
 /* Isso impede que o início da página fique escondido atrás da navbar fixa */
 main {
-    /* ALTURA APROXIMADA DA SUA NAVBAR. */
-    /* Você pode ajustar este valor (ex: 80px, 65px) para um encaixe perfeito. */
-    padding-top: 72px;
+  /* ALTURA APROXIMADA DA SUA NAVBAR. */
+  /* Você pode ajustar este valor (ex: 80px, 65px) para um encaixe perfeito. */
+  padding-top: 72px;
 }
 
 /* =============================================== */
@@ -1635,75 +1583,100 @@ main {
 
 /* Alinha todos os itens (busca, carrinho, usuário) no header */
 .nav-icons {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    /* Ajusta o espaçamento entre os ícones */
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  /* Ajusta o espaçamento entre os ícones */
 }
 
 /* Container que segura o input e o ícone da lupa */
 .search-container {
-    position: relative;
-    /* Cria o contexto para o posicionamento absoluto do input */
-    display: flex;
-    align-items: center;
+  position: relative;
+  /* Cria o contexto para o posicionamento absoluto do input */
+  display: flex;
+  align-items: center;
 }
 
 /* Ícone da lupa */
 #search-icon-btn {
-    text-decoration: none;
-    z-index: 2;
-    /* Garante que o ícone fique na frente do input */
+  text-decoration: none;
+  z-index: 2;
+  /* Garante que o ícone fique na frente do input */
 }
 
 #search-icon-btn:hover {
-    color: var(--primary-green);
+  color: var(--primary-green);
 }
 
 /* O campo de input da busca */
 .search-bar {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
 
-    /* Estado inicial (escondido) */
-    width: 0;
-    opacity: 0;
-    visibility: hidden;
-    /* Começa escondido */
+  /* Estado inicial (escondido) */
+  width: 0;
+  opacity: 0;
+  visibility: hidden;
 
-    /* Estilos visuais */
-    height: 38px;
-    padding: 0;
-    border: 1px solid transparent;
-    border-radius: 20px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.9rem;
-    outline: none;
+  /* Estilos visuais */
+  height: 38px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
-    /* A MÁGICA DA ANIMAÇÃO DE SAÍDA ESTÁ AQUI */
-    /* Quando a classe .active for removida, a visibilidade só mudará após 0.4s */
-    transition: width 0.4s ease-in-out,
-        opacity 0.4s ease-in-out,
-        padding 0.4s ease-in-out,
-        border-color 0.4s ease-in-out,
-        visibility 0s linear 0.4s;
-    /* Transição instantânea, mas com atraso */
+  transition: width 0.4s ease-in-out, opacity 0.4s ease-in-out,
+    padding 0.4s ease-in-out, border-color 0.4s ease-in-out,
+    background-color 0.4s ease-in-out, visibility 0s linear 0.4s;
 }
 
 /* Estado ativo (visível), ativado pelo JavaScript */
 .search-bar.active {
-    width: 220px;
-    padding: 0.5rem 45px 0.5rem 1rem;
-    border-color: #ccc;
-    opacity: 1;
-    visibility: visible;
-    /* Torna-se visível */
+  width: 220px;
+  padding: 0.5rem 45px 0.5rem 1rem;
+  border-color: rgba(204, 204, 204, 0.5);
+  opacity: 1;
+  visibility: visible;
+  background-color: rgba(255, 255, 255, 0.95);
+  transition-delay: 0s;
+}
 
-    /* AQUI GARANTIMOS QUE A ENTRADA SEJA IMEDIATA */
-    /* Removemos o atraso da visibilidade para a animação de entrada */
-    transition-delay: 0s;
+/* Transparent header search bar */
+.transparent-header .navbar .search-bar {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--white-color);
+}
+
+.transparent-header .navbar .search-bar.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: var(--white-color);
+}
+
+.transparent-header .navbar .search-bar::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.transparent-header .navbar.scrolled .search-bar {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--dark-text);
+}
+
+.transparent-header .navbar.scrolled .search-bar.active {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-color: rgba(204, 204, 204, 0.5);
+  color: var(--dark-text);
+}
+
+.transparent-header .navbar.scrolled .search-bar::placeholder {
+  color: #999;
 }
 
 /* =============================================== */
@@ -1712,55 +1685,55 @@ main {
 
 /* Default state for transparent header (at top of page) */
 .transparent-header .navbar {
-    background-color: transparent;
-    box-shadow: none;
+  background-color: transparent;
+  box-shadow: none;
 }
 
 /* Text and Icon colors for transparent state (assuming dark background) */
 .transparent-header .navbar .nav-links a,
 .transparent-header .navbar .nav-icons a,
 .transparent-header .navbar .nav-icons .cart-icon-link {
-    color: var(--white-color);
+  color: var(--white-color);
 }
 
 /* Logo handling: Invert colors to make it white (if it's a dark logo) */
 .transparent-header .navbar .logo img {
-    filter: brightness(0) invert(1);
-    transition: filter 0.3s ease;
+  filter: brightness(0) invert(1);
+  transition: filter 0.3s ease;
 }
 
 /* Scrolled state for transparent header */
 .transparent-header .navbar.scrolled {
-    background-color: var(--white-color);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: var(--white-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Restore text colors when scrolled */
 .transparent-header .navbar.scrolled .nav-links a,
 .transparent-header .navbar.scrolled .nav-icons a,
 .transparent-header .navbar.scrolled .nav-icons .cart-icon-link {
-    color: var(--dark-text);
+  color: var(--dark-text);
 }
 
 /* Restore logo color when scrolled */
 .transparent-header .navbar.scrolled .logo img {
-    filter: none;
+  filter: none;
 }
 
 /* Hover effects for transparent state */
 .transparent-header .navbar .nav-links a:hover,
 .transparent-header .navbar .nav-icons a:hover {
-    color: var(--primary-green);
+  color: var(--primary-green);
 }
 
 /* Remove padding-top from main on homepage so hero goes behind navbar */
 .transparent-header main {
-    padding-top: 0;
+  padding-top: 0;
 }
 
 /* Ensure the hero section starts at the very top */
 .transparent-header .hero {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 /* ======================================================= */
@@ -1772,7 +1745,7 @@ main {
   dentro do <span> seja sempre escuro.
 */
 .transparent-header .navbar .dropdown-github-style .dropdown-item span {
-    color: var(--dark-text);
+  color: var(--dark-text);
 }
 
 /*
@@ -1780,7 +1753,7 @@ main {
   impedindo que fiquem brancos ou herdem outra cor.
 */
 .transparent-header .navbar .dropdown-github-style .dropdown-item i {
-    color: var(--primary-green);
+  color: var(--primary-green);
 }
 
 /*
@@ -1788,7 +1761,7 @@ main {
   para o verde principal ao passar o mouse.
 */
 .transparent-header .navbar .dropdown-github-style .dropdown-item:hover span {
-    color: var(--primary-green);
+  color: var(--primary-green);
 }
 
 /*
@@ -1797,15 +1770,14 @@ main {
 */
 .transparent-header .navbar .dropdown-header p,
 .transparent-header .navbar .dropdown-header strong {
-    color: var(--dark-text);
-    opacity: 1;
-    /* Garante opacidade total */
+  color: var(--dark-text);
+  opacity: 1;
+  /* Garante opacidade total */
 }
-
 
 /* Classe 'active' que será adicionada/removida pelo JavaScript para mostrar o menu */
 .dropdown-menu.active {
-    display: block;
+  display: block;
 }
 
 /* ======================================================= */
@@ -1813,220 +1785,221 @@ main {
 /* ======================================================= */
 
 .user-menu-container {
-    position: relative;
-    /* Essencial para o dropdown se posicionar corretamente */
-    display: inline-block;
+  position: relative;
+  /* Essencial para o dropdown se posicionar corretamente */
+  display: inline-block;
 }
 
 /* Container principal do dropdown */
 .dropdown-menu.dropdown-github-style {
-    position: absolute;
-    right: 0;
-    top: 100%;
-    min-width: 240px;
-    background-color: var(--white-color);
-    border: 1px solid #e0e0e0;
-    border-radius: 6px;
-    padding: 0;
-    margin-top: 8px;
-    box-shadow: 0 8px 24px rgba(47, 79, 79, 0.15);
-    overflow: hidden;
-    /* Garante que os links respeitem o border-radius */
+  position: absolute;
+  right: 0;
+  top: 100%;
+  min-width: 240px;
+  background-color: var(--white-color);
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 0;
+  margin-top: 8px;
+  box-shadow: 0 8px 24px rgba(47, 79, 79, 0.15);
+  overflow: hidden;
+  /* Garante que os links respeitem o border-radius */
 
-    /* --- LÓGICA DA ANIMAÇÃO --- */
-    opacity: 0;
-    /* Começa invisível */
-    visibility: hidden;
-    /* Começa inacessível para cliques e leitores de tela */
-    transform: translateY(-10px);
-    /* Começa 10px para cima */
-    transition: opacity 0.2s ease-out, transform 0.2s ease-out, visibility 0s linear 0.2s;
-    /* A transição de visibility tem um atraso para que o elemento desapareça visualmente ANTES de se tornar 'hidden' */
+  /* --- LÓGICA DA ANIMAÇÃO --- */
+  opacity: 0;
+  /* Começa invisível */
+  visibility: hidden;
+  /* Começa inacessível para cliques e leitores de tela */
+  transform: translateY(-10px);
+  /* Começa 10px para cima */
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out,
+    visibility 0s linear 0.2s;
+  /* A transição de visibility tem um atraso para que o elemento desapareça visualmente ANTES de se tornar 'hidden' */
 }
 
 /* Estado ativo (quando o JS adiciona a classe .active) - ESTADO VISÍVEL */
 .dropdown-menu.dropdown-github-style.active {
-    opacity: 1;
-    /* Torna-se visível */
-    visibility: visible;
-    /* Torna-se acessível */
-    transform: translateY(0);
-    /* Desce para a posição final */
-    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
-    /* Transição suave para aparecer */
+  opacity: 1;
+  /* Torna-se visível */
+  visibility: visible;
+  /* Torna-se acessível */
+  transform: translateY(0);
+  /* Desce para a posição final */
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+  /* Transição suave para aparecer */
 }
 
 /* Cabeçalho com "Logado como..." */
 .dropdown-github-style .dropdown-header {
-    padding: 8px 16px;
-    font-size: 0.875rem;
-    border-bottom: 1px solid #e0e0e0;
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .dropdown-github-style .dropdown-header p {
-    margin: 0;
-    color: var(--dark-text);
-    opacity: 0.8;
-    /* Um pouco mais suave para o texto secundário */
+  margin: 0;
+  color: var(--dark-text);
+  opacity: 0.8;
+  /* Um pouco mais suave para o texto secundário */
 }
 
 .dropdown-github-style .dropdown-header strong {
-    color: var(--dark-text);
+  color: var(--dark-text);
 }
 
 /* Linha divisória */
 .dropdown-github-style .dropdown-divider {
-    margin: 0;
-    height: 1px;
-    background-color: #e0e0e0;
-    border: 0;
+  margin: 0;
+  height: 1px;
+  background-color: #e0e0e0;
+  border: 0;
 }
 
 /* Itens do menu (links) */
 .dropdown-github-style .dropdown-item {
-    display: flex;
-    align-items: center;
-    padding: 10px 16px;
-    color: var(--dark-text);
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  color: var(--dark-text);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
 }
 
 /* Ícones dentro dos itens */
 .dropdown-github-style .dropdown-item i {
-    width: 24px;
-    margin-right: 12px;
-    /* Usamos a cor primária para os ícones, dando um toque da marca */
-    color: var(--primary-green);
-    text-align: center;
-    font-size: 1rem;
-    transition: color 0.15s ease-in-out;
+  width: 24px;
+  margin-right: 12px;
+  /* Usamos a cor primária para os ícones, dando um toque da marca */
+  color: var(--primary-green);
+  text-align: center;
+  font-size: 1rem;
+  transition: color 0.15s ease-in-out;
 }
 
 /* Efeito hover nos links */
 .dropdown-github-style .dropdown-item:hover {
-    /* Usamos o fundo geral do site para o hover, criando um efeito sutil */
-    background-color: var(--background-color);
-    color: var(--primary-green);
+  /* Usamos o fundo geral do site para o hover, criando um efeito sutil */
+  background-color: var(--background-color);
+  color: var(--primary-green);
 }
 
 .dropdown-github-style .dropdown-item:hover i {
-    color: var(--primary-green);
+  color: var(--primary-green);
 }
 
 /* =============================================== */
 /* === ESTILOS PARA ALERTAS E MENSAGENS === */
 /* =============================================== */
 .alert {
-    padding: 1rem 1.5rem;
-    margin-bottom: 1.5rem;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .alert-success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
 }
 
 .alert-error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
 }
 
 .alert::before {
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-    font-size: 1.2rem;
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 1.2rem;
 }
 
 .alert-success::before {
-    content: '\f058';
-    /* ícone de check circle */
+  content: "\f058";
+  /* ícone de check circle */
 }
 
 .alert-error::before {
-    content: '\f06a';
-    /* ícone de exclamation circle */
+  content: "\f06a";
+  /* ícone de exclamation circle */
 }
 
 /* =============================================== */
 /* === ESTILOS PARA SEÇÕES DO PERFIL === */
 /* =============================================== */
 .profile-section {
-    background: var(--white-color);
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    margin-bottom: 2rem;
+  background: var(--white-color);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
 }
 
 .profile-section h2 {
-    color: var(--dark-text);
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  color: var(--dark-text);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .profile-section h2 i {
-    color: var(--primary-green);
+  color: var(--primary-green);
 }
 
 .profile-form {
-    max-width: 500px;
+  max-width: 500px;
 }
 
 .profile-form .input-group {
-    margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .profile-form .btn {
-    width: 100%;
-    margin-top: 1rem;
+  width: 100%;
+  margin-top: 1rem;
 }
 
 /* =============================================== */
 /* === ESTILOS PARA MENSAGEM SEM PRODUTOS === */
 /* =============================================== */
 .no-products {
-    text-align: center;
-    padding: 3rem;
-    font-size: 1.2rem;
-    color: #666;
-    grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: #666;
+  grid-column: 1 / -1;
 }
 
 /* =============================================== */
 /* === ESTILOS PARA INFO DE ESTOQUE === */
 /* =============================================== */
 .stock-info {
-    margin-top: 0.5rem;
-    font-size: 0.9rem;
-    color: #666;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
 }
 
 /* =============================================== */
 /* === ESTILOS PARA FILTROS DE RADIO === */
 /* =============================================== */
 .filter-list input[type=\"radio\"] {
-    margin-right: 0.5rem;
-    accent-color: var(--primary-green);
-    cursor: pointer;
+  margin-right: 0.5rem;
+  accent-color: var(--primary-green);
+  cursor: pointer;
 }
 
 .filter-list label {
-    cursor: pointer;
-    transition: color 0.2s;
+  cursor: pointer;
+  transition: color 0.2s;
 }
 
 .filter-list label:hover {
-    color: var(--primary-green);
+  color: var(--primary-green);
 }

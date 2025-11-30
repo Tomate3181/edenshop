@@ -49,6 +49,7 @@
     ?>
     <title><?= $nome ?> - Edenshop</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="products-enhancements.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -88,10 +89,11 @@
 
           <div class="quantity-selector">
             <label for="quantity">Quantidade:</label>
-            <div class="quantity-wrapper">
-              <button id="decreaseQuantity">-</button>
-              <input type="number" id="quantity" value="1" min="1" max="<?= $produto['quantidade_estoque'] ?>" />
-              <button id="increaseQuantity">+</button>
+            <div class="quantity-wrapper-styled">
+              <button type="button" class="quantity-btn" id="decreaseQuantity" aria-label="Decrease quantity">-</button>
+              <span class="quantity-display" id="quantityDisplay">1</span>
+              <input type="hidden" id="quantity" value="1" min="1" max="<?= $produto['quantidade_estoque'] ?>" />
+              <button type="button" class="quantity-btn" id="increaseQuantity" aria-label="Increase quantity">+</button>
             </div>
             <p class="stock-info">Estoque: <?= $produto['quantidade_estoque'] ?> unidades</p>
           </div>
@@ -153,66 +155,55 @@
       <section class="related-products">
         <h2 class="section-title">Você também pode gostar</h2>
         <div class="products-grid">
-          <!-- Produto Relacionado 1 -->
+          <?php
+          // Incluir script de produtos relacionados
+          require_once 'php/get_related_products.php';
+          
+          // Buscar produtos relacionados (máximo 3)
+          $produtos_relacionados = getRelatedProducts($produto_id, $produto['id_categoria'], 3);
+          
+          // Verificar se há produtos relacionados
+          if (!empty($produtos_relacionados)) {
+              foreach ($produtos_relacionados as $produto_rel) {
+                  // Formatar o preço
+                  $preco_rel_formatado = number_format($produto_rel['preco'], 2, ',', '.');
+                  
+                  // Escapar dados para segurança
+                  $id_rel = htmlspecialchars($produto_rel['id_planta']);
+                  $nome_rel = htmlspecialchars($produto_rel['nome_planta']);
+                  $imagem_rel = htmlspecialchars($produto_rel['imagem_url']);
+                  $preco_rel = htmlspecialchars($preco_rel_formatado);
+                  $categoria_rel = htmlspecialchars($produto_rel['nome_categoria'] ?? '');
+                  
+                  // Renderizar card do produto relacionado
+                  echo <<<HTML
           <div
             class="product-card"
-            data-id="p5"
-            data-name="Ficus Lyrata"
-            data-price="129.90"
-            data-image="https://cdn.store-assets.com/s/214074/i/88112830.jpeg"
-            data-category="externa"
-            data-care=""
+            data-id="p{$id_rel}"
+            data-name="{$nome_rel}"
+            data-price="{$produto_rel['preco']}"
+            data-image="{$imagem_rel}"
+            data-category="{$categoria_rel}"
           >
-            <a href="product-detail.html" class="product-link">
+            <a href="product-detail.php?id={$id_rel}" class="product-link">
               <img
-                src="https://cdn.store-assets.com/s/214074/i/88112830.jpeg"
-                alt="Planta Ficus Lyrata"
+                src="{$imagem_rel}"
+                alt="{$nome_rel}"
+                onerror="this.src='https://via.placeholder.com/300x300?text=Sem+Imagem'"
               />
-              <h3>Ficus Lyrata</h3>
-              <p class="price">R$ 129,90</p>
+              <div class="product-card-content">
+                <h3>{$nome_rel}</h3>
+                <p class="price">R$ {$preco_rel}</p>
+              </div>
             </a>
             <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
           </div>
-          <!-- Produto Relacionado 2 -->
-          <div
-            class="product-card"
-            data-id="p3"
-            data-name="Espada de São Jorge"
-            data-price="59.90"
-            data-image="https://cdn.awsli.com.br/600x700/1520/1520689/produto/247127180/espada-de-sao-jorge-mini3-b1rfi2xmr4.jpeg"
-            data-category="interna"
-            data-care="facil"
-          >
-            <a href="product-detail.html" class="product-link">
-              <img
-                src="https://cdn.awsli.com.br/600x700/1520/1520689/produto/247127180/espada-de-sao-jorge-mini3-b1rfi2xmr4.jpeg"
-                alt="Planta Espada de São Jorge"
-              />
-              <h3>Espada de São Jorge</h3>
-              <p class="price">R$ 59,90</p>
-            </a>
-            <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
-          </div>
-          <!-- Produto Relacionado 3 -->
-          <div
-            class="product-card"
-            data-id="p4"
-            data-name="Zamioculca"
-            data-price="69.90"
-            data-image="https://upload.wikimedia.org/wikipedia/commons/d/d6/Zamioculcas.jpg"
-            data-category="interna suculenta"
-            data-care="facil"
-          >
-            <a href="product-detail.html" class="product-link">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Zamioculcas.jpg"
-                alt="Planta Zamioculca"
-              />
-              <h3>Zamioculca</h3>
-              <p class="price">R$ 69,90</p>
-            </a>
-            <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
-          </div>
+HTML;
+              }
+          } else {
+              echo '<p class="no-products">Nenhum produto relacionado encontrado.</p>';
+          }
+          ?>
         </div>
       </section>
     </main>
@@ -411,8 +402,8 @@
     </footer>
 
     <script src="script.js"></script>
-
     <script src="navbar.js"></script>
     <script src="search.js"></script>
+    <script src="product-quantity.js"></script>
   </body>
 </html>

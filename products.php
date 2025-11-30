@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nossos Produtos - Edenshop</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="products-enhancements.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -27,6 +28,12 @@
 
     <main class="container page-padding">
       <h1 class="page-title">Nossas Plantas</h1>
+      
+      <!-- Toggle button for filters -->
+      <button class="filter-toggle-btn" id="filterToggleBtn" aria-label="Toggle filters">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      
       <div class="shop-layout">
         <!-- Barra Lateral de Filtros -->
         <aside class="filters-sidebar">
@@ -115,7 +122,7 @@ HTML;
     </main>
           <!-- Produto 1 -->
           <!-- Produto 1 -->
-          <div
+          <!-- <div
             class="product-card"
             data-id="p1"
             data-name="Jiboia (Epipremnum aureum)"
@@ -137,7 +144,7 @@ HTML;
             <button class="btn add-to-cart-btn">Adicionar ao Carrinho</button>
         </section>
       </div>
-    </main>
+    </main> -->
 
     <!-- =============================================== -->
     <!-- ============ INÍCIO DO MODAL DE CARRINHO ============ -->
@@ -335,5 +342,6 @@ HTML;
     <script src="script.js"></script>
     <script src="navbar.js"></script>
     <script src="search.js"></script>
+    <script src="products-toggle.js"></script>
   </body>
 </html>
