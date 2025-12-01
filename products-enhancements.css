@@ -8,10 +8,34 @@
   gap: 2rem;
   position: relative;
 }
+/* =============================================== */
+/* === ESTILOS ADICIONAIS PARA PRODUCTS.PHP === */
+/* =============================================== */
+
+/* Shop layout and product link */
+.shop-layout {
+  display: flex;
+  gap: 2rem;
+  position: relative;
+}
 
 .product-link {
   text-decoration: none;
   color: inherit;
+}
+
+/* Page title with animation */
+.page-title {
+  text-align: center;
+  font-size: 2.8rem;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  color: var(--dark-text);
+  transition: margin-left 0.3s ease;
+}
+
+.page-title.sidebar-active {
+  margin-left: 140px;
 }
 
 /* Fixed sidebar with toggle */
@@ -38,6 +62,17 @@
   margin-bottom: 2rem;
   border-bottom: 2px solid var(--light-green);
   padding-bottom: 0.5rem;
+}
+
+/* Remove list decoration from filters */
+.filter-list {
+  list-style: none !important;
+  padding-left: 0 !important;
+}
+
+.filter-list li {
+  list-style: none !important;
+  margin-bottom: 0.8rem;
 }
 
 /* Toggle button for filters */
@@ -74,14 +109,52 @@
   transform: rotate(180deg);
 }
 
-/* Products grid with responsive columns */
+.filter-group {
+  margin-bottom: 2rem;
+}
+
+.filter-group h4 {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.filter-list label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.filter-list label:hover {
+  color: var(--primary-green);
+}
+
+.filter-list input[type="checkbox"],
+.filter-list input[type="radio"] {
+  margin-right: 0.5rem;
+  accent-color: var(--primary-green);
+  cursor: pointer;
+}
+
+.price-slider {
+  width: 100%;
+  cursor: pointer;
+  accent-color: var(--primary-green);
+}
+
+#priceValue {
+  font-weight: 700;
+  color: var(--primary-green);
+}
+
+/* Products grid - ALWAYS 4 columns */
 .products-grid-full {
   flex-grow: 1;
   margin-left: 300px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
-  transition: margin-left 0.3s ease, grid-template-columns 0.3s ease;
+  transition: margin-left 0.3s ease;
 }
 
 .products-grid-full.sidebar-hidden {
@@ -95,9 +168,37 @@
   min-height: 450px;
 }
 
+/* Center add-to-cart button in cards */
+.product-card .add-to-cart-btn {
+  display: block;
+  width: calc(100% - 3rem);
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
 /* =============================================== */
 /* === ESTILOS PARA PRODUCT-DETAIL.PHP === */
 /* =============================================== */
+
+/* Fix product detail layout */
+.product-detail-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+.product-image-gallery {
+  width: 100%;
+}
+
+.product-image-gallery .main-image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
 
 /* Styled quantity buttons without input field */
 .quantity-wrapper-styled {
@@ -160,4 +261,31 @@ body:not(.transparent-header) main {
 
 .container.page-padding {
   padding-top: 6rem;
+}
+
+/* =============================================== */
+/* === NAVBAR TRANSPARENCY FIXES === */
+/* =============================================== */
+
+/* Navbar fully transparent at top */
+.transparent-header .navbar {
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+/* Navbar with blur when scrolled */
+.transparent-header .navbar.scrolled {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Regular navbar (non-transparent pages) with blur */
+body:not(.transparent-header) .navbar {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
 }

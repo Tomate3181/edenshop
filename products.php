@@ -6,6 +6,7 @@
     <title>Nossos Produtos - Edenshop</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="products-enhancements.css" />
+    <link rel="stylesheet" href="critical-fixes.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"

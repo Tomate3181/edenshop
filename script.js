@@ -100,33 +100,33 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===================================================================
     // --- 3. LÓGICA DOS FILTROS (products.html) ---
     // ===================================================================
-    const filtersSidebar = document.querySelector('.filters-sidebar');
-    if (filtersSidebar) {
-        const priceRange = document.getElementById('priceRange');
-        const priceValue = document.getElementById('priceValue');
-        const applyFiltersBtn = document.getElementById('applyFilters');
-        const productCards = document.querySelectorAll('.products-grid-full .product-card');
+    // const filtersSidebar = document.querySelector('.filters-sidebar');
+    // if (filtersSidebar) {
+    //     const priceRange = document.getElementById('priceRange');
+    //     const priceValue = document.getElementById('priceValue');
+    //     const applyFiltersBtn = document.getElementById('applyFilters');
+    //     const productCards = document.querySelectorAll('.products-grid-full .product-card');
 
-        priceRange.addEventListener('input', () => {
-            priceValue.textContent = `R$ ${priceRange.value}`;
-        });
+    //     priceRange.addEventListener('input', () => {
+    //         priceValue.textContent = `R$ ${priceRange.value}`;
+    //     });
 
-        const filterProducts = () => {
-            const maxPrice = parseFloat(priceRange.value);
-            const selectedCategories = [...document.querySelectorAll('input[name="category"]:checked')].map(cb => cb.value);
-            const selectedCares = [...document.querySelectorAll('input[name="care"]:checked')].map(cb => cb.value);
+    //     const filterProducts = () => {
+    //         const maxPrice = parseFloat(priceRange.value);
+    //         const selectedCategories = [...document.querySelectorAll('input[name="category"]:checked')].map(cb => cb.value);
+    //         const selectedCares = [...document.querySelectorAll('input[name="care"]:checked')].map(cb => cb.value);
 
-            productCards.forEach(card => {
-                const priceMatch = parseFloat(card.dataset.price) <= maxPrice;
-                const categoryMatch = selectedCategories.length === 0 || selectedCategories.some(cat => card.dataset.category.includes(cat));
-                const careMatch = selectedCares.length === 0 || selectedCares.some(care => card.dataset.care.includes(care));
+    //         productCards.forEach(card => {
+    //             const priceMatch = parseFloat(card.dataset.price) <= maxPrice;
+    //             const categoryMatch = selectedCategories.length === 0 || selectedCategories.some(cat => card.dataset.category.includes(cat));
+    //             const careMatch = selectedCares.length === 0 || selectedCares.some(care => card.dataset.care.includes(care));
 
-                card.style.display = (priceMatch && categoryMatch && careMatch) ? 'block' : 'none';
-            });
-        };
+    //             card.style.display = (priceMatch && categoryMatch && careMatch) ? 'block' : 'none';
+    //         });
+    //     };
 
-        applyFiltersBtn.addEventListener('click', filterProducts);
-    }
+    //     applyFiltersBtn.addEventListener('click', filterProducts);
+    // }
 
 
     // ===================================================================
