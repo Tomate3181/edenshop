@@ -274,12 +274,6 @@
                 }
             });
         });
-
-        // Adicionar dados do carrinho ao formulário antes de enviar
-        document.getElementById('checkout-form').addEventListener('submit', function (e) {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            document.getElementById('cartData').value = JSON.stringify(cart);
-        });
     </script>
 </body>
 

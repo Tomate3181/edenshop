@@ -1,9 +1,9 @@
 // checkout.js
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // Funções auxiliares para pegar o carrinho do localStorage
     const getCart = () => JSON.parse(localStorage.getItem('edenshopCart')) || [];
-    
+
     const formatCurrency = (value) => `R$ ${value.toFixed(2).replace('.', ',')}`;
 
     // Função para carregar itens na página de checkout
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cart.forEach(item => {
             const itemElement = document.createElement('div');
             itemElement.classList.add('checkout-item');
-            
+
             itemElement.innerHTML = `
                 <img src="${item.image}" alt="${item.name}" class="checkout-item-image">
                 <div class="checkout-item-info">
@@ -48,11 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const confirmedOrder = JSON.parse(sessionStorage.getItem('confirmedOrder'));
         const itemsContainer = document.getElementById('confirmation-items');
         const totalElement = document.getElementById('confirmation-total');
-        
+
         if (!confirmedOrder) {
             // Se não houver pedido confirmado, talvez o usuário tenha atualizado a página.
             // Opcional: redirecionar para a home ou mostrar uma mensagem.
-             if(itemsContainer) itemsContainer.innerHTML = '<p>Não há detalhes do pedido para exibir.</p>';
+            if (itemsContainer) itemsContainer.innerHTML = '<p>Não há detalhes do pedido para exibir.</p>';
             return;
         }
 
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         totalElement.textContent = formatCurrency(subtotal);
-        
+
         // Limpa o pedido da sessão para que não seja exibido novamente se a página for recarregada
         sessionStorage.removeItem('confirmedOrder');
         // Limpa o carrinho real
@@ -87,23 +87,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-
     // Lógica para o formulário de checkout
     const checkoutForm = document.getElementById('checkout-form');
     if (checkoutForm) {
         checkoutForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Impede o envio real do formulário
-            
             const cart = getCart();
-            if (cart.length > 0) {
-                // Guarda o pedido confirmado no sessionStorage para a próxima página
-                sessionStorage.setItem('confirmedOrder', JSON.stringify(cart));
-                
-                // Redireciona para a página de confirmação
-                window.location.href = 'order-confirmation.php';
-            } else {
-                Swal.fire({icon: 'warning', title: 'Carrinho Vazio', text: 'Seu carrinho está vazio!', confirmButtonColor: '#6b8e23'});
+
+            if (cart.length === 0) {
+                e.preventDefault(); // Impede envio se carrinho vazio
+                Swal.fire({ icon: 'warning', title: 'Carrinho Vazio', text: 'Seu carrinho está vazio!', confirmButtonColor: '#6b8e23' });
+                return;
             }
+
+            // 1. Preenche o campo hidden para o PHP processar
+            const cartDataInput = document.getElementById('cartData');
+            if (cartDataInput) {
+                cartDataInput.value = JSON.stringify(cart);
+            }
+
+            // 2. Guarda o pedido no sessionStorage APENAS para exibição na página de confirmação (frontend)
+            sessionStorage.setItem('confirmedOrder', JSON.stringify(cart));
+
+            // 3. NÃO chamamos e.preventDefault() nem window.location.href aqui.
+            // Deixamos o formulário ser enviado via POST para php/process_checkout.php
         });
     }
 
@@ -111,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('checkout-items-container')) {
         loadCheckoutPage();
     }
-    
+
     if (document.getElementById('confirmation-items')) {
         loadConfirmationPage();
     }
