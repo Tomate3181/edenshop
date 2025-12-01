@@ -1,0 +1,116 @@
+/* =============================================== */
+/* === SEARCH BAR DROPDOWN STYLES === */
+/* =============================================== */
+
+.search-suggestions {
+  position: absolute;
+  top: calc(100% + 5px);
+  right: 0;
+  width: 350px;
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+
+.search-suggestions.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.search-suggestion-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid #f0f0f0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.search-suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.search-suggestion-item:hover {
+  background-color: #f8f9fa;
+}
+
+.search-suggestion-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.search-suggestion-info {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.search-suggestion-name {
+  font-weight: 600;
+  color: var(--dark-text);
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search-suggestion-price {
+  font-size: 0.9rem;
+  color: var(--primary-green);
+  font-weight: 700;
+}
+
+.search-suggestion-arrow {
+  color: var(--primary-green);
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.search-suggestion-item:hover .search-suggestion-arrow {
+  transform: translateX(5px);
+}
+
+.search-no-results {
+  padding: 2rem;
+  text-align: center;
+  color: #999;
+}
+
+.search-loading {
+  padding: 2rem;
+  text-align: center;
+  color: var(--primary-green);
+}
+
+/* Scrollbar styling for suggestions */
+.search-suggestions::-webkit-scrollbar {
+  width: 6px;
+}
+
+.search-suggestions::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.search-suggestions::-webkit-scrollbar-thumb {
+  background: var(--primary-green);
+  border-radius: 10px;
+}
+
+.search-suggestions::-webkit-scrollbar-thumb:hover {
+  background: #55711c;
+}

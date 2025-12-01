@@ -86,42 +86,6 @@
 
 .nav-icons a:hover i {
   transform: scale(1.2) !important;
-}
-
-/* =============================================== */
-/* === NAVBAR TRANSPARENCY - CORRECT BEHAVIOR === */
-/* =============================================== */
-
-/* Navbar FULLY transparent at top (no blur, no background) */
-.transparent-header .navbar {
-  background-color: transparent !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  box-shadow: none !important;
-}
-
-/* Navbar with blur ONLY when scrolled */
-.transparent-header .navbar.scrolled {
-  background-color: rgba(255, 255, 255, 0.95) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
-}
-
-/* Regular pages (non-transparent) always have blur */
-body:not(.transparent-header) .navbar {
-  background-color: rgba(255, 255, 255, 0.95) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-}
-
-/* Force transparent navbar search bar styles */
-.transparent-header .navbar .search-bar {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-  color: var(--white-color) !important;
-}
-
-.transparent-header .navbar .search-bar.active {
   background-color: rgba(255, 255, 255, 0.2) !important;
   border-color: rgba(255, 255, 255, 0.3) !important;
   color: var(--white-color) !important;
