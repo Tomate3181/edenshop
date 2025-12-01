@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,15 +17,15 @@
             gap: 1rem;
             margin-bottom: 2rem;
         }
-        
+
         .payment-option {
             cursor: pointer;
         }
-        
+
         .payment-option input[type="radio"] {
             display: none;
         }
-        
+
         .payment-card {
             border: 2px solid #e0e0e0;
             border-radius: 8px;
@@ -34,33 +35,34 @@
             gap: 1rem;
             transition: all 0.3s;
         }
-        
-        .payment-option input[type="radio"]:checked + .payment-card {
+
+        .payment-option input[type="radio"]:checked+.payment-card {
             border-color: #6b8e23;
             background-color: rgba(107, 142, 35, 0.05);
         }
-        
+
         .payment-card:hover {
             border-color: #6b8e23;
         }
-        
+
         .payment-card i {
             font-size: 1.5rem;
             color: #6b8e23;
         }
-        
+
         .payment-card span {
             font-weight: 600;
         }
     </style>
 </head>
+
 <body>
     <?php include 'php/header.php'; ?>
 
     <main class="page-padding">
         <div class="container">
             <h1 class="page-title" style="padding-top: 3rem; padding-bottom: 2rem;">Finalizar Compra</h1>
-            
+
             <div class="checkout-layout">
                 <!-- Seção de Detalhes do Cliente -->
                 <div class="customer-details">
@@ -104,7 +106,7 @@
                                     <span>Cartão de Crédito</span>
                                 </div>
                             </label>
-                            
+
                             <label class="payment-option">
                                 <input type="radio" name="paymentMethod" value="debit">
                                 <div class="payment-card">
@@ -112,7 +114,7 @@
                                     <span>Cartão de Débito</span>
                                 </div>
                             </label>
-                            
+
                             <label class="payment-option">
                                 <input type="radio" name="paymentMethod" value="pix">
                                 <div class="payment-card">
@@ -120,7 +122,7 @@
                                     <span>PIX</span>
                                 </div>
                             </label>
-                            
+
                             <label class="payment-option">
                                 <input type="radio" name="paymentMethod" value="boleto">
                                 <div class="payment-card">
@@ -134,12 +136,14 @@
                         <div id="card-fields" style="display: none;">
                             <div class="form-group">
                                 <label for="cardNumber">Número do Cartão</label>
-                                <input type="text" id="cardNumber" name="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19">
+                                <input type="text" id="cardNumber" name="cardNumber" placeholder="0000 0000 0000 0000"
+                                    maxlength="19">
                             </div>
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="cardExpiry">Validade</label>
-                                    <input type="text" id="cardExpiry" name="cardExpiry" placeholder="MM/AA" maxlength="5">
+                                    <input type="text" id="cardExpiry" name="cardExpiry" placeholder="MM/AA"
+                                        maxlength="5">
                                 </div>
                                 <div class="form-group">
                                     <label for="cardCVV">CVV</label>
@@ -171,96 +175,97 @@
 
     <!-- Modal de Carrinho -->
     <div id="cartModal" class="cart-modal">
-      <div class="cart-modal-overlay"></div>
-      <div class="cart-modal-content">
-        <div class="cart-modal-header">
-          <h3>Meu Carrinho</h3>
-          <button class="close-cart-btn">&times;</button>
-        </div>
-        <div class="cart-modal-body">
-          <div id="cart-items-container-modal"></div>
-          <div id="cart-empty-message-modal" class="cart-empty" style="display: none">
-            <h2>Seu carrinho está vazio.</h2>
-            <p>Adicione algumas plantas para vê-las aqui!</p>
-            <a href="products.php" class="btn">Ver Produtos</a>
-          </div>
-        </div>
-        <div id="cart-modal-footer" class="cart-modal-footer">
-          <div class="order-summary-modal">
-            <div class="summary-row total-row">
-              <span>Subtotal</span>
-              <span id="cart-total-modal">R$ 0,00</span>
+        <div class="cart-modal-overlay"></div>
+        <div class="cart-modal-content">
+            <div class="cart-modal-header">
+                <h3>Meu Carrinho</h3>
+                <button class="close-cart-btn">&times;</button>
             </div>
-            <button id="checkout-btn-modal" class="btn large-btn">Finalizar Compra</button>
-          </div>
+            <div class="cart-modal-body">
+                <div id="cart-items-container-modal"></div>
+                <div id="cart-empty-message-modal" class="cart-empty" style="display: none">
+                    <h2>Seu carrinho está vazio.</h2>
+                    <p>Adicione algumas plantas para vê-las aqui!</p>
+                    <a href="products.php" class="btn">Ver Produtos</a>
+                </div>
+            </div>
+            <div id="cart-modal-footer" class="cart-modal-footer">
+                <div class="order-summary-modal">
+                    <div class="summary-row total-row">
+                        <span>Subtotal</span>
+                        <span id="cart-total-modal">R$ 0,00</span>
+                    </div>
+                    <button id="checkout-btn-modal" class="btn large-btn">Finalizar Compra</button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 
     <!-- Modal de Login -->
     <div id="loginModal" class="modal">
-      <div class="modal-content">
-        <span class="close-btn">&times;</span>
-        <div class="login-box-modal">
-          <div class="login-header-text">
-            <h2>Bem-vindo de volta!</h2>
-            <p>Faça login para continuar</p>
-          </div>
-          <form id="loginForm" method="POST" action="php/login.php">
-            <div class="input-group">
-              <label for="modal-email">Email</label>
-              <input type="email" id="modal-email" name="email" placeholder="seuemail@exemplo.com" required />
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="login-box-modal">
+                <div class="login-header-text">
+                    <h2>Bem-vindo de volta!</h2>
+                    <p>Faça login para continuar</p>
+                </div>
+                <form id="loginForm" method="POST" action="php/login.php">
+                    <div class="input-group">
+                        <label for="modal-email">Email</label>
+                        <input type="email" id="modal-email" name="email" placeholder="seuemail@exemplo.com" required />
+                    </div>
+                    <div class="input-group">
+                        <label for="modal-password">Senha</label>
+                        <input type="password" id="modal-password" name="password" placeholder="Sua senha" required />
+                    </div>
+                    <button type="submit" class="btn">Entrar</button>
+                    <div class="login-footer">
+                        <p>Não tem uma conta? <a href="#" id="switchToRegister">Cadastre-se</a></p>
+                        <a href="#">Esqueceu sua senha?</a>
+                    </div>
+                </form>
             </div>
-            <div class="input-group">
-              <label for="modal-password">Senha</label>
-              <input type="password" id="modal-password" name="password" placeholder="Sua senha" required />
-            </div>
-            <button type="submit" class="btn">Entrar</button>
-            <div class="login-footer">
-              <p>Não tem uma conta? <a href="#" id="switchToRegister">Cadastre-se</a></p>
-              <a href="#">Esqueceu sua senha?</a>
-            </div>
-          </form>
         </div>
-      </div>
     </div>
 
     <footer class="footer">
         <div class="footer-content">
-        <div class="footer-section">
-          <h3>Edenshop</h3>
-          <p>Conectando pessoas e o verde no dia a dia.</p>
+            <div class="footer-section">
+                <h3>Edenshop</h3>
+                <p>Conectando pessoas e o verde no dia a dia.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Links Úteis</h3>
+                <ul>
+                    <li><a href="#">Política de Privacidade</a></li>
+                    <li><a href="#">Termos de Serviço</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Siga-nos</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
         </div>
-        <div class="footer-section">
-          <h3>Links Úteis</h3>
-          <ul>
-            <li><a href="#">Política de Privacidade</a></li>
-            <li><a href="#">Termos de Serviço</a></li>
-            <li><a href="#">FAQ</a></li>
-          </ul>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Edenshop. Todos os direitos reservados.</p>
         </div>
-        <div class="footer-section">
-          <h3>Siga-nos</h3>
-          <div class="social-icons">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 Edenshop. Todos os direitos reservados.</p>
-      </div>
     </footer>
 
     <script src="checkout.js"></script>
     <script src="script.js"></script>
     <script src="navbar.js"></script>
     <script src="search.js"></script>
+    <script src="checkout-auth.js"></script>
     <script>
         // Mostrar campos de cartão quando cartão for selecionado
         document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
-            radio.addEventListener('change', function() {
+            radio.addEventListener('change', function () {
                 const cardFields = document.getElementById('card-fields');
                 if (this.value === 'credit' || this.value === 'debit') {
                     cardFields.style.display = 'block';
@@ -271,10 +276,11 @@
         });
 
         // Adicionar dados do carrinho ao formulário antes de enviar
-        document.getElementById('checkout-form').addEventListener('submit', function(e) {
+        document.getElementById('checkout-form').addEventListener('submit', function (e) {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             document.getElementById('cartData').value = JSON.stringify(cart);
         });
     </script>
 </body>
+
 </html>

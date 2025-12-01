@@ -232,15 +232,15 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    alert('Usuário criado com sucesso!');
+                    Swal.fire({icon: 'success', title: 'Sucesso!', text: 'Usuário criado com sucesso!', confirmButtonColor: '#6b8e23'});
                     loadUsers();
                 } else {
-                    alert('Erro: ' + data.error);
+                    Swal.fire({icon: 'error', title: 'Erro', text: 'Erro: ' + data.error, confirmButtonColor: '#6b8e23'});
                 }
             })
             .catch(error => {
                 console.error('Erro:', error);
-                alert('Erro ao criar usuário');
+                Swal.fire({icon: 'error', title: 'Erro', text: 'Erro ao criar usuário', confirmButtonColor: '#6b8e23'});
             });
         });
     }
@@ -262,11 +262,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Funções globais para editar e deletar usuários
 function editUser(id) {
-    alert('Funcionalidade de edição em desenvolvimento. ID: ' + id);
+    Swal.fire({icon: 'info', title: 'Em Desenvolvimento', text: 'Funcionalidade de edição em desenvolvimento. ID: ' + id, confirmButtonColor: '#6b8e23'});
 }
 
 function deleteUser(id) {
     if (confirm('Tem certeza que deseja excluir este usuário?')) {
-        alert('Funcionalidade de exclusão em desenvolvimento. ID: ' + id);
+        Swal.fire({icon: 'info', title: 'Em Desenvolvimento', text: 'Funcionalidade de exclusão em desenvolvimento. ID: ' + id, confirmButtonColor: '#6b8e23'});
     }
 }
+

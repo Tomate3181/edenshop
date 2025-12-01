@@ -426,7 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Validação crucial: verificar se as senhas coincidem
                 if (password !== confirmPassword) {
                     // Se as senhas não baterem, A GENTE IMPEDE O ENVIO.
-                    e.preventDefault(); 
+                    e.preventDefault();
                     alert('As senhas não coincidem. Por favor, tente novamente.');
                     return; // Para a execução da função aqui
                 }
@@ -442,12 +442,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===================================================================
     // --- DIRECIONAMENTO PARA PÁGINA DE CHECKOUT ---
     // ===================================================================
-    const checkoutBtn = document.getElementById('checkout-btn-modal');
-    if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', () => {
-            window.location.href = 'checkout.html';
-        });
-    }
+    // const checkoutBtn = document.getElementById('checkout-btn-modal');
+    // if (checkoutBtn) {
+    //     checkoutBtn.addEventListener('click', () => {
+    //         window.location.href = 'checkout.php';
+    //     });
+    // }
 
     const urlParams = new URLSearchParams(window.location.search);
     const error = urlParams.get('error');
@@ -459,12 +459,12 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (error === 'emptyfields') {
             errorMessage = 'Por favor, preencha todos os campos.';
         }
-        
+
         if (errorMessage) {
             // Abre o modal de login para o usuário ver o erro e tentar de novo.
-            openLoginModal(); 
+            openLoginModal();
             // Exibe a mensagem. Você pode criar um elemento HTML específico para isso se quiser.
-            setTimeout(() => alert(errorMessage), 100); 
+            setTimeout(() => alert(errorMessage), 100);
         }
     }
 

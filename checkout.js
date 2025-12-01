@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Redireciona para a página de confirmação
                 window.location.href = 'order-confirmation.php';
             } else {
-                alert('Seu carrinho está vazio!');
+                Swal.fire({icon: 'warning', title: 'Carrinho Vazio', text: 'Seu carrinho está vazio!', confirmButtonColor: '#6b8e23'});
             }
         });
     }

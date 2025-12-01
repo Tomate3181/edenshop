@@ -35,11 +35,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $sql = "INSERT INTO usuarios (nome, email, senha_hash, tipo, data_cadastro) VALUES (:nome, :email, :senha_hash, 'cliente', NOW())";
         $stmt = $pdo->prepare($sql);
-        
+
         $stmt->bindValue(':nome', $nome);
         $stmt->bindValue(':email', $email);
         $stmt->bindValue(':senha_hash', $senha_hash);
-        
+
         $stmt->execute();
 
         echo "<script>alert('Cadastro realizado com sucesso!'); window.location.href = '../index.php';</script>";
