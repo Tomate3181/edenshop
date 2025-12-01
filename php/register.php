@@ -1,21 +1,61 @@
 <?php
 require_once 'db_connect.php';
 
+function showAlert($title, $text, $icon, $redirect = null)
+{
+    $script_action = $redirect ? "window.location.href = '$redirect';" : "window.history.back();";
+    echo "
+    <!DOCTYPE html>
+    <html lang='pt-BR'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>Aviso</title>
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+        <style>
+            body { 
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+                background-color: #f0f2f5; 
+                display: flex; 
+                justify-content: center; 
+                align-items: center; 
+                height: 100vh; 
+                margin: 0; 
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    title: '$title',
+                    text: '$text',
+                    icon: '$icon',
+                    confirmButtonColor: '#2e8b57',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    $script_action
+                });
+            });
+        </script>
+    </body>
+    </html>";
+    exit;
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nome = $_POST['name'];
-    $email = $_POST['email'];
-    $senha = $_POST['password'];
-    $confirm_senha = $_POST['confirm_password'];
+    $nome = $_POST['name'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $senha = $_POST['password'] ?? '';
+    $confirm_senha = $_POST['confirm_password'] ?? '';
 
     // Validação básica
     if (empty($nome) || empty($email) || empty($senha) || empty($confirm_senha)) {
-        echo "<script>alert('Por favor, preencha todos os campos.'); window.history.back();</script>";
-        exit;
+        showAlert('Atenção', 'Por favor, preencha todos os campos.', 'warning');
     }
 
     if ($senha !== $confirm_senha) {
-        echo "<script>alert('As senhas não coincidem.'); window.history.back();</script>";
-        exit;
+        showAlert('Erro', 'As senhas não coincidem.', 'error');
     }
 
     // Verificar se o email já existe
@@ -24,8 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute();
 
     if ($stmt->rowCount() > 0) {
-        echo "<script>alert('Este email já está cadastrado.'); window.history.back();</script>";
-        exit;
+        showAlert('Erro', 'Este email já está cadastrado.', 'error');
     }
 
     // Hash da senha
@@ -42,9 +81,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $stmt->execute();
 
-        echo "<script>alert('Cadastro realizado com sucesso!'); window.location.href = '../index.php';</script>";
+        showAlert('Sucesso!', 'Cadastro realizado com sucesso!', 'success', '../index.php');
     } catch (PDOException $e) {
-        echo "Erro ao cadastrar: " . $e->getMessage();
+        showAlert('Erro no Sistema', 'Erro ao cadastrar: ' . $e->getMessage(), 'error');
     }
 }
 ?>

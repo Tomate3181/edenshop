@@ -25,8 +25,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     loginModal.style.display = 'block';
                 }
 
-                // Exibe um alerta (que será convertido para SweetAlert2 pelo override)
-                alert('Por favor, faça login para finalizar sua compra.');
+                // Exibe um alerta com SweetAlert2
+                Swal.fire({
+                    title: 'Login Necessário',
+                    text: 'Por favor, faça login para finalizar sua compra.',
+                    icon: 'info',
+                    confirmButtonText: 'Entendi',
+                    confirmButtonColor: '#2e8b57'
+                });
             } else {
                 // Usuário está logado, redireciona para checkout
                 window.location.href = 'checkout.php';

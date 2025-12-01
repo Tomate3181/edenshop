@@ -268,7 +268,7 @@ HTML;
           </div>
           <button type="submit" class="btn">Entrar</button>
           <div class="login-footer">
-            <p>Não tem uma conta? <a href="#">Cadastre-se</a></p>
+            <p>Não tem uma conta? <a href="#" id="switchToRegister">Cadastre-se</a></p>
             <a href="#">Esqueceu sua senha?</a>
           </div>
         </form>
