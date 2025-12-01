@@ -343,7 +343,7 @@ $nome_admin = htmlspecialchars($_SESSION['usuario_nome']);
                     </div>
 
                     <div class="form-actions">
-                        <button type="button" class="btn secondary-btn">Cancelar</button>
+                        <button type="button" id="cancel-edit-btn" class="btn secondary-btn">Cancelar</button>
                         <button type="submit" class="btn primary-btn">Cadastrar Planta</button>
                     </div>
                 </form>

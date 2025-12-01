@@ -277,6 +277,39 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
+
+    // === Cancelar Edição / Limpar Formulário ===
+    const cancelBtn = document.getElementById('cancel-edit-btn');
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', () => {
+            const form = document.getElementById('addProductForm');
+
+            // Limpar campos do formulário
+            form.reset();
+
+            // Remover ID oculto se existir (sair do modo edição)
+            const hiddenId = document.getElementById('edit-plant-id');
+            if (hiddenId) {
+                hiddenId.remove();
+            }
+
+            // Resetar ação do formulário
+            form.action = 'php/admin_add_product.php';
+
+            // Resetar texto do botão de submit
+            const submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.textContent = 'Cadastrar Planta';
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Formulário Limpo',
+                text: 'Modo de edição cancelado. Você agora está no modo de cadastro.',
+                timer: 2000,
+                showConfirmButton: false,
+                confirmButtonColor: '#6b8e23'
+            });
+        });
+    }
 });
 
 // Funções globais para editar e deletar usuários
