@@ -290,26 +290,26 @@ $nome_admin = htmlspecialchars($_SESSION['usuario_nome']);
                             <div class="input-group">
                                 <label for="scientificName">Nome Científico</label>
                                 <input type="text" id="scientificName" name="scientificName"
-                                    placeholder="Ex: Monstera deliciosa">
+                                    placeholder="Ex: Monstera deliciosa" required>
                             </div>
                             <div class="row">
                                 <div class="input-group half">
                                     <label for="plantFamily">Família</label>
-                                    <input type="text" id="plantFamily" name="plantFamily" placeholder="Ex: Araceae">
+                                    <input type="text" id="plantFamily" name="plantFamily" placeholder="Ex: Araceae" required>
                                 </div>
                                 <div class="input-group half">
                                     <label for="plantOrigin">Origem</label>
-                                    <input type="text" id="plantOrigin" name="plantOrigin" placeholder="Ex: México">
+                                    <input type="text" id="plantOrigin" name="plantOrigin" placeholder="Ex: México" required>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-group half">
                                     <label for="plantHeight">Altura Média</label>
-                                    <input type="text" id="plantHeight" name="plantHeight" placeholder="Ex: 1m - 3m">
+                                    <input type="text" id="plantHeight" name="plantHeight" placeholder="Ex: 1m - 3m" required>
                                 </div>
                                 <div class="input-group half">
                                     <label for="petFriendly">Pet Friendly?</label>
-                                    <select id="petFriendly" name="petFriendly">
+                                    <select id="petFriendly" name="petFriendly" required>
                                         <option value="Não tóxica">Sim</option>
                                         <option value="Tóxica">Não</option>
                                     </select>
@@ -324,20 +324,20 @@ $nome_admin = htmlspecialchars($_SESSION['usuario_nome']);
                                 <div class="input-group">
                                     <label for="careLight"><i class="fas fa-sun"></i> Luz</label>
                                     <input type="text" id="careLight" name="careLight"
-                                        placeholder="Ex: Sol pleno ou luz brilhante">
+                                        placeholder="Ex: Sol pleno ou luz brilhante" required>
                                 </div>
                                 <div class="input-group">
                                     <label for="careWater"><i class="fas fa-tint"></i> Água</label>
-                                    <input type="text" id="careWater" name="careWater" placeholder="Ex: Rega moderada">
+                                    <input type="text" id="careWater" name="careWater" placeholder="Ex: Rega moderada" required>
                                 </div>
                                 <div class="input-group">
                                     <label for="careHumidity"><i class="fas fa-cloud-rain"></i> Umidade</label>
-                                    <input type="text" id="careHumidity" name="careHumidity" placeholder="Ex: Média">
+                                    <input type="text" id="careHumidity" name="careHumidity" placeholder="Ex: Média" required>
                                 </div>
                                 <div class="input-group">
                                     <label for="careSoil"><i class="fas fa-seedling"></i> Solo</label>
                                     <input type="text" id="careSoil" name="careSoil"
-                                        placeholder="Ex: Drenado, rico em matéria orgânica">
+                                        placeholder="Ex: Drenado, rico em matéria orgânica" required>
                                 </div>
                             </div>
                         </div>

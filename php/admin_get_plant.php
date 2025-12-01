@@ -25,9 +25,13 @@ try {
     $stmt = $pdo->prepare("
         SELECT 
             p.*,
-            c.nome_categoria
+            c.nome_categoria,
+            e.nomeCientifico, e.familia, e.origem, e.alturaMedia, e.pet,
+            cu.luz, cu.agua, cu.humidade, cu.solo
         FROM plantas p
         LEFT JOIN categorias c ON p.id_categoria = c.id_categoria
+        LEFT JOIN especificacoes e ON p.id_planta = e.id_planta
+        LEFT JOIN cuidados cu ON p.id_planta = cu.id_planta
         WHERE p.id_planta = :id_planta
     ");
 

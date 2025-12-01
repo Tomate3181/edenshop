@@ -334,6 +334,55 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
+
+    // === Interceptar Envio do Formulário de Produto (Update) ===
+    const addProductForm = document.getElementById('addProductForm');
+    if (addProductForm) {
+        addProductForm.addEventListener('submit', function (e) {
+            // Se for atualização (admin_update_plant.php), usar AJAX
+            if (this.action.includes('admin_update_plant.php')) {
+                e.preventDefault();
+
+                const formData = new FormData(this);
+
+                fetch(this.action, {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Sucesso!',
+                                text: data.message,
+                                confirmButtonColor: '#6b8e23'
+                            }).then(() => {
+                                // Resetar formulário e recarregar lista
+                                if (cancelBtn) cancelBtn.click(); // Usa o click do cancelar para limpar tudo
+                                loadPlants();
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Erro',
+                                text: data.error || 'Erro ao atualizar planta',
+                                confirmButtonColor: '#6b8e23'
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro:', error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Erro',
+                            text: 'Erro de conexão',
+                            confirmButtonColor: '#6b8e23'
+                        });
+                    });
+            }
+        });
+    }
 });
 
 // Funções globais para editar e deletar usuários
