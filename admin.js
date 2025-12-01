@@ -351,6 +351,7 @@ function deleteUser(id) {
 // ===== GERENCIAMENTO DE PLANTAS =====
 
 // Carregar plantas
+// Carregar plantas
 async function loadPlants() {
     try {
         const response = await fetch('php/admin_get_plants.php');
@@ -370,6 +371,9 @@ async function loadPlants() {
                     <button class="action-btn edit-btn" onclick="editPlant(${plant.id_planta})" title="Editar">
                         <i class="fas fa-edit"></i>
                     </button>
+                    <button class="action-btn delete-btn" onclick="deletePlant(${plant.id_planta})" title="Excluir">
+                        <i class="fas fa-trash"></i>
+                    </button>
                 </td>
             </tr>
         `).join('');
@@ -378,6 +382,93 @@ async function loadPlants() {
     }
 }
 
+// Funções globais para editar e deletar usuários
+function editUser(id) {
+    // Buscar dados do usuário atual (simulação, ideal seria um endpoint get_user)
+    // Como os dados já estão na tabela, podemos pegar de lá ou fazer um fetch.
+    // Vamos fazer um fetch para garantir dados atualizados.
+
+    // Nota: Precisaríamos de um endpoint admin_get_user.php?id=X
+    // Como não temos, vamos pegar da linha da tabela por enquanto ou implementar o endpoint.
+    // O ideal é implementar o endpoint. Vou assumir que vamos criar admin_get_user.php ou passar os dados via parametro.
+    // Para simplificar e atender o pedido rápido, vou pegar os dados do DOM se possível, mas o ideal é o endpoint.
+    // Vou criar o endpoint admin_get_user.php rapidinho depois.
+
+    fetch(`php/admin_get_user.php?id=${id}`)
+        .then(response => response.json())
+        .then(user => {
+            if (user.error) {
+                Swal.fire({ icon: 'error', title: 'Erro', text: 'Erro ao carregar usuário' });
+                return;
+            }
+
+            Swal.fire({
+                title: 'Editar Usuário',
+                html: `
+                    <input id="swal-edit-nome" class="swal2-input" placeholder="Nome" value="${user.nome}">
+                    <input id="swal-edit-email" class="swal2-input" placeholder="Email" type="email" value="${user.email}">
+                    <div style="margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                        <input type="checkbox" id="swal-edit-admin" style="width: auto; margin: 0;" ${user.tipo === 'admin' ? 'checked' : ''}>
+                        <label for="swal-edit-admin" style="margin: 0;">É administrador?</label>
+                    </div>
+                `,
+                focusConfirm: false,
+                showCancelButton: true,
+                confirmButtonText: 'Salvar',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#6b8e23',
+                preConfirm: () => {
+                    const nome = document.getElementById('swal-edit-nome').value;
+                    const email = document.getElementById('swal-edit-email').value;
+                    const isAdmin = document.getElementById('swal-edit-admin').checked;
+
+                    if (!nome || !email) {
+                        Swal.showValidationMessage('Por favor, preencha todos os campos');
+                        return false;
+                    }
+
+                    return { id: id, nome: nome, email: email, tipo: isAdmin ? 'admin' : 'cliente' };
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const data = result.value;
+
+                    fetch('php/admin_update_user.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                        .then(response => response.json())
+                        .then(response => {
+                            if (response.success) {
+                                Swal.fire({ icon: 'success', title: 'Sucesso', text: 'Usuário atualizado!', confirmButtonColor: '#6b8e23' });
+                                // Recarregar tabela de usuários
+                                const usersLink = document.querySelector('a[data-section="users"]');
+                                if (usersLink) usersLink.click();
+                            } else {
+                                Swal.fire({ icon: 'error', title: 'Erro', text: response.error || 'Erro ao atualizar' });
+                            }
+                        })
+                        .catch(error => {
+                            console.error(error);
+                            Swal.fire({ icon: 'error', title: 'Erro', text: 'Erro de conexão' });
+                        });
+                }
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao buscar usuário:', error);
+            Swal.fire({ icon: 'error', title: 'Erro', text: 'Erro ao carregar dados do usuário' });
+        });
+}
+
+function deleteUser(id) {
+    if (confirm('Tem certeza que deseja excluir este usuário?')) {
+        Swal.fire({ icon: 'info', title: 'Em Desenvolvimento', text: 'Funcionalidade de exclusão em desenvolvimento. ID: ' + id, confirmButtonColor: '#6b8e23' });
+    }
+}
 // Editar planta
 async function editPlant(id) {
     try {
@@ -435,5 +526,58 @@ async function editPlant(id) {
     } catch (error) {
         console.error('Erro ao editar planta:', error);
         Swal.fire({ icon: 'error', title: 'Erro', text: 'Erro ao carregar dados da planta', confirmButtonColor: '#6b8e23' });
+    }
+}
+
+// Deletar planta
+async function deletePlant(id) {
+    const result = await Swal.fire({
+        title: 'Tem certeza?',
+        text: "Você não poderá reverter isso!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#6b8e23',
+        confirmButtonText: 'Sim, excluir!',
+        cancelButtonText: 'Cancelar'
+    });
+
+    if (result.isConfirmed) {
+        try {
+            const response = await fetch('php/admin_delete_plant.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: id })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Excluído!',
+                    text: 'A planta foi removida com sucesso.',
+                    confirmButtonColor: '#6b8e23'
+                });
+                loadPlants(); // Recarrega a tabela
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro',
+                    text: data.error || 'Erro ao excluir planta',
+                    confirmButtonColor: '#6b8e23'
+                });
+            }
+        } catch (error) {
+            console.error('Erro ao excluir planta:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro',
+                text: 'Erro de conexão ao tentar excluir planta',
+                confirmButtonColor: '#6b8e23'
+            });
+        }
     }
 }
