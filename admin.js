@@ -203,45 +203,69 @@ document.addEventListener('DOMContentLoaded', function () {
     if (usersLink) {
         usersLink.addEventListener('click', loadUsers);
     }
-
     // === Adicionar Novo Usuário ===
     const addUserBtn = document.getElementById('add-user-btn');
     if (addUserBtn) {
         addUserBtn.addEventListener('click', () => {
-            const nome = prompt('Nome do usuário:');
-            if (!nome) return;
+            Swal.fire({
+                title: 'Novo Usuário',
+                html: `
+                    <input id="swal-input-nome" class="swal2-input" placeholder="Nome">
+                    <input id="swal-input-email" class="swal2-input" placeholder="Email" type="email">
+                    <input id="swal-input-senha" class="swal2-input" placeholder="Senha" type="password">
+                    <div style="margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                        <input type="checkbox" id="swal-input-admin" style="width: auto; margin: 0;">
+                        <label for="swal-input-admin" style="margin: 0;">É administrador?</label>
+                    </div>
+                `,
+                focusConfirm: false,
+                showCancelButton: true,
+                confirmButtonText: 'Criar',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#6b8e23',
+                cancelButtonColor: '#d33',
+                preConfirm: () => {
+                    const nome = document.getElementById('swal-input-nome').value;
+                    const email = document.getElementById('swal-input-email').value;
+                    const senha = document.getElementById('swal-input-senha').value;
+                    const isAdmin = document.getElementById('swal-input-admin').checked;
 
-            const email = prompt('Email do usuário:');
-            if (!email) return;
-
-            const senha = prompt('Senha do usuário:');
-            if (!senha) return;
-
-            const tipo = confirm('É administrador? (OK = Sim, Cancelar = Não)') ? 'admin' : 'cliente';
-
-            const formData = new FormData();
-            formData.append('nome', nome);
-            formData.append('email', email);
-            formData.append('senha', senha);
-            formData.append('tipo', tipo);
-
-            fetch('php/admin_add_user.php', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        Swal.fire({ icon: 'success', title: 'Sucesso!', text: 'Usuário criado com sucesso!', confirmButtonColor: '#6b8e23' });
-                        loadUsers();
-                    } else {
-                        Swal.fire({ icon: 'error', title: 'Erro', text: 'Erro: ' + data.error, confirmButtonColor: '#6b8e23' });
+                    if (!nome || !email || !senha) {
+                        Swal.showValidationMessage('Por favor, preencha todos os campos');
+                        return false;
                     }
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-                    Swal.fire({ icon: 'error', title: 'Erro', text: 'Erro ao criar usuário', confirmButtonColor: '#6b8e23' });
-                });
+
+                    return { nome: nome, email: email, senha: senha, tipo: isAdmin ? 'admin' : 'cliente' };
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const { nome, email, senha, tipo } = result.value;
+
+                    const formData = new FormData();
+                    formData.append('nome', nome);
+                    formData.append('email', email);
+                    formData.append('senha', senha);
+                    formData.append('tipo', tipo);
+
+                    fetch('php/admin_add_user.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire({ icon: 'success', title: 'Sucesso!', text: 'Usuário criado com sucesso!', confirmButtonColor: '#6b8e23' });
+                                loadUsers();
+                            } else {
+                                Swal.fire({ icon: 'error', title: 'Erro', text: 'Erro: ' + data.error, confirmButtonColor: '#6b8e23' });
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Erro:', error);
+                            Swal.fire({ icon: 'error', title: 'Erro', text: 'Erro ao criar usuário', confirmButtonColor: '#6b8e23' });
+                        });
+                }
+            });
         });
     }
 

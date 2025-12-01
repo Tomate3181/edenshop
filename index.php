@@ -25,7 +25,7 @@
           Plantas que trazem vida, bem-estar e sustentabilidade para o seu dia
           a dia.
         </p>
-        <a href="products.html" class="btn">Ver Produtos</a>
+        <a href="products.php" class="btn">Ver Produtos</a>
       </div>
     </section>
 
@@ -227,7 +227,7 @@ HTML;
         <div id="cart-empty-message-modal" class="cart-empty" style="display: none">
           <h2>Seu carrinho está vazio.</h2>
           <p>Adicione algumas plantas para vê-las aqui!</p>
-          <a href="products.html" class="btn">Ver Produtos</a>
+          <a href="products.php" class="btn">Ver Produtos</a>
         </div>
       </div>
 
