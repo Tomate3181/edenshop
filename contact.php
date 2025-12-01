@@ -24,7 +24,7 @@
 
     <div class="contact-layout">
       <!-- Formulário de Contato -->
-      <form id="contactForm" class="contact-form">
+      <form id="contactForm" class="contact-form" method="POST" action="enviar-email_TESTE.php">
         <div class="form-group">
           <label for="name">Nome</label>
           <input type="text" id="name" name="name" placeholder="Seu nome completo" required>

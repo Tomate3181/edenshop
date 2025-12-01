@@ -347,6 +347,32 @@ document.addEventListener('DOMContentLoaded', function () {
     const addProductForm = document.getElementById('addProductForm');
     if (addProductForm) {
         addProductForm.addEventListener('submit', function (e) {
+            // Validação de Preço e Estoque Negativos
+            const priceInput = document.getElementById('plantPrice');
+            const stockInput = document.getElementById('plantStock');
+
+            if (priceInput && parseFloat(priceInput.value) < 0) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Preço Inválido',
+                    text: 'O preço do produto não pode ser negativo.',
+                    confirmButtonColor: '#6b8e23'
+                });
+                return;
+            }
+
+            if (stockInput && parseInt(stockInput.value) < 0) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Estoque Inválido',
+                    text: 'A quantidade em estoque não pode ser negativa.',
+                    confirmButtonColor: '#6b8e23'
+                });
+                return;
+            }
+
             // Se for atualização (admin_update_plant.php), usar AJAX
             if (this.action.includes('admin_update_plant.php')) {
                 e.preventDefault();
@@ -391,6 +417,38 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+    // === Check for URL Parameters (Success/Error) ===
+    const urlParams = new URLSearchParams(window.location.search);
+    const successParam = urlParams.get('success');
+    const errorParam = urlParams.get('error');
+
+    if (successParam === 'productadded') {
+        Swal.fire({
+            icon: 'success',
+            title: 'Sucesso!',
+            text: 'Produto cadastrado com sucesso!',
+            confirmButtonColor: '#6b8e23'
+        });
+        // Clean URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+    } else if (errorParam === 'invaliddata') {
+        Swal.fire({
+            icon: 'error',
+            title: 'Dados Inválidos',
+            text: 'Por favor, verifique os dados preenchidos (preço ou estoque inválidos).',
+            confirmButtonColor: '#6b8e23'
+        });
+        window.history.replaceState({}, document.title, window.location.pathname);
+    } else if (errorParam === 'dberror') {
+        Swal.fire({
+            icon: 'error',
+            title: 'Erro no Banco',
+            text: 'Ocorreu um erro ao salvar no banco de dados.',
+            confirmButtonColor: '#6b8e23'
+        });
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
 });
 
 // Funções globais para editar e deletar usuários
