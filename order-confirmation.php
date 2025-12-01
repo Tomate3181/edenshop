@@ -29,7 +29,7 @@
                         <span id="confirmation-total"></span>
                     </div>
                 </div>
-                <a href="products.html" class="btn">Continuar Comprando</a>
+                <a href="products.php" class="btn">Continuar Comprando</a>
             </div>
         </div>
     </main>
@@ -62,7 +62,7 @@
           >
             <h2>Seu carrinho está vazio.</h2>
             <p>Adicione algumas plantas para vê-las aqui!</p>
-            <a href="products.html" class="btn">Ver Produtos</a>
+            <a href="products.php" class="btn">Ver Produtos</a>
           </div>
         </div>
 

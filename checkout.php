@@ -8,24 +8,64 @@
     <link rel="stylesheet" href="critical-fixes.css" />
     <link rel="stylesheet" href="search-dropdown.css" />
     <link rel="stylesheet" href="checkout.css" />
-    <!-- Font Awesome para ícones -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .payment-option {
+            cursor: pointer;
+        }
+        
+        .payment-option input[type="radio"] {
+            display: none;
+        }
+        
+        .payment-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .payment-option input[type="radio"]:checked + .payment-card {
+            border-color: #6b8e23;
+            background-color: rgba(107, 142, 35, 0.05);
+        }
+        
+        .payment-card:hover {
+            border-color: #6b8e23;
+        }
+        
+        .payment-card i {
+            font-size: 1.5rem;
+            color: #6b8e23;
+        }
+        
+        .payment-card span {
+            font-weight: 600;
+        }
+    </style>
 </head>
 <body>
     <?php include 'php/header.php'; ?>
 
     <main class="page-padding">
         <div class="container">
-            <h1 class="page-title">Finalizar Compra</h1>
+            <h1 class="page-title" style="padding-top: 3rem; padding-bottom: 2rem;">Finalizar Compra</h1>
             
             <div class="checkout-layout">
                 <!-- Seção de Detalhes do Cliente -->
                 <div class="customer-details">
                     <h2>Seus Dados</h2>
-                    <form id="checkout-form">
+                    <form id="checkout-form" method="POST" action="php/process_checkout.php">
                         <div class="form-group">
                             <label for="fullName">Nome Completo</label>
                             <input type="text" id="fullName" name="fullName" required>
@@ -52,12 +92,64 @@
                         </div>
                         <div class="form-group">
                             <label for="zip">CEP</label>
-                            <input type="text" id="zip" name="zip" required>
+                            <input type="text" id="zip" name="zip" required maxlength="9" placeholder="00000-000">
                         </div>
 
-                        <h2>Pagamento</h2>
-                        <p>Funcionalidade de pagamento será implementada em breve. Clique abaixo para confirmar seu pedido.</p>
+                        <h2>Método de Pagamento</h2>
+                        <div class="payment-methods">
+                            <label class="payment-option">
+                                <input type="radio" name="paymentMethod" value="credit" required>
+                                <div class="payment-card">
+                                    <i class="fas fa-credit-card"></i>
+                                    <span>Cartão de Crédito</span>
+                                </div>
+                            </label>
+                            
+                            <label class="payment-option">
+                                <input type="radio" name="paymentMethod" value="debit">
+                                <div class="payment-card">
+                                    <i class="fas fa-money-check-alt"></i>
+                                    <span>Cartão de Débito</span>
+                                </div>
+                            </label>
+                            
+                            <label class="payment-option">
+                                <input type="radio" name="paymentMethod" value="pix">
+                                <div class="payment-card">
+                                    <i class="fas fa-qrcode"></i>
+                                    <span>PIX</span>
+                                </div>
+                            </label>
+                            
+                            <label class="payment-option">
+                                <input type="radio" name="paymentMethod" value="boleto">
+                                <div class="payment-card">
+                                    <i class="fas fa-barcode"></i>
+                                    <span>Boleto</span>
+                                </div>
+                            </label>
+                        </div>
 
+                        <!-- Campos de cartão (aparecem quando cartão é selecionado) -->
+                        <div id="card-fields" style="display: none;">
+                            <div class="form-group">
+                                <label for="cardNumber">Número do Cartão</label>
+                                <input type="text" id="cardNumber" name="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="cardExpiry">Validade</label>
+                                    <input type="text" id="cardExpiry" name="cardExpiry" placeholder="MM/AA" maxlength="5">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cardCVV">CVV</label>
+                                    <input type="text" id="cardCVV" name="cardCVV" placeholder="000" maxlength="3">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Campo oculto para enviar dados do carrinho -->
+                        <input type="hidden" id="cartData" name="cartData">
                     </form>
                 </div>
 
@@ -77,41 +169,23 @@
         </div>
     </main>
 
-    <!-- =============================================== -->
-    <!-- ============ INÍCIO DO MODAL DE CARRINHO ============ -->
-    <!-- =============================================== -->
+    <!-- Modal de Carrinho -->
     <div id="cartModal" class="cart-modal">
-      <!-- Fundo escurecido -->
       <div class="cart-modal-overlay"></div>
-
-      <!-- Conteúdo do modal -->
       <div class="cart-modal-content">
-        <!-- Cabeçalho do modal -->
         <div class="cart-modal-header">
           <h3>Meu Carrinho</h3>
           <button class="close-cart-btn">&times;</button>
         </div>
-
-        <!-- Corpo do modal (onde os itens e a mensagem de vazio aparecem) -->
         <div class="cart-modal-body">
-          <!-- Itens do Carrinho (serão preenchidos pelo JS) -->
           <div id="cart-items-container-modal"></div>
-
-          <!-- Mensagem de Carrinho Vazio -->
-          <div
-            id="cart-empty-message-modal"
-            class="cart-empty"
-            style="display: none"
-          >
+          <div id="cart-empty-message-modal" class="cart-empty" style="display: none">
             <h2>Seu carrinho está vazio.</h2>
             <p>Adicione algumas plantas para vê-las aqui!</p>
-            <a href="products.html" class="btn">Ver Produtos</a>
+            <a href="products.php" class="btn">Ver Produtos</a>
           </div>
         </div>
-
-        <!-- Rodapé do modal (resumo e botão de finalizar) -->
         <div id="cart-modal-footer" class="cart-modal-footer">
-          <!-- Reutilizamos a sua classe order-summary com algumas adaptações -->
           <div class="order-summary-modal">
             <div class="summary-row total-row">
               <span>Subtotal</span>
@@ -122,63 +196,36 @@
         </div>
       </div>
     </div>
-    <!-- =============================================== -->
-    <!-- ============= FIM DO MODAL DE CARRINHO ============= -->
-    <!-- =============================================== -->
 
-    <!-- =============================================== -->
-    <!-- ============= INÍCIO DO MODAL DE LOGIN ============= -->
-    <!-- =============================================== -->
+    <!-- Modal de Login -->
     <div id="loginModal" class="modal">
       <div class="modal-content">
         <span class="close-btn">&times;</span>
-        <!-- Conteúdo reutilizado do seu login-box -->
         <div class="login-box-modal">
           <div class="login-header-text">
             <h2>Bem-vindo de volta!</h2>
             <p>Faça login para continuar</p>
           </div>
-          <form id="loginForm">
-            <!-- O ID importante que seu JS já usa -->
+          <form id="loginForm" method="POST" action="php/login.php">
             <div class="input-group">
               <label for="modal-email">Email</label>
-              <input
-                type="email"
-                id="modal-email"
-                name="email"
-                placeholder="seuemail@exemplo.com"
-                required
-              />
+              <input type="email" id="modal-email" name="email" placeholder="seuemail@exemplo.com" required />
             </div>
             <div class="input-group">
               <label for="modal-password">Senha</label>
-              <input
-                type="password"
-                id="modal-password"
-                name="password"
-                placeholder="Sua senha"
-                required
-              />
+              <input type="password" id="modal-password" name="password" placeholder="Sua senha" required />
             </div>
             <button type="submit" class="btn">Entrar</button>
             <div class="login-footer">
-              <p>
-                Não tem uma conta?
-                <a href="#" id="switchToRegister">Cadastre-se</a>
-              </p>
+              <p>Não tem uma conta? <a href="#" id="switchToRegister">Cadastre-se</a></p>
               <a href="#">Esqueceu sua senha?</a>
             </div>
           </form>
         </div>
       </div>
     </div>
-    <!-- =============================================== -->
-    <!-- =============== FIM DO MODAL DE LOGIN =============== -->
-    <!-- =============================================== -->
 
-    <!-- Footer (consistente com o resto do site) -->
     <footer class="footer">
-        <!-- O mesmo conteúdo do seu footer aqui -->
         <div class="footer-content">
         <div class="footer-section">
           <h3>Edenshop</h3>
@@ -208,8 +255,26 @@
 
     <script src="checkout.js"></script>
     <script src="script.js"></script>
-
-    <script src="navbar.js"></script> <!-- Carregue o script principal também -->
+    <script src="navbar.js"></script>
     <script src="search.js"></script>
+    <script>
+        // Mostrar campos de cartão quando cartão for selecionado
+        document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const cardFields = document.getElementById('card-fields');
+                if (this.value === 'credit' || this.value === 'debit') {
+                    cardFields.style.display = 'block';
+                } else {
+                    cardFields.style.display = 'none';
+                }
+            });
+        });
+
+        // Adicionar dados do carrinho ao formulário antes de enviar
+        document.getElementById('checkout-form').addEventListener('submit', function(e) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cartData').value = JSON.stringify(cart);
+        });
+    </script>
 </body>
 </html>

@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Se o carrinho estiver vazio, redireciona para a home
         if (cart.length === 0) {
-            window.location.href = 'index.html';
+            window.location.href = 'index.php';
             return;
         }
 
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 sessionStorage.setItem('confirmedOrder', JSON.stringify(cart));
                 
                 // Redireciona para a página de confirmação
-                window.location.href = 'order-confirmation.html';
+                window.location.href = 'order-confirmation.php';
             } else {
                 alert('Seu carrinho está vazio!');
             }

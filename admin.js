@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // === Sidebar Toggle (Mobile) ===
     const sidebar = document.querySelector('.sidebar');
     const sidebarToggle = document.getElementById('sidebar-toggle');
-    const mainContent = document.querySelector('.main-content');
 
     if (sidebarToggle) {
         sidebarToggle.addEventListener('click', () => {
@@ -27,21 +26,17 @@ document.addEventListener('DOMContentLoaded', function () {
         link.addEventListener('click', (e) => {
             e.preventDefault();
 
-            // Remove active class from all links and sections
             navLinks.forEach(l => l.classList.remove('active'));
             sections.forEach(s => s.classList.remove('active'));
 
-            // Add active class to clicked link
             link.classList.add('active');
 
-            // Show target section
             const targetId = link.getAttribute('data-section');
             const targetSection = document.getElementById(targetId);
             if (targetSection) {
                 targetSection.classList.add('active');
             }
 
-            // Close sidebar on mobile after selection
             if (window.innerWidth <= 992) {
                 sidebar.classList.remove('active');
             }
@@ -49,22 +44,37 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // === Charts Configuration ===
-
-    // Colors
     const primaryGreen = '#6B8E23';
     const lightGreen = '#AEC670';
     const darkText = '#2F4F4F';
     const goldAccent = '#DAA520';
+
+    // Processar dados de vendas mensais do PHP
+    const mesesNomes = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+    let labelsVendas = [];
+    let dadosVendas = [];
+
+    if (typeof vendasMensais !== 'undefined' && vendasMensais.length > 0) {
+        vendasMensais.forEach(item => {
+            const [ano, mes] = item.mes.split('-');
+            labelsVendas.push(mesesNomes[parseInt(mes) - 1]);
+            dadosVendas.push(parseFloat(item.total));
+        });
+    } else {
+        // Dados padrão se não houver vendas
+        labelsVendas = ['Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov'];
+        dadosVendas = [0, 0, 0, 0, 0, 0];
+    }
 
     // Sales Chart (Line)
     const ctxSales = document.getElementById('salesChart').getContext('2d');
     const salesChart = new Chart(ctxSales, {
         type: 'line',
         data: {
-            labels: ['Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov'],
+            labels: labelsVendas,
             datasets: [{
                 label: 'Vendas (R$)',
-                data: [8500, 9200, 10500, 9800, 11200, 12450],
+                data: dadosVendas,
                 borderColor: primaryGreen,
                 backgroundColor: 'rgba(107, 142, 35, 0.1)',
                 borderWidth: 2,
@@ -98,19 +108,35 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // Processar dados de categorias do PHP
+    let labelsCategorias = [];
+    let dadosCategorias = [];
+    
+    if (typeof categoriasVendidas !== 'undefined' && categoriasVendidas.length > 0) {
+        categoriasVendidas.forEach(item => {
+            labelsCategorias.push(item.nome_categoria);
+            dadosCategorias.push(parseInt(item.total_vendas));
+        });
+    } else {
+        // Dados padrão se não houver vendas
+        labelsCategorias = ['Sem dados'];
+        dadosCategorias = [1];
+    }
+
     // Categories Chart (Doughnut)
     const ctxCategories = document.getElementById('categoriesChart').getContext('2d');
     const categoriesChart = new Chart(ctxCategories, {
         type: 'doughnut',
         data: {
-            labels: ['Interior', 'Exterior', 'Suculentas', 'Flores'],
+            labels: labelsCategorias,
             datasets: [{
-                data: [45, 25, 20, 10],
+                data: dadosCategorias,
                 backgroundColor: [
                     primaryGreen,
                     lightGreen,
                     goldAccent,
-                    darkText
+                    darkText,
+                    '#8FBC8F'
                 ],
                 borderWidth: 0
             }]
@@ -130,25 +156,117 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // === Form Handling (Simulation) ===
-    const addProductForm = document.getElementById('addProductForm');
-    if (addProductForm) {
-        addProductForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+    // === Carregar Usuários do Banco de Dados ===
+    function loadUsers() {
+        fetch('php/admin_get_users.php')
+            .then(response => response.json())
+            .then(users => {
+                const tbody = document.getElementById('users-table-body');
+                tbody.innerHTML = '';
 
-            // Simulate processing
-            const submitBtn = addProductForm.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerText;
+                users.forEach(user => {
+                    const inicial = user.nome.charAt(0).toUpperCase();
+                    const badgeClass = user.tipo === 'admin' ? 'badge-admin' : 'badge-cliente';
+                    
+                    const row = `
+                        <tr>
+                            <td>#${String(user.id).padStart(3, '0')}</td>
+                            <td>
+                                <div class="user-cell">
+                                    <div class="avatar-sm">${inicial}</div>
+                                    ${user.nome}
+                                </div>
+                            </td>
+                            <td>${user.email}</td>
+                            <td><span class="badge ${badgeClass}">${user.tipo}</span></td>
+                            <td>${user.data_cadastro}</td>
+                            <td>
+                                <button class="action-btn edit" onclick="editUser(${user.id})">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="action-btn delete" onclick="deleteUser(${user.id})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                    tbody.innerHTML += row;
+                });
+            })
+            .catch(error => {
+                console.error('Erro ao carregar usuários:', error);
+            });
+    }
 
-            submitBtn.innerText = 'Salvando...';
-            submitBtn.disabled = true;
+    // Carregar usuários quando a seção de usuários for aberta
+    const usersLink = document.querySelector('a[data-section="users"]');
+    if (usersLink) {
+        usersLink.addEventListener('click', loadUsers);
+    }
 
-            setTimeout(() => {
-                alert('Produto cadastrado com sucesso! (Simulação)');
-                addProductForm.reset();
-                submitBtn.innerText = originalText;
-                submitBtn.disabled = false;
-            }, 1500);
+    // === Adicionar Novo Usuário ===
+    const addUserBtn = document.getElementById('add-user-btn');
+    if (addUserBtn) {
+        addUserBtn.addEventListener('click', () => {
+            const nome = prompt('Nome do usuário:');
+            if (!nome) return;
+
+            const email = prompt('Email do usuário:');
+            if (!email) return;
+
+            const senha = prompt('Senha do usuário:');
+            if (!senha) return;
+
+            const tipo = confirm('É administrador? (OK = Sim, Cancelar = Não)') ? 'admin' : 'cliente';
+
+            const formData = new FormData();
+            formData.append('nome', nome);
+            formData.append('email', email);
+            formData.append('senha', senha);
+            formData.append('tipo', tipo);
+
+            fetch('php/admin_add_user.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Usuário criado com sucesso!');
+                    loadUsers();
+                } else {
+                    alert('Erro: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Erro ao criar usuário');
+            });
+        });
+    }
+
+    // === Busca de Usuários ===
+    const userSearch = document.getElementById('user-search');
+    if (userSearch) {
+        userSearch.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#users-table-body tr');
+
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
         });
     }
 });
+
+// Funções globais para editar e deletar usuários
+function editUser(id) {
+    alert('Funcionalidade de edição em desenvolvimento. ID: ' + id);
+}
+
+function deleteUser(id) {
+    if (confirm('Tem certeza que deseja excluir este usuário?')) {
+        alert('Funcionalidade de exclusão em desenvolvimento. ID: ' + id);
+    }
+}
