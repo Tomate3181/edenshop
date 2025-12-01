@@ -5,12 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre Nós - Edenshop</title>
     <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="critical-fixes.css" />
+    <link rel="stylesheet" href="search-dropdown.css" />
+
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-  <?php include 'php/header.php'; ?>
-
-    <main>
+  <?php include 'php/header.php'; ?>   
+   <main>
         <!-- Seção Hero da Página Sobre -->
         <section class="about-hero">
             <div class="hero-content">
@@ -137,7 +141,7 @@
               <h2>Bem-vindo de volta!</h2>
               <p>Faça login para continuar</p>
             </div>
-            <form id="loginForm">
+            <form id="loginForm" method="POST" action="php/login.php">
               <!-- O ID importante que seu JS já usa -->
               <div class="input-group">
                 <label for="modal-email">Email</label>
@@ -161,7 +165,7 @@
               </div>
               <button type="submit" class="btn">Entrar</button>
               <div class="login-footer">
-                <p>Não tem uma conta? <a href="#">Cadastre-se</a></p>
+                <p>Não tem uma conta? <a href="#" id="switchToRegister">Cadastre-se</a></p>
                 <a href="#">Esqueceu sua senha?</a>
               </div>
             </form>
@@ -184,7 +188,7 @@
         <h2>Crie sua conta</h2>
         <p>É rápido e fácil!</p>
       </div>
-      <form id="registerForm">
+      <form id="registerForm" method="POST" action="php/register.php">
         <!-- Campo Nome -->
         <div class="input-group">
           <label for="register-name">Nome</label>

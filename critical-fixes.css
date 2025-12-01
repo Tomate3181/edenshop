@@ -76,21 +76,49 @@
   width: 100% !important;
 }
 
+/* Remove logo hover animation completely */
 .logo a:hover img {
-  transform: scale(1.1) rotate(5deg) !important;
+  transform: none !important;
 }
 
+/* Navbar icons hover - keep original color */
 .nav-icons a:hover {
   transform: translateY(-2px) !important;
+  color: var(--primary-green) !important;
 }
 
 .nav-icons a:hover i {
   transform: scale(1.2) !important;
-  background-color: rgba(255, 255, 255, 0.2) !important;
-  border-color: rgba(255, 255, 255, 0.3) !important;
-  color: var(--white-color) !important;
 }
 
+/* =============================================== */
+/* === NAVBAR TRANSPARENCY - CORRECT BEHAVIOR === */
+/* =============================================== */
+
+/* Navbar with SLIGHT blur at top for text readability */
+.transparent-header .navbar {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+  box-shadow: none !important;
+}
+
+/* Navbar with MORE blur when scrolled */
+.transparent-header .navbar.scrolled {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Regular pages (non-transparent) always have blur */
+body:not(.transparent-header) .navbar {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+}
+
+/* Search bar styles */
 .transparent-header .navbar .search-bar::placeholder {
   color: rgba(255, 255, 255, 0.7) !important;
 }

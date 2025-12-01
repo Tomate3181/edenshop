@@ -3,114 +3,119 @@
 /* =============================================== */
 
 .search-suggestions {
-  position: absolute;
-  top: calc(100% + 5px);
-  right: 0;
-  width: 350px;
-  max-height: 400px;
-  overflow-y: auto;
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
+  position: absolute !important;
+  top: calc(100% + 5px) !important;
+  right: 0 !important;
+  width: 400px !important;
+  max-width: 90vw !important;
+  max-height: 500px !important;
+  overflow-y: auto !important;
+  background-color: white !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+  z-index: 1000 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(-10px) !important;
+  transition: all 0.3s ease !important;
 }
 
 .search-suggestions.active {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) !important;
 }
 
 .search-suggestion-item {
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  gap: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  border-bottom: 1px solid #f0f0f0;
-  text-decoration: none;
-  color: inherit;
+  display: flex !important;
+  align-items: center !important;
+  padding: 1.2rem !important;
+  gap: 1.2rem !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s ease !important;
+  border-bottom: 1px solid #f0f0f0 !important;
+  text-decoration: none !important;
+  color: inherit !important;
+  min-height: 80px !important;
 }
 
 .search-suggestion-item:last-child {
-  border-bottom: none;
+  border-bottom: none !important;
 }
 
 .search-suggestion-item:hover {
-  background-color: #f8f9fa;
+  background-color: #f8f9fa !important;
 }
 
 .search-suggestion-image {
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  border-radius: 8px;
-  flex-shrink: 0;
+  width: 60px !important;
+  height: 60px !important;
+  object-fit: cover !important;
+  border-radius: 8px !important;
+  flex-shrink: 0 !important;
 }
 
 .search-suggestion-info {
-  flex-grow: 1;
-  min-width: 0;
+  flex-grow: 1 !important;
+  min-width: 0 !important;
 }
 
 .search-suggestion-name {
-  font-weight: 600;
-  color: var(--dark-text);
-  margin-bottom: 0.25rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-weight: 600 !important;
+  color: var(--dark-text) !important;
+  margin-bottom: 0.4rem !important;
+  font-size: 1rem !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 .search-suggestion-price {
-  font-size: 0.9rem;
-  color: var(--primary-green);
-  font-weight: 700;
+  font-size: 1rem !important;
+  color: var(--primary-green) !important;
+  font-weight: 700 !important;
 }
 
 .search-suggestion-arrow {
-  color: var(--primary-green);
-  font-size: 1.2rem;
-  flex-shrink: 0;
-  transition: transform 0.2s ease;
+  color: var(--primary-green) !important;
+  font-size: 1.3rem !important;
+  flex-shrink: 0 !important;
+  transition: transform 0.2s ease !important;
 }
 
 .search-suggestion-item:hover .search-suggestion-arrow {
-  transform: translateX(5px);
+  transform: translateX(5px) !important;
 }
 
 .search-no-results {
-  padding: 2rem;
-  text-align: center;
-  color: #999;
+  padding: 2.5rem !important;
+  text-align: center !important;
+  color: #999 !important;
+  font-size: 1rem !important;
 }
 
 .search-loading {
-  padding: 2rem;
-  text-align: center;
-  color: var(--primary-green);
+  padding: 2.5rem !important;
+  text-align: center !important;
+  color: var(--primary-green) !important;
+  font-size: 1rem !important;
 }
 
 /* Scrollbar styling for suggestions */
 .search-suggestions::-webkit-scrollbar {
-  width: 6px;
+  width: 6px !important;
 }
 
 .search-suggestions::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
+  background: #f1f1f1 !important;
+  border-radius: 10px !important;
 }
 
 .search-suggestions::-webkit-scrollbar-thumb {
-  background: var(--primary-green);
-  border-radius: 10px;
+  background: var(--primary-green) !important;
+  border-radius: 10px !important;
 }
 
 .search-suggestions::-webkit-scrollbar-thumb:hover {
-  background: #55711c;
+  background: #55711c !important;
 }

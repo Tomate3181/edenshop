@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Finalizar Compra - Edenshop</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="critical-fixes.css" />
+    <link rel="stylesheet" href="search-dropdown.css" />
     <link rel="stylesheet" href="checkout.css" />
     <!-- Font Awesome para ícones -->
     <link
