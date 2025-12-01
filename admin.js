@@ -168,13 +168,21 @@ document.addEventListener('DOMContentLoaded', function () {
                     const inicial = user.nome.charAt(0).toUpperCase();
                     const badgeClass = user.tipo === 'admin' ? 'badge-admin' : 'badge-cliente';
 
+                    // Verifica se está ativo (se undefined, assume 1 para compatibilidade)
+                    const isInactive = (user.ativo !== undefined && user.ativo == 0);
+                    const rowStyle = isInactive ? 'style="opacity: 0.7; background-color: #f0f0f0;"' : '';
+                    const statusBadge = isInactive ? '<span style="color: red; font-size: 0.8em; margin-left: 5px;">(Inativo)</span>' : '';
+                    const toggleIcon = isInactive ? 'fa-check' : 'fa-ban';
+                    const toggleTitle = isInactive ? 'Ativar Usuário' : 'Inativar Usuário';
+                    const toggleColor = isInactive ? 'style="color: green;"' : 'style="color: red;"';
+
                     const row = `
-                        <tr>
+                        <tr ${rowStyle}>
                             <td>#${String(user.id).padStart(3, '0')}</td>
                             <td>
                                 <div class="user-cell">
                                     <div class="avatar-sm">${inicial}</div>
-                                    ${user.nome}
+                                    ${user.nome} ${statusBadge}
                                 </div>
                             </td>
                             <td>${user.email}</td>
@@ -184,8 +192,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <button class="action-btn edit" onclick="editUser(${user.id})">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <button class="action-btn delete" onclick="deleteUser(${user.id})">
-                                    <i class="fas fa-trash"></i>
+                                <button class="action-btn delete" onclick="toggleUserStatus(${user.id}, ${isInactive})" title="${toggleTitle}" ${toggleColor}>
+                                    <i class="fas ${toggleIcon}"></i>
                                 </button>
                             </td>
                         </tr>
@@ -409,10 +417,18 @@ async function loadPlants() {
         const tbody = document.getElementById('plants-table-body');
         if (!tbody) return;
 
-        tbody.innerHTML = plants.map(plant => `
-            <tr>
+        tbody.innerHTML = plants.map(plant => {
+            const isInactive = plant.ativo == 0;
+            const rowStyle = isInactive ? 'style="opacity: 0.7; background-color: #f0f0f0;"' : '';
+            const statusBadge = isInactive ? '<span style="color: red; font-size: 0.8em; margin-left: 5px;">(Inativo)</span>' : '';
+            const toggleIcon = isInactive ? 'fa-check' : 'fa-ban';
+            const toggleTitle = isInactive ? 'Ativar Planta' : 'Inativar Planta';
+            const toggleColor = isInactive ? 'style="color: green;"' : 'style="color: red;"';
+
+            return `
+            <tr ${rowStyle}>
                 <td>${plant.id_planta}</td>
-                <td>${plant.nome_planta}</td>
+                <td>${plant.nome_planta} ${statusBadge}</td>
                 <td>${plant.nome_categoria || 'Sem categoria'}</td>
                 <td>R$ ${parseFloat(plant.preco).toFixed(2).replace('.', ',')}</td>
                 <td>${plant.quantidade_estoque}</td>
@@ -420,12 +436,12 @@ async function loadPlants() {
                     <button class="action-btn edit-btn" onclick="editPlant(${plant.id_planta})" title="Editar">
                         <i class="fas fa-edit"></i>
                     </button>
-                    <button class="action-btn delete-btn" onclick="deletePlant(${plant.id_planta})" title="Excluir">
-                        <i class="fas fa-trash"></i>
+                    <button class="action-btn delete-btn" onclick="togglePlantStatus(${plant.id_planta}, ${isInactive})" title="${toggleTitle}" ${toggleColor}>
+                        <i class="fas ${toggleIcon}"></i>
                     </button>
                 </td>
             </tr>
-        `).join('');
+        `}).join('');
     } catch (error) {
         console.error('Erro ao carregar plantas:', error);
     }
@@ -579,54 +595,112 @@ async function editPlant(id) {
 }
 
 // Deletar planta
-async function deletePlant(id) {
-    const result = await Swal.fire({
-        title: 'Tem certeza?',
-        text: "Você não poderá reverter isso!",
+// Alternar status do usuário (Ativar/Inativar)
+function toggleUserStatus(id, isInactive) {
+    const action = isInactive ? 'ativar' : 'inativar';
+    const confirmText = isInactive ? 'O usuário poderá fazer login novamente.' : 'O usuário não poderá mais fazer login.';
+
+    Swal.fire({
+        title: `Tem certeza que deseja ${action}?`,
+        text: confirmText,
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#6b8e23',
-        confirmButtonText: 'Sim, excluir!',
+        confirmButtonColor: isInactive ? '#6b8e23' : '#d33',
+        cancelButtonColor: '#aaa',
+        confirmButtonText: `Sim, ${action}!`,
         cancelButtonText: 'Cancelar'
-    });
-
-    if (result.isConfirmed) {
-        try {
-            const response = await fetch('php/admin_delete_plant.php', {
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch('php/admin_toggle_user.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ id: id })
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Excluído!',
-                    text: 'A planta foi removida com sucesso.',
-                    confirmButtonColor: '#6b8e23'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Sucesso!',
+                            text: data.message,
+                            confirmButtonColor: '#6b8e23'
+                        });
+                        loadUsers();
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Erro',
+                            text: data.error || 'Erro ao alterar status',
+                            confirmButtonColor: '#6b8e23'
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erro',
+                        text: 'Erro de conexão',
+                        confirmButtonColor: '#6b8e23'
+                    });
                 });
-                loadPlants(); // Recarrega a tabela
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Erro',
-                    text: data.error || 'Erro ao excluir planta',
-                    confirmButtonColor: '#6b8e23'
-                });
-            }
-        } catch (error) {
-            console.error('Erro ao excluir planta:', error);
-            Swal.fire({
-                icon: 'error',
-                title: 'Erro',
-                text: 'Erro de conexão ao tentar excluir planta',
-                confirmButtonColor: '#6b8e23'
-            });
         }
-    }
+    });
+}
+
+// Alternar status da planta (Ativar/Inativar)
+function togglePlantStatus(id, isInactive) {
+    const action = isInactive ? 'ativar' : 'inativar';
+    const confirmText = isInactive ? 'A planta voltará a aparecer na loja.' : 'A planta não aparecerá mais na loja.';
+
+    Swal.fire({
+        title: `Tem certeza que deseja ${action}?`,
+        text: confirmText,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: isInactive ? '#6b8e23' : '#d33',
+        cancelButtonColor: '#aaa',
+        confirmButtonText: `Sim, ${action}!`,
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch('php/admin_toggle_plant.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: id })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Sucesso!',
+                            text: data.message,
+                            confirmButtonColor: '#6b8e23'
+                        });
+                        loadPlants();
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Erro',
+                            text: data.error || 'Erro ao alterar status',
+                            confirmButtonColor: '#6b8e23'
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erro',
+                        text: 'Erro de conexão',
+                        confirmButtonColor: '#6b8e23'
+                    });
+                });
+        }
+    });
 }

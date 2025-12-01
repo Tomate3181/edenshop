@@ -20,12 +20,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // 6. Prepara a consulta para evitar SQL Injection
     // IMPORTANTE: Agora também buscamos o campo 'tipo' para verificar se é admin ou cliente
-    $sql = "SELECT id, nome, email, senha_hash, tipo FROM usuarios WHERE email = :email LIMIT 1";
+    // E também o campo 'ativo'
+    $sql = "SELECT id, nome, email, senha_hash, tipo, ativo FROM usuarios WHERE email = :email LIMIT 1";
     $stmt = $pdo->prepare($sql);
-    
+
     // 7. Associa o valor do email ao placeholder
     $stmt->bindValue(':email', $email);
-    
+
     // 8. Executa a consulta
     $stmt->execute();
 
@@ -34,6 +35,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // 10. Verifica se o usuário existe E se a senha está correta
     if ($usuario && password_verify($senha, $usuario['senha_hash'])) {
+
+        // Verifica se a conta está ativa
+        if (isset($usuario['ativo']) && $usuario['ativo'] == 0) {
+            header("Location: ../index.php?error=accountinactive");
+            exit();
+        }
+
         // Sucesso no Login!
 
         // 11. Regenera o ID da sessão para prevenir ataques de Session Fixation

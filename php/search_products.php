@@ -29,34 +29,35 @@ try {
         LEFT JOIN categorias c ON p.id_categoria = c.id_categoria
         WHERE p.nome_planta LIKE :search
         AND p.quantidade_estoque > 0
+        AND p.ativo = 1
         ORDER BY p.nome_planta ASC
         LIMIT 10
     ");
-    
+
     // Bind do parâmetro com % para busca parcial
     $searchPattern = '%' . $searchTerm . '%';
     $stmt->bindValue(':search', $searchPattern, PDO::PARAM_STR);
     $stmt->execute();
-    
+
     $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
+
     // Formatar os resultados
-    $formattedProducts = array_map(function($product) {
+    $formattedProducts = array_map(function ($product) {
         return [
-            'id' => (int)$product['id_planta'],
+            'id' => (int) $product['id_planta'],
             'name' => htmlspecialchars($product['nome_planta']),
             'price' => number_format($product['preco'], 2, ',', '.'),
             'image' => htmlspecialchars($product['imagem_url']),
             'category' => htmlspecialchars($product['nome_categoria'] ?? '')
         ];
     }, $products);
-    
+
     echo json_encode([
         'success' => true,
         'products' => $formattedProducts,
         'count' => count($formattedProducts)
     ]);
-    
+
 } catch (PDOException $e) {
     error_log("Erro na busca de produtos: " . $e->getMessage());
     echo json_encode([

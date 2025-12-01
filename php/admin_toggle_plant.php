@@ -1,5 +1,5 @@
 <?php
-// Endpoint para deletar uma planta (Soft Delete)
+// Endpoint para alternar status (ativo/inativo) de uma planta
 session_start();
 
 // Verifica se o usuário é admin
@@ -28,25 +28,28 @@ if ($id_planta <= 0) {
 }
 
 try {
-    // Verifica se a planta existe
-    $stmt = $pdo->prepare("SELECT id_planta FROM plantas WHERE id_planta = :id");
+    // Verifica o status atual
+    $stmt = $pdo->prepare("SELECT ativo FROM plantas WHERE id_planta = :id");
     $stmt->execute([':id' => $id_planta]);
+    $planta = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($stmt->rowCount() === 0) {
+    if (!$planta) {
         http_response_code(404);
         echo json_encode(['error' => 'Planta não encontrada']);
         exit();
     }
 
-    // Soft delete: Marca como inativo em vez de excluir
-    // Isso evita erros de integridade referencial com pedidos existentes
-    $stmt = $pdo->prepare("UPDATE plantas SET ativo = 0 WHERE id_planta = :id");
-    $stmt->execute([':id' => $id_planta]);
+    // Alterna o status
+    $novo_status = ($planta['ativo'] == 1) ? 0 : 1;
+    $mensagem = ($novo_status == 1) ? 'Planta ativada com sucesso' : 'Planta inativada com sucesso';
 
-    echo json_encode(['success' => true, 'message' => 'Planta removida com sucesso (marcada como inativa)']);
+    $stmt = $pdo->prepare("UPDATE plantas SET ativo = :status WHERE id_planta = :id");
+    $stmt->execute([':status' => $novo_status, ':id' => $id_planta]);
+
+    echo json_encode(['success' => true, 'message' => $mensagem, 'novo_status' => $novo_status]);
 
 } catch (PDOException $e) {
     http_response_code(500);
-    echo json_encode(['error' => 'Erro ao deletar planta: ' . $e->getMessage()]);
+    echo json_encode(['error' => 'Erro ao alterar status da planta: ' . $e->getMessage()]);
 }
 ?>

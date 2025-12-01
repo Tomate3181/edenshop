@@ -20,7 +20,8 @@ try {
             p.preco,
             p.quantidade_estoque,
             c.nome_categoria,
-            p.imagem_url
+            p.imagem_url,
+            p.ativo
         FROM plantas p
         LEFT JOIN categorias c ON p.id_categoria = c.id_categoria
         ORDER BY p.id_planta DESC
