@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Processar dados de categorias do PHP
     let labelsCategorias = [];
     let dadosCategorias = [];
-    
+
     if (typeof categoriasVendidas !== 'undefined' && categoriasVendidas.length > 0) {
         categoriasVendidas.forEach(item => {
             labelsCategorias.push(item.nome_categoria);
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 users.forEach(user => {
                     const inicial = user.nome.charAt(0).toUpperCase();
                     const badgeClass = user.tipo === 'admin' ? 'badge-admin' : 'badge-cliente';
-                    
+
                     const row = `
                         <tr>
                             <td>#${String(user.id).padStart(3, '0')}</td>
@@ -229,19 +229,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 method: 'POST',
                 body: formData
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    Swal.fire({icon: 'success', title: 'Sucesso!', text: 'Usuário criado com sucesso!', confirmButtonColor: '#6b8e23'});
-                    loadUsers();
-                } else {
-                    Swal.fire({icon: 'error', title: 'Erro', text: 'Erro: ' + data.error, confirmButtonColor: '#6b8e23'});
-                }
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-                Swal.fire({icon: 'error', title: 'Erro', text: 'Erro ao criar usuário', confirmButtonColor: '#6b8e23'});
-            });
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire({ icon: 'success', title: 'Sucesso!', text: 'Usuário criado com sucesso!', confirmButtonColor: '#6b8e23' });
+                        loadUsers();
+                    } else {
+                        Swal.fire({ icon: 'error', title: 'Erro', text: 'Erro: ' + data.error, confirmButtonColor: '#6b8e23' });
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    Swal.fire({ icon: 'error', title: 'Erro', text: 'Erro ao criar usuário', confirmButtonColor: '#6b8e23' });
+                });
         });
     }
 
@@ -258,16 +258,125 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
+    // Carregar plantas quando a seção for aberta
+    const managePlantsLink = document.querySelector('a[data-section="manage-plants"]');
+    if (managePlantsLink) {
+        managePlantsLink.addEventListener('click', loadPlants);
+    }
+
+    // Busca de plantas
+    const plantSearch = document.getElementById('plant-search');
+    if (plantSearch) {
+        plantSearch.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#plants-table-body tr');
+
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        });
+    }
 });
 
 // Funções globais para editar e deletar usuários
 function editUser(id) {
-    Swal.fire({icon: 'info', title: 'Em Desenvolvimento', text: 'Funcionalidade de edição em desenvolvimento. ID: ' + id, confirmButtonColor: '#6b8e23'});
+    Swal.fire({ icon: 'info', title: 'Em Desenvolvimento', text: 'Funcionalidade de edição em desenvolvimento. ID: ' + id, confirmButtonColor: '#6b8e23' });
 }
 
 function deleteUser(id) {
     if (confirm('Tem certeza que deseja excluir este usuário?')) {
-        Swal.fire({icon: 'info', title: 'Em Desenvolvimento', text: 'Funcionalidade de exclusão em desenvolvimento. ID: ' + id, confirmButtonColor: '#6b8e23'});
+        Swal.fire({ icon: 'info', title: 'Em Desenvolvimento', text: 'Funcionalidade de exclusão em desenvolvimento. ID: ' + id, confirmButtonColor: '#6b8e23' });
     }
 }
 
+
+// ===== GERENCIAMENTO DE PLANTAS =====
+
+// Carregar plantas
+async function loadPlants() {
+    try {
+        const response = await fetch('php/admin_get_plants.php');
+        const plants = await response.json();
+
+        const tbody = document.getElementById('plants-table-body');
+        if (!tbody) return;
+
+        tbody.innerHTML = plants.map(plant => `
+            <tr>
+                <td>${plant.id_planta}</td>
+                <td>${plant.nome_planta}</td>
+                <td>${plant.nome_categoria || 'Sem categoria'}</td>
+                <td>R$ ${parseFloat(plant.preco).toFixed(2).replace('.', ',')}</td>
+                <td>${plant.quantidade_estoque}</td>
+                <td>
+                    <button class="action-btn edit-btn" onclick="editPlant(${plant.id_planta})" title="Editar">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </td>
+            </tr>
+        `).join('');
+    } catch (error) {
+        console.error('Erro ao carregar plantas:', error);
+    }
+}
+
+// Editar planta
+async function editPlant(id) {
+    try {
+        const response = await fetch(`php/admin_get_plant.php?id=${id}`);
+        const plant = await response.json();
+
+        if (plant.error) {
+            Swal.fire({ icon: 'error', title: 'Erro', text: 'Erro ao carregar planta', confirmButtonColor: '#6b8e23' });
+            return;
+        }
+
+        // Preencher formulário de edição
+        document.getElementById('plantName').value = plant.nome_planta || '';
+        document.getElementById('plantCategory').value = plant.id_categoria || '';
+        document.getElementById('plantPrice').value = plant.preco || '';
+        document.getElementById('plantStock').value = plant.quantidade_estoque || '';
+        document.getElementById('plantImage').value = plant.imagem_url || '';
+        document.getElementById('plantDescription').value = plant.descricao || '';
+        document.getElementById('scientificName').value = plant.nomeCientifico || '';
+        document.getElementById('plantFamily').value = plant.familia || '';
+        document.getElementById('plantOrigin').value = plant.origem || '';
+        document.getElementById('plantHeight').value = plant.alturaMedia || '';
+        document.getElementById('petFriendly').value = plant.pet || 'Não tóxica';
+        document.getElementById('careLight').value = plant.luz || '';
+        document.getElementById('careWater').value = plant.agua || '';
+        document.getElementById('careHumidity').value = plant.humidade || '';
+        document.getElementById('careSoil').value = plant.solo || '';
+
+        // Adicionar campo hidden com ID
+        let hiddenId = document.getElementById('edit-plant-id');
+        if (!hiddenId) {
+            hiddenId = document.createElement('input');
+            hiddenId.type = 'hidden';
+            hiddenId.id = 'edit-plant-id';
+            hiddenId.name = 'id_planta';
+            document.getElementById('addProductForm').appendChild(hiddenId);
+        }
+        hiddenId.value = id;
+
+        // Mudar ação do formulário
+        const form = document.getElementById('addProductForm');
+        form.action = 'php/admin_update_plant.php';
+
+        // Navegar para a seção de produtos
+        const productsLink = document.querySelector('a[data-section="products"]');
+        if (productsLink) productsLink.click();
+
+        // Mudar texto do botão
+        const submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.textContent = 'Atualizar Planta';
+
+        // Scroll para o topo do formulário
+        form.scrollIntoView({ behavior: 'smooth' });
+
+    } catch (error) {
+        console.error('Erro ao editar planta:', error);
+        Swal.fire({ icon: 'error', title: 'Erro', text: 'Erro ao carregar dados da planta', confirmButtonColor: '#6b8e23' });
+    }
+}

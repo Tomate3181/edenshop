@@ -97,8 +97,11 @@ $nome_admin = htmlspecialchars($_SESSION['usuario_nome']);
             </div>
             <nav class="sidebar-nav">
                 <ul>
-                    <li><a href="#dashboard" class="active" data-section="dashboard"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                    <li><a href="#dashboard" class="active" data-section="dashboard"><i class="fas fa-chart-line"></i>
+                            Dashboard</a></li>
                     <li><a href="#users" data-section="users"><i class="fas fa-users"></i> Usuários</a></li>
+                    <li><a href="#manage-plants" data-section="manage-plants"><i class="fas fa-seedling"></i> Gerenciar
+                            Plantas</a></li>
                     <li><a href="#products" data-section="products"><i class="fas fa-leaf"></i> Novo Produto</a></li>
                     <li><a href="php/logout.php" class="logout-link"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
                 </ul>
@@ -119,10 +122,11 @@ $nome_admin = htmlspecialchars($_SESSION['usuario_nome']);
             <!-- Section: Dashboard -->
             <section id="dashboard" class="admin-section active">
                 <h1 class="page-title">Dashboard de Vendas</h1>
-                
+
                 <div class="stats-cards">
                     <div class="card stat-card">
-                        <div class="stat-icon" style="background-color: rgba(107, 142, 35, 0.1); color: var(--primary-green);">
+                        <div class="stat-icon"
+                            style="background-color: rgba(107, 142, 35, 0.1); color: var(--primary-green);">
                             <i class="fas fa-shopping-bag"></i>
                         </div>
                         <div class="stat-info">
@@ -132,7 +136,8 @@ $nome_admin = htmlspecialchars($_SESSION['usuario_nome']);
                         </div>
                     </div>
                     <div class="card stat-card">
-                        <div class="stat-icon" style="background-color: rgba(218, 165, 32, 0.1); color: var(--gold-accent);">
+                        <div class="stat-icon"
+                            style="background-color: rgba(218, 165, 32, 0.1); color: var(--gold-accent);">
                             <i class="fas fa-box-open"></i>
                         </div>
                         <div class="stat-info">
@@ -142,7 +147,8 @@ $nome_admin = htmlspecialchars($_SESSION['usuario_nome']);
                         </div>
                     </div>
                     <div class="card stat-card">
-                        <div class="stat-icon" style="background-color: rgba(47, 79, 79, 0.1); color: var(--dark-text);">
+                        <div class="stat-icon"
+                            style="background-color: rgba(47, 79, 79, 0.1); color: var(--dark-text);">
                             <i class="fas fa-users"></i>
                         </div>
                         <div class="stat-info">
@@ -174,7 +180,8 @@ $nome_admin = htmlspecialchars($_SESSION['usuario_nome']);
                             <i class="fas fa-search"></i>
                             <input type="text" id="user-search" placeholder="Buscar usuário...">
                         </div>
-                        <button class="btn small-btn" id="add-user-btn"><i class="fas fa-plus"></i> Novo Usuário</button>
+                        <button class="btn small-btn" id="add-user-btn"><i class="fas fa-plus"></i> Novo
+                            Usuário</button>
                     </div>
                     <div class="table-responsive">
                         <table class="admin-table">
@@ -196,6 +203,36 @@ $nome_admin = htmlspecialchars($_SESSION['usuario_nome']);
                 </div>
             </section>
 
+            <!-- Section: Manage Plants -->
+            <section id="manage-plants" class="admin-section">
+                <h1 class="page-title">Gerenciar Plantas</h1>
+                <div class="card table-card">
+                    <div class="table-header">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="plant-search" placeholder="Buscar planta...">
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Categoria</th>
+                                    <th>Preço</th>
+                                    <th>Estoque</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="plants-table-body">
+                                <!-- Será preenchido via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
             <!-- Section: Add Product -->
             <section id="products" class="admin-section">
                 <h1 class="page-title">Cadastrar Nova Planta</h1>
@@ -206,7 +243,8 @@ $nome_admin = htmlspecialchars($_SESSION['usuario_nome']);
                             <h3><i class="fas fa-info-circle"></i> Informações Básicas</h3>
                             <div class="input-group">
                                 <label for="plantName">Nome da Planta</label>
-                                <input type="text" id="plantName" name="plantName" placeholder="Ex: Monstera Deliciosa" required>
+                                <input type="text" id="plantName" name="plantName" placeholder="Ex: Monstera Deliciosa"
+                                    required>
                             </div>
                             <div class="row">
                                 <div class="input-group half">
@@ -224,7 +262,8 @@ $nome_admin = htmlspecialchars($_SESSION['usuario_nome']);
                                 </div>
                                 <div class="input-group half">
                                     <label for="plantPrice">Preço (R$)</label>
-                                    <input type="number" id="plantPrice" name="plantPrice" step="0.01" placeholder="0.00" required>
+                                    <input type="number" id="plantPrice" name="plantPrice" step="0.01"
+                                        placeholder="0.00" required>
                                 </div>
                             </div>
                             <div class="row">
@@ -239,7 +278,8 @@ $nome_admin = htmlspecialchars($_SESSION['usuario_nome']);
                             </div>
                             <div class="input-group">
                                 <label for="plantDescription">Descrição</label>
-                                <textarea id="plantDescription" name="plantDescription" rows="4" placeholder="Descreva a planta..." required></textarea>
+                                <textarea id="plantDescription" name="plantDescription" rows="4"
+                                    placeholder="Descreva a planta..." required></textarea>
                             </div>
                         </div>
 
@@ -248,7 +288,8 @@ $nome_admin = htmlspecialchars($_SESSION['usuario_nome']);
                             <h3><i class="fas fa-list-ul"></i> Especificações</h3>
                             <div class="input-group">
                                 <label for="scientificName">Nome Científico</label>
-                                <input type="text" id="scientificName" name="scientificName" placeholder="Ex: Monstera deliciosa">
+                                <input type="text" id="scientificName" name="scientificName"
+                                    placeholder="Ex: Monstera deliciosa">
                             </div>
                             <div class="row">
                                 <div class="input-group half">
@@ -281,7 +322,8 @@ $nome_admin = htmlspecialchars($_SESSION['usuario_nome']);
                             <div class="care-grid">
                                 <div class="input-group">
                                     <label for="careLight"><i class="fas fa-sun"></i> Luz</label>
-                                    <input type="text" id="careLight" name="careLight" placeholder="Ex: Sol pleno ou luz brilhante">
+                                    <input type="text" id="careLight" name="careLight"
+                                        placeholder="Ex: Sol pleno ou luz brilhante">
                                 </div>
                                 <div class="input-group">
                                     <label for="careWater"><i class="fas fa-tint"></i> Água</label>
@@ -293,12 +335,13 @@ $nome_admin = htmlspecialchars($_SESSION['usuario_nome']);
                                 </div>
                                 <div class="input-group">
                                     <label for="careSoil"><i class="fas fa-seedling"></i> Solo</label>
-                                    <input type="text" id="careSoil" name="careSoil" placeholder="Ex: Drenado, rico em matéria orgânica">
+                                    <input type="text" id="careSoil" name="careSoil"
+                                        placeholder="Ex: Drenado, rico em matéria orgânica">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="form-actions">
                         <button type="button" class="btn secondary-btn">Cancelar</button>
                         <button type="submit" class="btn primary-btn">Cadastrar Planta</button>
@@ -315,4 +358,5 @@ $nome_admin = htmlspecialchars($_SESSION['usuario_nome']);
     </script>
     <script src="admin.js"></script>
 </body>
+
 </html>
